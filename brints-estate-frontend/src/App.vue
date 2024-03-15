@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
+import LandingPage from '@/views/users/LandingPage.vue'
 </script>
 
 <template>
-  <div>
-    <h1>Brints Estate Frontend</h1>
-  </div>
+  <LandingPage></LandingPage>
 </template>
 
 <style module></style>
