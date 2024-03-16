@@ -12,8 +12,6 @@
     }
   ],
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ESNext",
-    "allowJs": true,
+    "module": "NodeNext"
   }
 }
