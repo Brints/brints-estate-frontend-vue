@@ -1,8 +1,36 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+
+const bg = ref(null);
+const loadText = ref(null);
+
+onMounted(() => {
+  bg.value = document.querySelector(".bg");
+  loadText.value = document.querySelector(".loading-text");
+});
+
+let load = ref(0);
+
+let int = setInterval(blurring, 30);
+
+function blurring() {
+  load.value++;
+  if (load.value > 99) {
+    clearInterval(int);
+  }
+  loadText.value.innerText = `${load.value}%`;
+  loadText.value.style.opacity = scale(load.value, 0, 100, 1, 0);
+  bg.value.style.filter = `blur(${scale(load.value, 0, 100, 30, 0)}px)`;
+}
+
+function scale(num, in_min, in_max, out_min, out_max) {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+}
+</script>
 
 <template>
   <div
-    className="bg-[url('../assets/images/house-2.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat"
+    className="bg bg-[url('../assets/images/house-2.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat bg-opacity-80"
   >
     <div className="bg-slate-800 bg-opacity-80 p-10 rounded-lg">
       <h1 className="text-4xl font-bold text-center">
@@ -36,5 +64,24 @@
         >
       </div>
     </div>
+
+    <div className="loading-text">0%</div>
   </div>
 </template>
+
+<style scoped>
+.bg {
+  position: absolute;
+  filter: blur(0px);
+}
+.loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+</style>
