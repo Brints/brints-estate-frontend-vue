@@ -64,9 +64,8 @@ function scale(num, in_min, in_max, out_min, out_max) {
         >
       </div>
     </div>
-
-    <div className="loading-text">0%</div>
   </div>
+  <div className="loading-text">0%</div>
 </template>
 
 <style scoped>
@@ -80,7 +79,6 @@ function scale(num, in_min, in_max, out_min, out_max) {
   left: 50%;
   font-size: 2rem;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
   z-index: 100;
 }
