@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LandingPage from "../views/users/LandingPage.vue";
+import LandingPage from "../views/LandingPage.vue";
 // import LandingPage from "@/views/users/LandingPage.vue";
 
 const router = createRouter({
@@ -11,11 +11,10 @@ const router = createRouter({
       name: "landing-page",
       component: LandingPage,
     },
-    // {
-    //   path: "/register",
-    //   name: "signup",
-    //   component: () => import("@/views/users/SignupPage.vue"),
-    // },
+    {
+      path: "/:path(.*)",
+      component: () => import("../views/NotFound.vue"),
+    },
   ],
 });
 
