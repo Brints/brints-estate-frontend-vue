@@ -30,7 +30,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
 
 <template>
   <div
-    className="bg bg-[url('../assets/images/house-3.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat bg-opacity-80"
+    className="bg bg-[url('../assets/images/building-design-4.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat  bg-opacity-80"
   >
     <div className="bg-slate-800 bg-opacity-80 p-10 rounded-lg">
       <h1 className="text-4xl font-bold text-center">
