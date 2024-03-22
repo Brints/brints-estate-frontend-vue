@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
+// import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "../components/BaseButton.vue";
 
 const bg = ref(null);
 const loadText = ref(null);
@@ -32,7 +34,9 @@ function scale(num, in_min, in_max, out_min, out_max) {
   <div
     className="bg bg-[url('../assets/images/building-design-4.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat  bg-opacity-80"
   >
-    <div className="bg-slate-800 bg-opacity-80 p-10 rounded-lg">
+    <div
+      className="bg-slate-800 bg-opacity-80 pt-10 px-10 rounded-lg flex flex-col items-center"
+    >
       <h1 className="text-4xl font-bold text-center">
         Welcome to
         <span className="border-y text-lime-500"
@@ -63,6 +67,9 @@ function scale(num, in_min, in_max, out_min, out_max) {
           ></router-link
         >
       </div>
+      <router-link to="/login" className="mt-5">
+        <BaseButton>Get Started</BaseButton>
+      </router-link>
     </div>
   </div>
   <div className="loading-text">0%</div>
