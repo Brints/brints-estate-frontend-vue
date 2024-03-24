@@ -14,12 +14,17 @@ onMounted(() => {
 
 // counter.url = await setUrl();
 
-const url = import.meta.env.VITE_BASE_URL;
+// const url = import.meta.env.BACKEND_URL;
+// const url = "http://localhost:3001";
+// console.log(url + "/admin/about-us");
 
 async function fetchAboutUs() {
   try {
     loading.value = true;
-    const response = await axios.get(url + "/admin/about-us");
+    // const response = await axios.get("http://localhost:3001/admin/about-us");
+    const response = await axios.get(
+      "https://aniebietafia.live/admin/about-us"
+    );
     aboutUs.value = response.data.payload;
   } catch (error) {
     console.error(error);
