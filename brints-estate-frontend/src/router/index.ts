@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      component: () => import("@/views/users/LoginPage.vue"),
+      component: () => import("../views/users/LoginPage.vue"),
     },
     {
       path: "/about",
@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: "/:path(.*)*",
-      component: () => import("@/views/NotFound.vue"),
+      component: () => import("../views/NotFound.vue"),
     },
   ],
 });
