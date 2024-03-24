@@ -23,7 +23,7 @@ async function fetchAboutUs() {
     loading.value = true;
     // const response = await axios.get("http://localhost:3001/admin/about-us");
     const response = await axios.get(
-      "https://aniebietafia.live/admin/about-us"
+      "https://estate.aniebietafia.live/admin/about-us"
     );
     aboutUs.value = response.data.payload;
     console.log(response.data);
