@@ -1301,7 +1301,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.1":
+"axios@npm:^1.6.1, axios@npm:^1.6.8":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
   dependencies:
@@ -1406,6 +1406,7 @@ __metadata:
     "@vue/test-utils": "npm:^2.4.4"
     "@vue/tsconfig": "npm:^0.5.1"
     autoprefixer: "npm:^10.4.18"
+    axios: "npm:^1.6.8"
     cypress: "npm:^13.6.6"
     eslint: "npm:^8.49.0"
     eslint-plugin-cypress: "npm:^2.15.1"
