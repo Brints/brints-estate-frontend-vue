@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
-// import LandingPage from "@/views/users/LandingPage.vue";
 
 const router = createRouter({
-  // history: createWebHistory(import.meta.env.BASE_URL),
   history: createWebHistory(),
   routes: [
     {
@@ -17,8 +15,13 @@ const router = createRouter({
       component: () => import("@/views/users/LoginPage.vue"),
     },
     {
-      path: "/:path(.*)",
-      component: () => import("../views/NotFound.vue"),
+      path: "/about",
+      name: "about",
+      component: () => import("../views/AboutUs.vue"),
+    },
+    {
+      path: "/:path(.*)*",
+      component: () => import("@/views/NotFound.vue"),
     },
   ],
 });
