@@ -24,7 +24,6 @@ async function fetchAboutUs() {
 
 <template>
   <main>
-    <h1>About Us</h1>
     <section v-if="loading">Loading...</section>
     <section v-else-if="!loading && !aboutUs">No Content yet.</section>
     <section v-else>
