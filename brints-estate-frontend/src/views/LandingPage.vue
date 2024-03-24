@@ -54,7 +54,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
             >Company Profile</span
           ></router-link
         >
-        <router-link to="#" className="border-r-2 pr-2">
+        <router-link :to="{ name: 'about' }" className="border-r-2 pr-2">
           <span
             className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >About Us</span
@@ -67,7 +67,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
           ></router-link
         >
       </div>
-      <router-link to="/login" className="mt-5">
+      <router-link :to="{ name: 'login' }" className="mt-5">
         <BaseButton>Get Started</BaseButton>
       </router-link>
     </div>
