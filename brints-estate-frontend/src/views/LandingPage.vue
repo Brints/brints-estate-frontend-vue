@@ -82,7 +82,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
 }
 .loading-text {
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
   font-size: 2rem;
   color: #fff;
