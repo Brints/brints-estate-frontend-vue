@@ -23,9 +23,8 @@ async function fetchAboutUs() {
 </script>
 
 <template>
-  <main>
+  <main className="flex flex-col min-h-screen justify-center items-center">
     <section v-if="loading">Loading...</section>
-
     <section v-else-if="!loading && aboutUs && aboutUs > 0">
       <div v-for="item in aboutUs" :key="item.aboutId">
         <h1>{{ item.title }}</h1>
@@ -33,7 +32,7 @@ async function fetchAboutUs() {
         <p>{{ item.content }}</p>
       </div>
     </section>
-    <section v-else>No Content yet.</section>
+    <section className="text-center text-lg" v-else>No Content yet.</section>
   </main>
 </template>
 
