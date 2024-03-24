@@ -25,14 +25,15 @@ async function fetchAboutUs() {
 <template>
   <main>
     <section v-if="loading">Loading...</section>
-    <section v-else-if="!loading && !aboutUs">No Content yet.</section>
-    <section v-else>
+
+    <section v-else-if="!loading && aboutUs && aboutUs > 0">
       <div v-for="item in aboutUs" :key="item.aboutId">
         <h1>{{ item.title }}</h1>
         <img :src="item.image[0].url" :alt="item.image[0].filename" />
         <p>{{ item.content }}</p>
       </div>
     </section>
+    <section v-else>No Content yet.</section>
   </main>
 </template>
 
