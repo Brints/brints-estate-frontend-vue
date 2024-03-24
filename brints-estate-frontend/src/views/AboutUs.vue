@@ -41,7 +41,7 @@ async function fetchAboutUs() {
     <section v-else-if="aboutUs">
       <div v-for="item in aboutUs" :key="item._id">
         <h1>{{ item.title }}</h1>
-        <img :src="item.image[0].url" :alt="item.image[0].filename" />
+        <!-- <img :src="item.image[0].url" :alt="item.image[0].filename" /> -->
         <p>{{ item.content }}</p>
       </div>
     </section>
