@@ -12,7 +12,7 @@ onMounted(() => {
 async function fetchAboutUs() {
   try {
     loading.value = true;
-    const response = await axios.get("http://localhost:3001/admin/about-us");
+    const response = await axios.get(process.env.BASE_URL + "/admin/about-us");
     aboutUs.value = response.data.payload;
   } catch (error) {
     console.error(error);
