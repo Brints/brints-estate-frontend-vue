@@ -26,6 +26,7 @@ async function fetchAboutUs() {
       "https://aniebietafia.live/admin/about-us"
     );
     aboutUs.value = response.data.payload;
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   } finally {
@@ -37,8 +38,8 @@ async function fetchAboutUs() {
 <template>
   <main className="flex flex-col min-h-screen justify-center items-center">
     <section v-if="loading">Loading...</section>
-    <section v-else-if="!loading && aboutUs && aboutUs > 0">
-      <div v-for="item in aboutUs" :key="item.aboutId">
+    <section v-else-if="aboutUs">
+      <div v-for="item in aboutUs" :key="item._id">
         <h1>{{ item.title }}</h1>
         <img :src="item.image[0].url" :alt="item.image[0].filename" />
         <p>{{ item.content }}</p>
