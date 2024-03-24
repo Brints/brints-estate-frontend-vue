@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+// import { useCounterStore } from "../stores/counter";
 import axios from "axios";
 
 const aboutUs = ref(null);
@@ -9,10 +10,16 @@ onMounted(() => {
   fetchAboutUs();
 });
 
+// const counter = useCounterStore();
+
+// counter.url = await setUrl();
+
+const url = import.meta.env.VITE_BASE_URL;
+
 async function fetchAboutUs() {
   try {
     loading.value = true;
-    const response = await axios.get(process.env.BASE_URL + "/admin/about-us");
+    const response = await axios.get(url + "/admin/about-us");
     aboutUs.value = response.data.payload;
   } catch (error) {
     console.error(error);
