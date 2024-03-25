@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from "vue";
-// import { useCounterStore } from "../stores/counter";
 import axios from "axios";
 
 const aboutUs = ref(null);
