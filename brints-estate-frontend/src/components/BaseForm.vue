@@ -14,9 +14,9 @@
 <style module>
 .main_form {
   width: 100%;
-  max-width: 400px;
+  max-width: 798px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
 }
