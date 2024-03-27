@@ -5,6 +5,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import LabelInput from "@/components/LabelInput.vue";
 import LabelSelect from "@/components/LabelSelect.vue";
 import ImageInput from "../../components/ImageInput.vue";
+import ResetButton from "../../components/ResetButton.vue";
 </script>
 
 <template>
@@ -12,6 +13,15 @@ import ImageInput from "../../components/ImageInput.vue";
     <BaseForm>
       <template #legend>
         <h1>Sign Up</h1>
+      </template>
+      <template #info>
+        <p className="text-center mb-1">
+          Have an account already?
+          <span
+            className="hover:border-b text-lime-500 hover:text-lime-900 transition-all duration-300"
+            ><RouterLink to="/login">Login</RouterLink></span
+          >
+        </p>
       </template>
       <template #content>
         <ImageInput label="Upload your Avatar" id="avatar" name="avatar" />
@@ -62,7 +72,10 @@ import ImageInput from "../../components/ImageInput.vue";
           </section>
         </section>
 
-        <BaseButton type="submit">Signup</BaseButton>
+        <div :class="$style.btns_wrapper">
+          <BaseButton type="submit">Signup</BaseButton>
+          <ResetButton>Reset</ResetButton>
+        </div>
       </template>
     </BaseForm>
   </main>
@@ -80,5 +93,12 @@ import ImageInput from "../../components/ImageInput.vue";
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.btns_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 </style>
