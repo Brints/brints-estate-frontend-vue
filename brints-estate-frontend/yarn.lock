@@ -1419,6 +1419,7 @@ __metadata:
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:~5.4.0"
     vite: "npm:^5.1.5"
+    vite-plugin-env-compatible: "npm:^2.0.1"
     vitest: "npm:^1.3.1"
     vue: "npm:^3.4.21"
     vue-router: "npm:^4.3.0"
@@ -1955,6 +1956,20 @@ __metadata:
   dependencies:
     esutils: "npm:^2.0.2"
   checksum: 10c0/c96bdccabe9d62ab6fea9399fdff04a66e6563c1d6fb3a3a063e8d53c3bb136ba63e84250bbf63d00086a769ad53aef92d2bd483f03f837fc97b71cbee6b2520
+  languageName: node
+  linkType: hard
+
+"dotenv-expand@npm:5.1.0":
+  version: 5.1.0
+  resolution: "dotenv-expand@npm:5.1.0"
+  checksum: 10c0/24ac633de853ef474d0421cc639328b7134109c8dc2baaa5e3afb7495af5e9237136d7e6971e55668e4dce915487eb140967cdd2b3e99aa439e0f6bf8b56faeb
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:8.2.0":
+  version: 8.2.0
+  resolution: "dotenv@npm:8.2.0"
+  checksum: 10c0/b6a07a2c400b13ad4e59c34e4682256e6bb846469781a3963b36861ee608ed312e6125c4a7635a9edcf957bb294a6966e218f0e26b82ff0bda9184211d4bc141
   languageName: node
   linkType: hard
 
@@ -5400,6 +5415,16 @@ __metadata:
   bin:
     vite-node: vite-node.mjs
   checksum: 10c0/bc8eb01dd03c2cc306be2bf35efe789d6a3e8ca1d89d635d3154a9af0213f7609c94ef849f30a01f04535b31e729aee49468275e267693a42c32845fbd2a6721
+  languageName: node
+  linkType: hard
+
+"vite-plugin-env-compatible@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "vite-plugin-env-compatible@npm:2.0.1"
+  dependencies:
+    dotenv: "npm:8.2.0"
+    dotenv-expand: "npm:5.1.0"
+  checksum: 10c0/356ddda4d9d8d3e26053392cba374f9bdc0804c74816eb88d2384df817c921d697519bad272feffcfb4fa8dda38a5ea7f8a6802eaf4fd65caa74171c9df6ff12
   languageName: node
   linkType: hard
 
