@@ -6,6 +6,7 @@
       <legend>
         <slot name="legend"></slot>
       </legend>
+      <slot name="info"></slot>
       <slot name="content"></slot>
     </fieldset>
   </form>
@@ -24,7 +25,7 @@
 fieldset {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 20px;
+  padding: 10px 20px;
   margin: 20px 0;
 }
 
