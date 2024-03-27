@@ -71,6 +71,7 @@ export default {
 
 .form_control {
   width: 100%;
+  height: 3rem;
   background-color: transparent;
   padding: 0.5rem;
   font-size: 1rem;
