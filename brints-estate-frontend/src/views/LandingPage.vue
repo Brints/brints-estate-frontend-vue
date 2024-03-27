@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-// import BaseButton from "@/components/BaseButton.vue";
-import BaseButton from "../components/BaseButton.vue";
+import SignInSignUpInfo from "@/components/SignInSignUpInfo.vue";
 
 const bg = ref(null);
 const loadText = ref(null);
@@ -67,9 +66,31 @@ function scale(num, in_min, in_max, out_min, out_max) {
           ></router-link
         >
       </div>
-      <router-link :to="{ name: 'login' }" className="mt-5">
-        <BaseButton>Get Started</BaseButton>
-      </router-link>
+
+      <div class="extra-info my-8 flex">
+        <div class="login border-r-yellow-100 border-r px-2">
+          <SignInSignUpInfo>
+            Do you have an account?
+            <router-link :to="{ name: 'login' }">
+              <span
+                className="text-lime-500 hover:text-lime-900 transition-all duration-300"
+                >Login</span
+              >
+            </router-link>
+          </SignInSignUpInfo>
+        </div>
+        <div class="signup px-2">
+          <SignInSignUpInfo>
+            Ready to hop in and explore?
+            <router-link :to="{ name: 'signup' }">
+              <span
+                className="text-red-500 hover:text-red-600 transition-all duration-300"
+                >Signup</span
+              >
+            </router-link>
+          </SignInSignUpInfo>
+        </div>
+      </div>
     </div>
   </div>
   <div className="loading-text">0%</div>
