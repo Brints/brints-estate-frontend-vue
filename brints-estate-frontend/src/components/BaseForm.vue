@@ -1,7 +1,7 @@
 <script></script>
 
 <template>
-  <form :class="$style.main_form">
+  <form :class="$style.main_form" @submit.prevent="$emit('submit')">
     <fieldset>
       <legend>
         <slot name="legend"></slot>
