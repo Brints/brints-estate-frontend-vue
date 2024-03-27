@@ -36,10 +36,15 @@ async function fetchAboutUs() {
       <div v-for="item in aboutUs" :key="item._id">
         <h1>{{ item.title }}</h1>
         <div
-          class="image"
-          :style="{ backgroundImage: 'url(' + item.image[0].url + ')' }"
+          class="image relative bg-cover bg-center bg-no-repeat"
+          :style="{ backgroundImage: `url('${item.image[0].url}')` }"
         >
-          <p>Welcome to Brints Estate. It is Possible</p>
+          <h1
+            className="bg-zinc-300 rounded-lg text-xl absolute top-1/2 left-5 w-80 p-6 text-emerald-700 "
+          >
+            Looking for apartment? Do you have a property for sale or lease?
+            Brints Estate got you covered.
+          </h1>
         </div>
         <p>{{ item.content }}</p>
       </div>
@@ -63,8 +68,5 @@ async function fetchAboutUs() {
 .image {
   width: 100%;
   height: calc(100vh - 5rem);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 </style>
