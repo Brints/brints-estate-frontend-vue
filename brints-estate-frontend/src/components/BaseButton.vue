@@ -43,9 +43,9 @@ button {
   letter-spacing: 1px;
   cursor: pointer;
   transition: background-color 0.3s;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow: hidden;
-  margin: 20px;
+  margin: 10px;
 }
 
 .btn:focus {
