@@ -1,16 +1,67 @@
 <script setup>
-// import { ref } from "vue";
+import { ref } from "vue";
 import BaseForm from "@/components/BaseForm.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LabelInput from "@/components/LabelInput.vue";
 import LabelSelect from "@/components/LabelSelect.vue";
 import ImageInput from "../../components/ImageInput.vue";
 import ResetButton from "../../components/ResetButton.vue";
+
+const url = import.meta.env.VITE_BACKEND_URL;
+
+const form = ref({
+  fullname: "",
+  email: "",
+  phone: "",
+  gender: "",
+  password: "",
+  confirmPassword: "",
+  avatar: "",
+});
+
+const handleSubmit = async () => {
+  const formData = new FormData();
+  formData.append("fullname", form.value.fullname);
+  formData.append("email", form.value.email);
+  formData.append("phone", form.value.phone);
+  formData.append("gender", form.value.gender);
+  formData.append("password", form.value.password);
+  formData.append("confirmPassword", form.value.confirmPassword);
+  formData.append("avatar", form.value.avatar);
+
+  console.log(formData);
+
+  try {
+    const response = await fetch(`${url}/user/register`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("An error occurred while registering user");
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+// const handleReset = () => {
+//   form.value.fullname = "";
+//   form.value.email = "";
+//   form.value.phone = "";
+//   form.value.gender = "";
+//   form.value.password = "";
+//   form.value.confirmPassword = "";
+//   form.value.avatar = "";
+// };
 </script>
 
 <template>
   <main :class="$style.wrapper">
-    <BaseForm>
+    <BaseForm @submit="handleSubmit">
       <template #legend>
         <h1>Sign Up</h1>
       </template>
