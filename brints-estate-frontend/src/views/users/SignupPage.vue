@@ -4,59 +4,40 @@ import BaseForm from "@/components/BaseForm.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LabelInput from "@/components/LabelInput.vue";
 import LabelSelect from "@/components/LabelSelect.vue";
-import ImageInput from "../../components/ImageInput.vue";
-import ResetButton from "../../components/ResetButton.vue";
+import ImageInput from "@/components/ImageInput.vue";
+import ResetButton from "@/components/ResetButton.vue";
+// import axios from "axios";
 
-const url = import.meta.env.VITE_BACKEND_URL;
+const payload = ref(new FormData());
 
-const form = ref({
-  fullname: "",
-  email: "",
-  phone: "",
-  gender: "",
-  password: "",
-  confirmPassword: "",
-  avatar: "",
-});
+// const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
-  const formData = new FormData();
-  formData.append("fullname", form.value.fullname);
-  formData.append("email", form.value.email);
-  formData.append("phone", form.value.phone);
-  formData.append("gender", form.value.gender);
-  formData.append("password", form.value.password);
-  formData.append("confirmPassword", form.value.confirmPassword);
-  formData.append("avatar", form.value.avatar);
+  console.log("Fullname", fullname.value);
+  console.log("Avatar", avatar.files[0]);
 
-  console.log(formData);
+  payload.value.append("avatar", avatar.files[0]);
+  payload.value.append("fullname", fullname.value);
+  payload.value.append("email", email.value);
+  payload.value.append("phone", phone.value);
+  payload.value.append("gender", gender.value);
+  payload.value.append("password", password.value);
+  payload.value.append("confirmPassword", confirmPassword.value);
 
-  try {
-    const response = await fetch(`${url}/user/register`, {
-      method: "POST",
-      body: formData,
-    });
+  console.log(payload.value);
 
-    if (!response.ok) {
-      throw new Error("An error occurred while registering user");
-    }
+  // try {
+  //   const response = await axios.post(`${url}/user/register`, payload.value, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
 
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error.message);
-  }
+  //   console.log("Signup successful", response.data);
+  // } catch (error) {
+  //   console.error(error.message);
+  // }
 };
-
-// const handleReset = () => {
-//   form.value.fullname = "";
-//   form.value.email = "";
-//   form.value.phone = "";
-//   form.value.gender = "";
-//   form.value.password = "";
-//   form.value.confirmPassword = "";
-//   form.value.avatar = "";
-// };
 </script>
 
 <template>
@@ -115,7 +96,7 @@ const handleSubmit = async () => {
             </LabelSelect>
             <LabelInput
               label="Confirm Password"
-              id="confirm-password"
+              id="confirmPassword"
               name="confirmPassword"
               type="password"
               placeholder="Repeat your Password"
