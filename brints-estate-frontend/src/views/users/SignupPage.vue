@@ -13,16 +13,13 @@ const payload = ref(new FormData());
 // const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
-  console.log("Fullname", fullname.value);
-  console.log("Avatar", avatar.files[0]);
-
-  payload.value.append("avatar", avatar.files[0]);
-  payload.value.append("fullname", fullname.value);
-  payload.value.append("email", email.value);
-  payload.value.append("phone", phone.value);
-  payload.value.append("gender", gender.value);
-  payload.value.append("password", password.value);
-  payload.value.append("confirmPassword", confirmPassword.value);
+  // payload.value.append("avatar", avatar.files[0]);
+  // payload.value.append("fullname", fullname.value);
+  // payload.value.append("email", email.value);
+  // payload.value.append("phone", phone.value);
+  // payload.value.append("gender", gender.value);
+  // payload.value.append("password", password.value);
+  // payload.value.append("confirmPassword", confirmPassword.value);
 
   console.log(payload.value);
 
