@@ -21,6 +21,8 @@ const handleSubmit = async () => {
   // payload.value.append("password", password.value);
   // payload.value.append("confirmPassword", confirmPassword.value);
 
+  payload.value["fullname"] = fullname.value;
+
   console.log(payload.value);
 
   // try {
