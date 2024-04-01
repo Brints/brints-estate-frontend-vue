@@ -6,11 +6,11 @@ import LabelInput from "@/components/LabelInput.vue";
 import LabelSelect from "@/components/LabelSelect.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import ResetButton from "@/components/ResetButton.vue";
-// import axios from "axios";
+import axios from "axios";
 
 const payload = ref(new FormData());
 
-// const url = import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
   // payload.value.append("fullname", fullname.value);
@@ -23,19 +23,12 @@ const handleSubmit = async () => {
   payload.value["confirmPassword"] = confirmPassword.value;
   payload.value["gender"] = gender.value;
 
-  console.log(payload.value);
-
-  // try {
-  //   const response = await axios.post(`${url}/user/register`, payload.value, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-
-  //   console.log("Signup successful", response.data);
-  // } catch (error) {
-  //   console.error(error.message);
-  // }
+  try {
+    const response = await axios.post(`${url}/user/register`, payload.value);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 </script>
 
