@@ -18,32 +18,53 @@ const gender = ref("");
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
-const handleSubmit = async () => {
-  const payload = {
-    value: {
-      avatar: avatar.value,
-      fullname: fullname.value,
-      email: email.value,
-      password: password.value,
-      phone: phone.value,
-      gender: gender.value,
-      confirmPassword: confirmPassword.value,
-    },
-  };
+// const handleInput = (event) => {
+//   console.log(event);
+//   fullname.value = event.target.value;
+//   email.value = event.target.value;
+// };
 
-  console.log(payload);
+const handleSubmit = async () => {
+  const formData = new FormData();
 
   // Append file to form data
+  if (avatar.value && avatar.value.files[0]) {
+    formData.append("avatar", avatar.value);
+  }
+
+  console.log(fullname.value);
+  // console.log(email.value);
 
   // Append other user details to form data
+  formData.append("fullname", fullname.value);
+  formData.append("email", email.value);
+
+  console.log(formData);
 
   try {
-    const response = await axios.post(`${url}/user/register`, payload.value, {
+    const response = await axios.post(`${url}/user/register`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     console.log(response.data);
+
+    // Reset form fields
+    avatar.value = null;
+    fullname.value = "";
+    email.value = "";
+    password.value = "";
+    phone.value = "";
+    confirmPassword.value = "";
+    gender.value = "";
+
+    // Redirect to login page
+    $router.push("/login");
+
+    // Show success message
+    alert("User registered successfully");
+
+    return response.data;
   } catch (error) {
     console.error(error.response.data);
   }
@@ -76,6 +97,7 @@ const handleSubmit = async () => {
               type="text"
               placeholder="Enter your full name e.g. John Doe"
             />
+
             <LabelInput
               label="Email"
               id="email"
