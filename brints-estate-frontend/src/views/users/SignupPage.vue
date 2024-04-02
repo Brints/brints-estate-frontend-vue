@@ -29,14 +29,13 @@ const handleSubmit = async () => {
       gender: gender.value,
       confirmPassword: confirmPassword.value,
     },
+  };
 
-    console.log(payload);
+  console.log(payload);
 
   // Append file to form data
 
-
   // Append other user details to form data
-
 
   try {
     const response = await axios.post(`${url}/user/register`, payload.value, {
