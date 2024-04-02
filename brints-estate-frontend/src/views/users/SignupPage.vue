@@ -8,26 +8,45 @@ import ImageInput from "@/components/ImageInput.vue";
 import ResetButton from "@/components/ResetButton.vue";
 import axios from "axios";
 
-const payload = ref(new FormData());
+const avatar = ref(null);
+const fullname = ref("");
+const email = ref("");
+const password = ref("");
+const phone = ref("");
+const confirmPassword = ref("");
+const gender = ref("");
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
-  // payload.value.append("fullname", fullname.value);
+  const payload = {
+    value: {
+      avatar: avatar.value,
+      fullname: fullname.value,
+      email: email.value,
+      password: password.value,
+      phone: phone.value,
+      gender: gender.value,
+      confirmPassword: confirmPassword.value,
+    },
 
-  payload.value["avatar"] = avatar.files[0];
-  payload.value["fullname"] = fullname.value;
-  payload.value["email"] = email.value;
-  payload.value["password"] = password.value;
-  payload.value["phone"] = phone.value;
-  payload.value["confirmPassword"] = confirmPassword.value;
-  payload.value["gender"] = gender.value;
+    console.log(payload);
+
+  // Append file to form data
+
+
+  // Append other user details to form data
+
 
   try {
-    const response = await axios.post(`${url}/user/register`, payload.value);
+    const response = await axios.post(`${url}/user/register`, payload.value, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(response.data);
   } catch (error) {
-    console.error(error.message);
+    console.error(error.response.data);
   }
 };
 </script>
