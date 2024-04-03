@@ -32,8 +32,12 @@ export default {
     };
   },
 
+  // watch: {
+  //   value(newValue) {
+  //     this.inputValue = newValue;
+  //   },
   watch: {
-    value(newValue) {
+    inputValue(newValue) {
       this.inputValue = newValue;
     },
   },
