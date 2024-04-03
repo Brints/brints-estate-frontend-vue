@@ -1,11 +1,18 @@
-<script setup></script>
+<script></script>
 
 <template>
-  <header>
-    <nav>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link>
-      <router-link to="/user/12345">Verify Email</router-link>
+  <header :class="$style.header_links">
+    <nav className="flex gap-4 items-center">
+      <router-link to="/">Home</router-link>
+      <router-link to="/about-us">About Us</router-link>
+      <router-link to="/contact-us">Contact Us</router-link>
+      <router-link to="/company-profile">Company Profile</router-link>
     </nav>
   </header>
 </template>
+
+<style module>
+.header_links {
+  width: 100%;
+}
+</style>
