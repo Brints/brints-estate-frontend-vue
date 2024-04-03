@@ -4,9 +4,9 @@
   <header :class="$style.header_links">
     <nav className="flex gap-4 items-center">
       <router-link to="/">Home</router-link>
-      <router-link to="/about-us">About Us</router-link>
-      <router-link to="/contact-us">Contact Us</router-link>
-      <router-link to="/company-profile">Company Profile</router-link>
+      <router-link to="/about">About Us</router-link>
+      <router-link to="/contact">Contact Us</router-link>
+      <router-link to="/company">Company Profile</router-link>
     </nav>
   </header>
 </template>
