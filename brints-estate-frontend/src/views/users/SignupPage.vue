@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import BaseForm from "@/components/BaseForm.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import LabelInput from "@/components/LabelInput.vue";
+import BaseInput from "@/components/BaseInput.vue";
 import LabelSelect from "@/components/LabelSelect.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import ResetButton from "@/components/ResetButton.vue";
@@ -24,6 +24,8 @@ const url = import.meta.env.VITE_BACKEND_URL;
 //   email.value = event.target.value;
 // };
 
+console.log(email.value);
+
 const handleSubmit = async () => {
   const formData = new FormData();
 
@@ -32,42 +34,39 @@ const handleSubmit = async () => {
     formData.append("avatar", avatar.value);
   }
 
-  console.log(fullname.value);
-  // console.log(email.value);
-
   // Append other user details to form data
   formData.append("fullname", fullname.value);
   formData.append("email", email.value);
 
   console.log(formData);
 
-  try {
-    const response = await axios.post(`${url}/user/register`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log(response.data);
+  // try {
+  //   const response = await axios.post(`${url}/user/register`, formData, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
+  //   console.log(response.data);
 
-    // Reset form fields
-    avatar.value = null;
-    fullname.value = "";
-    email.value = "";
-    password.value = "";
-    phone.value = "";
-    confirmPassword.value = "";
-    gender.value = "";
+  //   // Reset form fields
+  //   avatar.value = null;
+  //   fullname.value = "";
+  //   email.value = "";
+  //   password.value = "";
+  //   phone.value = "";
+  //   confirmPassword.value = "";
+  //   gender.value = "";
 
-    // Redirect to login page
-    $router.push("/login");
+  //   // Redirect to login page
+  //   $router.push("/login");
 
-    // Show success message
-    alert("User registered successfully");
+  //   // Show success message
+  //   alert("User registered successfully");
 
-    return response.data;
-  } catch (error) {
-    console.error(error.response.data);
-  }
+  //   return response.data;
+  //   } catch (error) {
+  //     console.error(error.response.data);
+  //   }
 };
 </script>
 
@@ -90,7 +89,7 @@ const handleSubmit = async () => {
         <ImageInput label="Upload your Avatar" id="avatar" name="avatar" />
         <section :class="$style.form_content">
           <section class="left-column">
-            <LabelInput
+            <BaseInput
               label="Full Name"
               id="fullname"
               name="fullname"
@@ -98,14 +97,14 @@ const handleSubmit = async () => {
               placeholder="Enter your full name e.g. John Doe"
             />
 
-            <LabelInput
+            <BaseInput
               label="Email"
               id="email"
               name="email"
               type="email"
               placeholder="Enter your email e.g. johndoe@example.com"
             />
-            <LabelInput
+            <BaseInput
               label="Password"
               id="password"
               name="password"
@@ -114,7 +113,7 @@ const handleSubmit = async () => {
             />
           </section>
           <section class="right-column">
-            <LabelInput
+            <BaseInput
               label="Phone Number"
               id="phone"
               name="phone"
@@ -126,7 +125,7 @@ const handleSubmit = async () => {
               <option value="female">Female</option>
               <option value="male">Male</option>
             </LabelSelect>
-            <LabelInput
+            <BaseInput
               label="Confirm Password"
               id="confirmPassword"
               name="confirmPassword"
