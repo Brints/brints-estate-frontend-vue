@@ -1,12 +1,14 @@
 <script setup>
-import HeaderBarLinks from "@/components/HeaderBarLinks.vue";
+import HeaderBar from "@/components/HeaderBar.vue";
 </script>
 
 <template>
-  <!-- <router-link to="/">Landing Page</router-link>
-  <router-link to="/register">Register</router-link> -->
-  <HeaderBarLinks></HeaderBarLinks>
-  <h1>Login Page</h1>
+  <div class="container">
+    <div class="nav-links">
+      <HeaderBar></HeaderBar>
+    </div>
+    <h1>Login Page</h1>
+  </div>
 </template>
 
 <style module></style>
