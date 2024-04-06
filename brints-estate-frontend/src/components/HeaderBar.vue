@@ -28,5 +28,6 @@ export default {
   width: 100%;
   height: 5rem;
   padding: 0 2rem;
+  background-color: #101011;
 }
 </style>
