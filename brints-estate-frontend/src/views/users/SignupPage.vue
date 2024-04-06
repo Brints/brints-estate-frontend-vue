@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import BaseForm from "@/components/BaseForm.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import LabelSelect from "@/components/LabelSelect.vue";
-import ImageInput from "@/components/ImageInput.vue";
-import ResetButton from "@/components/ResetButton.vue";
+import BaseForm from "@/components/form/BaseForm.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import BaseInput from "@/components/form/BaseInput.vue";
+import LabelSelect from "@/components/form/LabelSelect.vue";
+import ImageInput from "@/components/form/ImageInput.vue";
+import ResetButton from "@/components/buttons/ResetButton.vue";
+import HeaderBar from "@/components/header/HeaderBar.vue";
 import axios from "axios";
 
 const avatar = ref(null);
@@ -71,6 +72,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
+  <HeaderBar></HeaderBar>
   <main :class="$style.wrapper">
     <BaseForm @submit="handleSubmit">
       <template #legend>
@@ -79,8 +81,7 @@ const handleSubmit = async () => {
       <template #info>
         <p className="text-center mb-1">
           Have an account already?
-          <span
-            className="hover:border-b text-lime-500 hover:text-lime-900 transition-all duration-300"
+          <span className="hover:border-b text-lime-500 hover:text-lime-900 transition-all duration-300"
             ><RouterLink to="/login">Login</RouterLink></span
           >
         </p>
@@ -113,13 +114,7 @@ const handleSubmit = async () => {
             />
           </section>
           <section class="right-column">
-            <BaseInput
-              label="Phone Number"
-              id="phone"
-              name="phone"
-              type="tel"
-              placeholder="Enter your phone number"
-            />
+            <BaseInput label="Phone Number" id="phone" name="phone" type="tel" placeholder="Enter your phone number" />
             <LabelSelect label="Gender" id="gender" name="gender">
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>

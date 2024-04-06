@@ -35,7 +35,6 @@ export default {
   watch: {
     value(newValue) {
       this.inputValue = newValue;
-      // this.inputValue = this.$refs.userInfo.value
     },
   },
 };
@@ -57,6 +56,7 @@ export default {
         @input="$emit('input', $event.target.value)"
       />
     </slot>
+    <!-- @input="$emit('input', $event.target.value)" -->
     <!-- ref="userInfo" -->
   </div>
 </template>

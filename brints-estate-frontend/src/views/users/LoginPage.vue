@@ -3,10 +3,10 @@ import HeaderBar from "@/components/HeaderBar.vue";
 </script>
 
 <template>
+  <div class="nav-links">
+    <HeaderBar></HeaderBar>
+  </div>
   <div class="container">
-    <div class="nav-links">
-      <HeaderBar></HeaderBar>
-    </div>
     <h1>Login Page</h1>
   </div>
 </template>
