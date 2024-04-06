@@ -32,13 +32,10 @@ export default {
     };
   },
 
-  // watch: {
-  //   value(newValue) {
-  //     this.inputValue = newValue;
-  //   },
   watch: {
-    inputValue(newValue) {
+    value(newValue) {
       this.inputValue = newValue;
+      // this.inputValue = this.$refs.userInfo.value
     },
   },
 };
@@ -60,6 +57,7 @@ export default {
         @input="$emit('input', $event.target.value)"
       />
     </slot>
+    <!-- ref="userInfo" -->
   </div>
 </template>
 
