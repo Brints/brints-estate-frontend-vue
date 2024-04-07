@@ -32,7 +32,7 @@ async function fetchAboutUs() {
 
 <script>
 import axios from "axios";
-import HeaderBar from "@/components/HeaderBar.vue";
+import HeaderBar from "@/components/header/HeaderBar.vue";
 
 export default {
   components: {
@@ -93,8 +93,7 @@ export default {
             <h1
               className="bg-zinc-300 rounded-lg text-xl relative top-1/2 left-14 w-80 p-6 text-emerald-700 -translate-y-2/4 "
             >
-              Looking for apartment? Do you have a property for sale or lease?
-              Brints Estate got you covered.
+              Looking for apartment? Do you have a property for sale or lease? Brints Estate got you covered.
             </h1>
           </div>
 
