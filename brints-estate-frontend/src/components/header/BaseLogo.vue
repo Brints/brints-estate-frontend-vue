@@ -2,7 +2,7 @@
 
 <template>
   <div :class="$style.logo">
-    <img src="../../public/logo.png" alt="Brints Estate Logo" />
+    <img src="/logo.png" alt="Brints Estate Logo" />
     <h1>Brints <span className="border-y">Estate</span></h1>
   </div>
 </template>
