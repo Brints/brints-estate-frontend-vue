@@ -1,6 +1,6 @@
 <script>
-import BaseLogo from "@/components/BaseLogo.vue";
-import HeaderBarLinks from "@/components/HeaderBarLinks.vue";
+import BaseLogo from "@/components/header/BaseLogo.vue";
+import HeaderBarLinks from "@/components/header/HeaderBarLinks.vue";
 export default {
   components: {
     BaseLogo,
