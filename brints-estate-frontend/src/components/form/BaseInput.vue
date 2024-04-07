@@ -1,5 +1,6 @@
 <script>
 export default {
+  emits: ["input-data"],
   props: {
     label: {
       type: String,
@@ -53,7 +54,6 @@ export default {
         :name="name"
         :placeholder="placeholder"
         v-model="inputValue"
-        @input="$emit('input', $event.target.value)"
       />
     </slot>
     <!-- @input="$emit('input', $event.target.value)" -->
