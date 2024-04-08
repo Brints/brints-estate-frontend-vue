@@ -10,8 +10,8 @@ import HeaderBar from "@/components/header/HeaderBar.vue";
 import axios from "axios";
 
 const avatar = ref(null);
-const fullname = ref("");
-const email = ref("");
+const fullname = ref("aniebiet afia");
+const email = ref("aniebietafia@localhost.com");
 const password = ref("");
 const phone = ref("");
 const confirmPassword = ref("");
@@ -20,16 +20,13 @@ const gender = ref("");
 const url = import.meta.env.VITE_BACKEND_URL;
 
 // const handleInput = (event) => {
-//   console.log(event);
-//   fullname.value = event.target.value;
-//   email.value = event.target.value;
+//   console.log($emit("input-data", event.target.value));
 // };
-
-console.log(email.value);
 
 const handleSubmit = async () => {
   const formData = new FormData();
 
+  console.log(fullname.value);
   // Append file to form data
   if (avatar.value && avatar.value.files[0]) {
     formData.append("avatar", avatar.value);
@@ -39,7 +36,11 @@ const handleSubmit = async () => {
   formData.append("fullname", fullname.value);
   formData.append("email", email.value);
 
-  console.log(formData);
+  for (const [key, value] of formData.entries()) {
+    console.log({ [key]: value });
+  }
+
+  // console.log(...formData);
 
   // try {
   //   const response = await axios.post(`${url}/user/register`, formData, {
@@ -74,7 +75,7 @@ const handleSubmit = async () => {
 <template>
   <HeaderBar></HeaderBar>
   <main :class="$style.wrapper">
-    <BaseForm @submit="handleSubmit">
+    <BaseForm @submit.prevent="handleSubmit">
       <template #legend>
         <h1>Sign Up</h1>
       </template>
@@ -96,6 +97,7 @@ const handleSubmit = async () => {
               name="fullname"
               type="text"
               placeholder="Enter your full name e.g. John Doe"
+              @input="$emit('input-data', $event.target.value)"
             />
 
             <BaseInput
