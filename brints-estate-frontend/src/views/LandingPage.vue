@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import SignInSignUpInfo from "@/components/SignInSignUpInfo.vue";
+import SmallButton from "@/components/buttons/SmallButton.vue";
 
 const bg = ref(null);
 const loadText = ref(null);
@@ -33,61 +34,51 @@ function scale(num, in_min, in_max, out_min, out_max) {
   <div
     className="bg bg-[url('../assets/images/building-design-4.jpg')] h-screen w-screen flex items-center justify-center flex-col bg-cover bg-center bg-no-repeat  bg-opacity-80"
   >
-    <div
-      className="bg-slate-800 bg-opacity-80 pt-10 px-10 rounded-lg flex flex-col items-center"
-    >
+    <div className="bg-slate-800 bg-opacity-80 pt-10 px-10 rounded-lg flex flex-col items-center">
       <h1 className="text-4xl font-bold text-center">
         Welcome to
-        <span className="border-y text-lime-500"
-          >Brints <span className="text-indigo-600">Estate</span></span
-        >
+        <span className="border-y text-lime-500">Brints <span className="text-indigo-600">Estate</span></span>
       </h1>
       <p className="text-center text-lg mt-5">
-        We are a real estate company that provides you with the best properties
-        in the market.
+        We are a real estate company that provides you with the best properties in the market.
       </p>
       <div className="mt-5 flex justify-center gap-2">
         <router-link to="#" className="border-r-2 pr-2">
-          <span
-            className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
+          <span className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >Company Profile</span
           ></router-link
         >
         <router-link :to="{ name: 'about' }" className="border-r-2 pr-2">
-          <span
-            className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
+          <span className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >About Us</span
           ></router-link
         >
         <router-link to="#" className="pr-2">
-          <span
-            className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
+          <span className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >Contact Us</span
           ></router-link
         >
       </div>
 
       <div class="extra-info my-8 flex">
-        <div class="login border-r-yellow-100 border-r px-2">
+        <div class="login px-2">
           <SignInSignUpInfo>
             Do you have an account?
-            <router-link :to="{ name: 'login' }">
-              <span
-                className="text-lime-500 hover:text-lime-900 transition-all duration-300"
-                >Login</span
-              >
-            </router-link>
+            <div className="flex justify-center">
+              <router-link :to="{ name: 'login' }">
+                <SmallButton><span className="text-green-400">Login</span></SmallButton>
+              </router-link>
+            </div>
           </SignInSignUpInfo>
         </div>
         <div class="signup px-2">
           <SignInSignUpInfo>
             Ready to hop in and explore?
-            <router-link :to="{ name: 'signup' }">
-              <span
-                className="text-red-500 hover:text-red-600 transition-all duration-300"
-                >Signup</span
-              >
-            </router-link>
+            <div className="flex justify-center">
+              <router-link :to="{ name: 'signup' }">
+                <SmallButton><span className="text-indigo-600">Sign Up</span></SmallButton>
+              </router-link>
+            </div>
           </SignInSignUpInfo>
         </div>
       </div>
