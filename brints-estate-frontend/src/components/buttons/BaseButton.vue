@@ -1,13 +1,14 @@
 <script setup>
-import { onMounted, defineProps } from "vue";
+import { onMounted, defineProps, ref } from "vue";
 
-onMounted(() => {
-  const buttons = document.querySelectorAll("button");
+const buttonType = ref(null);
+let hasListener = false;
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", createRipple);
-  });
-});
+function attachRippleListener(button) {
+  if (hasListener) return;
+  button.addEventListener("click", createRipple);
+  hasListener = true;
+}
 
 defineProps({
   type: {
@@ -32,10 +33,14 @@ function createRipple(e) {
 
   setTimeout(() => circle.remove(), 500);
 }
+
+onMounted(() => {
+  attachRippleListener(buttonType.value);
+});
 </script>
 
 <template>
-  <button :type="type" :class="status">
+  <button ref="buttonType" :type="type" :class="status">
     <slot></slot>
   </button>
 </template>
