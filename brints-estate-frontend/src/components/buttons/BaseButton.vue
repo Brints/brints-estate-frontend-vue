@@ -1,12 +1,21 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, defineProps } from "vue";
 
 onMounted(() => {
-  const buttons = document.querySelectorAll(".btn");
+  const buttons = document.querySelectorAll("button");
 
   buttons.forEach((button) => {
     button.addEventListener("click", createRipple);
   });
+});
+
+defineProps({
+  type: {
+    type: String,
+  },
+  status: {
+    type: String,
+  },
 });
 
 function createRipple(e) {
@@ -26,7 +35,7 @@ function createRipple(e) {
 </script>
 
 <template>
-  <button class="btn">
+  <button :type="type" :class="status">
     <slot></slot>
   </button>
 </template>
@@ -48,7 +57,7 @@ button {
   margin: 10px;
 }
 
-.btn:focus {
+button:focus {
   outline: none;
 }
 
@@ -60,6 +69,10 @@ button .circle {
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0);
   animation: scale 0.5s ease-in-out;
+}
+
+.reset_btn {
+  background-color: rgb(88, 9, 9);
 }
 
 @keyframes scale {
