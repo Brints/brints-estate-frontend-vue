@@ -5,19 +5,18 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
-// import ResetButton from "@/components/buttons/ResetButton.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
-import axios from "axios";
+// import axios from "axios";
 
 const avatar = ref(null);
 const fullname = ref("aniebiet afia");
 const email = ref("aniebietafia@localhost.com");
-const password = ref("");
-const phone = ref("");
-const confirmPassword = ref("");
-const gender = ref("");
+// const password = ref("");
+// const phone = ref("");
+// const confirmPassword = ref("");
+// const gender = ref("");
 
-const url = import.meta.env.VITE_BACKEND_URL;
+// const url = import.meta.env.VITE_BACKEND_URL;
 
 // const handleInput = (event) => {
 //   console.log($emit("input-data", event.target.value));
