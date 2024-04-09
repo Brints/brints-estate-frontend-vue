@@ -32,7 +32,7 @@ async function fetchAboutUs() {
 
 <script>
 import axios from "axios";
-import HeaderBar from "@/components/header/HeaderBar.vue";
+import HeaderBar from "@/components/layout/HeaderBar.vue";
 
 export default {
   components: {
@@ -136,15 +136,4 @@ export default {
   font-size: 1.5rem;
   height: calc(100vh - 5rem);
 }
-
-/* .about-contents {
-  width: 100%;
-  height: calc(100vh - 5rem);
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: 100vh;
-} */
 </style>
