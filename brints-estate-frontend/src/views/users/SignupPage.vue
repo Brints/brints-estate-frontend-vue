@@ -5,8 +5,8 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
-import ResetButton from "@/components/buttons/ResetButton.vue";
-import HeaderBar from "@/components/header/HeaderBar.vue";
+// import ResetButton from "@/components/buttons/ResetButton.vue";
+import HeaderBar from "@/components/layout/HeaderBar.vue";
 import axios from "axios";
 
 const avatar = ref(null);
@@ -134,7 +134,7 @@ const handleSubmit = async () => {
 
         <div :class="$style.btns_wrapper">
           <BaseButton type="submit">Signup</BaseButton>
-          <ResetButton>Reset</ResetButton>
+          <BaseButton type="reset" status="reset_btn">Reset</BaseButton>
         </div>
       </template>
     </BaseForm>
