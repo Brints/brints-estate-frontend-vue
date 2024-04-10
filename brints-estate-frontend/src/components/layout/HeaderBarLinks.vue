@@ -22,4 +22,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+nav a {
+  padding: 0.3rem;
+}
+
+nav a:hover {
+  border-bottom: 2px solid #7a7a7a;
+  transition: all 2s ease-in-out;
+}
 </style>
