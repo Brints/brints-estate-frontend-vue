@@ -6,68 +6,64 @@ import BaseInput from "@/components/form/BaseInput.vue";
 import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
-// import axios from "axios";
+import axios from "axios";
 
-const avatar = ref(null);
-const fullname = ref("aniebiet afia");
-const email = ref("aniebietafia@localhost.com");
-// const password = ref("");
-// const phone = ref("");
-// const confirmPassword = ref("");
-// const gender = ref("");
+const formData = ref({
+  fullname: "",
+  email: "",
+  phone: "",
+  gender: "",
+  password: "",
+  confirmPassword: "",
+  avatar: null,
+});
 
-// const url = import.meta.env.VITE_BACKEND_URL;
+const handleInput = (e) => {
+  const { name, value } = e.target;
+  formData.value = { ...formData.value, [name]: value };
+};
 
-// const handleInput = (event) => {
-//   console.log($emit("input-data", event.target.value));
-// };
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
-  const formData = new FormData();
+  const data = new FormData();
+  data.append("fullname", formData.value.fullname);
+  data.append("email", formData.value.email);
+  data.append("phone", formData.value.phone);
+  data.append("gender", formData.value.gender);
+  data.append("password", formData.value.password);
+  data.append("confirmPassword", formData.value.confirmPassword);
+  data.append("avatar", formData.value.avatar);
 
-  console.log(fullname.value);
-  // Append file to form data
-  if (avatar.value && avatar.value.files[0]) {
-    formData.append("avatar", avatar.value);
+  try {
+    const response = await axios.post(`${url}/user/register`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    const payload = response.data;
+    console.log(payload);
+
+    if (payload.statusCode === 201) {
+      formData.value = {
+        fullname: "",
+        email: "",
+        phone: "",
+        gender: "",
+        password: "",
+        confirmPassword: "",
+        avatar: null,
+      };
+      console.log("User created successfully");
+    } else {
+      alert("An error occurred. Please try again");
+    }
+
+    // Redirect to login page
+    $router.push("/login");
+  } catch (error) {
+    console.error(error.payload.error.message);
   }
-
-  // Append other user details to form data
-  formData.append("fullname", fullname.value);
-  formData.append("email", email.value);
-
-  for (const [key, value] of formData.entries()) {
-    console.log({ [key]: value });
-  }
-
-  // console.log(...formData);
-
-  // try {
-  //   const response = await axios.post(`${url}/user/register`, formData, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-  //   console.log(response.data);
-
-  //   // Reset form fields
-  //   avatar.value = null;
-  //   fullname.value = "";
-  //   email.value = "";
-  //   password.value = "";
-  //   phone.value = "";
-  //   confirmPassword.value = "";
-  //   gender.value = "";
-
-  //   // Redirect to login page
-  //   $router.push("/login");
-
-  //   // Show success message
-  //   alert("User registered successfully");
-
-  //   return response.data;
-  //   } catch (error) {
-  //     console.error(error.response.data);
-  //   }
 };
 </script>
 
@@ -95,8 +91,8 @@ const handleSubmit = async () => {
               id="fullname"
               name="fullname"
               type="text"
-              placeholder="Enter your full name e.g. John Doe"
-              @input="$emit('input-data', $event.target.value)"
+              placeholder="Enter your full name"
+              @input="handleInput"
             />
 
             <BaseInput
@@ -105,6 +101,7 @@ const handleSubmit = async () => {
               name="email"
               type="email"
               placeholder="Enter your email e.g. johndoe@example.com"
+              @input="handleInput"
             />
             <BaseInput
               label="Password"
@@ -112,11 +109,19 @@ const handleSubmit = async () => {
               name="password"
               type="password"
               placeholder="Enter your password"
+              @input="handleInput"
             />
           </section>
           <section class="right-column">
-            <BaseInput label="Phone Number" id="phone" name="phone" type="tel" placeholder="Enter your phone number" />
-            <LabelSelect label="Gender" id="gender" name="gender">
+            <BaseInput
+              label="Phone Number"
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="Enter your phone number"
+              @input="handleInput"
+            />
+            <LabelSelect label="Gender" id="gender" name="gender" @input="handleInput">
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -127,6 +132,7 @@ const handleSubmit = async () => {
               name="confirmPassword"
               type="password"
               placeholder="Repeat your Password"
+              @input="handleInput"
             />
           </section>
         </section>
@@ -157,7 +163,7 @@ const handleSubmit = async () => {
 .btns_wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 4px;
+  padding: 1rem;
+  gap: 10px;
 }
 </style>
