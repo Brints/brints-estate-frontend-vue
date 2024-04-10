@@ -59,7 +59,7 @@ button {
   transition: background-color 0.3s;
   border-radius: 6px;
   overflow: hidden;
-  margin: 10px;
+  /* margin: 10px; */
 }
 
 button:focus {
