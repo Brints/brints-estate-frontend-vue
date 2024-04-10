@@ -1,44 +1,89 @@
-<script>
-export default {
-  emits: ["input-data"],
-  props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    id: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
-      type: String,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    value: {
-      type: [String, Number],
-      default: "",
-    },
-  },
+<script setup>
+// export default {
+//   props: {
+//     id: {
+//       type: String,
+//       required: true,
+//     },
+//     label: {
+//       type: String,
+//       required: true,
+//     },
+//     type: {
+//       type: String,
+//       default: "text",
+//     },
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+//     placeholder: {
+//       type: String,
+//       default: "",
+//     },
+//     value: {
+//       type: String,
+//       default: "",
+//     },
+//   },
 
-  data() {
-    return {
-      inputValue: this.value,
-    };
-  },
+//   data() {
+//     return {
+//       inputValue: this.value,
+//     };
+//   },
+//   watch: {
+//     value(newValue) {
+//       this.inputValue = newValue;
+//     },
+//     inputValue(newValue) {
+//       this.$emit("input", newValue);
+//     },
+//   },
+// };
 
-  watch: {
-    value(newValue) {
-      this.inputValue = newValue;
-    },
+import { ref } from "vue";
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
   },
+  label: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+    default: "text",
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  value: {
+    type: String,
+    default: "",
+  },
+});
+
+const inputValue = ref(props.value);
+
+const watchValue = () => {
+  inputValue.value = props.value;
 };
+
+const watchInputValue = () => {
+  inputValue.value = props.value;
+};
+
+watchValue();
+watchInputValue();
 </script>
 
 <template>
@@ -53,11 +98,9 @@ export default {
         :id="id"
         :name="name"
         :placeholder="placeholder"
-        v-model="inputValue"
+        v-model.trim="inputValue"
       />
     </slot>
-    <!-- @input="$emit('input', $event.target.value)" -->
-    <!-- ref="userInfo" -->
   </div>
 </template>
 
