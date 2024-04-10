@@ -39,13 +39,7 @@ export default {
       ><slot name="label">{{ label }}</slot></label
     >
     <slot name="select">
-      <select
-        :class="$style.form_control"
-        :id="id"
-        :name="name"
-        v-model="selectedValue"
-        @change="$emit('change', $event.target.value)"
-      >
+      <select :class="$style.form_control" :id="id" :name="name" v-model.trim="selectedValue">
         <slot></slot>
       </select>
     </slot>
