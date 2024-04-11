@@ -1,47 +1,4 @@
 <script setup>
-// export default {
-//   props: {
-//     id: {
-//       type: String,
-//       required: true,
-//     },
-//     label: {
-//       type: String,
-//       required: true,
-//     },
-//     type: {
-//       type: String,
-//       default: "text",
-//     },
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     placeholder: {
-//       type: String,
-//       default: "",
-//     },
-//     value: {
-//       type: String,
-//       default: "",
-//     },
-//   },
-
-//   data() {
-//     return {
-//       inputValue: this.value,
-//     };
-//   },
-//   watch: {
-//     value(newValue) {
-//       this.inputValue = newValue;
-//     },
-//     inputValue(newValue) {
-//       this.$emit("input", newValue);
-//     },
-//   },
-// };
-
 import { ref } from "vue";
 
 const props = defineProps({
@@ -124,3 +81,48 @@ watchInputValue();
   border-radius: 5px;
 }
 </style>
+
+<!-- <script>
+  export default {
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      default: "text",
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      default: "",
+    },
+    value: {
+      type: String,
+      default: "",
+    },
+  },
+
+  data() {
+    return {
+      inputValue: this.value,
+    };
+  },
+  watch: {
+    value(newValue) {
+      this.inputValue = newValue;
+    },
+    inputValue(newValue) {
+      this.$emit("input", newValue);
+    },
+  },
+};
+</script> -->
