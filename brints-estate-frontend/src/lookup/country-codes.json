@@ -1,0 +1,1788 @@
+{
+  "countries": [
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "zipcode": "+93",
+      "flag": "🇦🇫"
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "zipcode": "+355",
+      "flag": "🇦🇱"
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "zipcode": "+213",
+      "flag": "🇩🇿"
+    },
+    {
+      "code": "AS",
+      "name": "American Samoa",
+      "zipcode": "+1 684",
+      "flag": "🇦🇸"
+    },
+    {
+      "code": "AD",
+      "name": "Andorra",
+      "zipcode": "+376",
+      "flag": "🇦🇩"
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "zipcode": "+244",
+      "flag": "🇦🇴"
+    },
+    {
+      "code": "AI",
+      "name": "Anguilla",
+      "zipcode": "+1 264",
+      "flag": "🇦🇮"
+    },
+    {
+      "code": "AQ",
+      "name": "Antarctica",
+      "zipcode": "+672",
+      "flag": "🇦🇶"
+    },
+    {
+      "code": "AG",
+      "name": "Antigua and Barbuda",
+      "zipcode": "+1 268",
+      "flag": "🇦🇬"
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "zipcode": "+54",
+      "flag": "🇦🇷"
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "zipcode": "+374",
+      "flag": "🇦🇲"
+    },
+    {
+      "code": "AW",
+      "name": "Aruba",
+      "zipcode": "+297",
+      "flag": "🇦🇼"
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "zipcode": "+61",
+      "flag": "🇦🇺"
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "zipcode": "+43",
+      "flag": "🇦🇹"
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "zipcode": "+994",
+      "flag": "🇦🇿"
+    },
+    {
+      "code": "BS",
+      "name": "Bahamas",
+      "zipcode": "+1 242",
+      "flag": "🇧🇸"
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "zipcode": "+973",
+      "flag": "🇧🇭"
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "zipcode": "+880",
+      "flag": "🇧🇩"
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "zipcode": "+1 246",
+      "flag": "🇧🇧"
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "zipcode": "+375",
+      "flag": "🇧🇾"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "zipcode": "+32",
+      "flag": "🇧🇪"
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "zipcode": "+501",
+      "flag": "🇧🇿"
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "zipcode": "+229",
+      "flag": "🇧🇯"
+    },
+    {
+      "code": "BM",
+      "name": "Bermuda",
+      "zipcode": "+1 441",
+      "flag": "🇧🇲"
+    },
+    {
+      "code": "BT",
+      "name": "Bhutan",
+      "zipcode": "+975",
+      "flag": "🇧🇹"
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "zipcode": "+591",
+      "flag": "🇧🇴"
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "zipcode": "+387",
+      "flag": "🇧🇦"
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "zipcode": "+267",
+      "flag": "🇧🇼"
+    },
+    {
+      "code": "BV",
+      "name": "Bouvet Island",
+      "zipcode": "+47",
+      "flag": "🇧🇻"
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "zipcode": "+55",
+      "flag": "🇧🇷"
+    },
+    {
+      "code": "IO",
+      "name": "British Indian Ocean Territory",
+      "zipcode": "+246",
+      "flag": "🇮🇴"
+    },
+    {
+      "code": "BN",
+      "name": "Brunei Darussalam",
+      "zipcode": "+673",
+      "flag": "🇧🇳"
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "zipcode": "+359",
+      "flag": "🇧🇬"
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "zipcode": "+226",
+      "flag": "🇧🇫"
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "zipcode": "+257",
+      "flag": "🇧🇮"
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "zipcode": "+855",
+      "flag": "🇰🇭"
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "zipcode": "+237",
+      "flag": "🇨🇲"
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "zipcode": "+1",
+      "flag": "🇨🇦"
+    },
+    {
+      "code": "CV",
+      "name": "Cape Verde",
+      "zipcode": "+238",
+      "flag": "🇨🇻"
+    },
+    {
+      "code": "KY",
+      "name": "Cayman Islands",
+      "zipcode": "+1 345",
+      "flag": "🇰🇾"
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "zipcode": "+236",
+      "flag": "🇨🇫"
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "zipcode": "+235",
+      "flag": "🇹🇩"
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "zipcode": "+56",
+      "flag": "🇨🇱"
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "zipcode": "+86",
+      "flag": "🇨🇳"
+    },
+    {
+      "code": "CX",
+      "name": "Christmas Island",
+      "zipcode": "+61",
+      "flag": "🇨🇽"
+    },
+    {
+      "code": "CC",
+      "name": "Cocos (Keeling) Islands",
+      "zipcode": "+61",
+      "flag": "🇨🇨"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "zipcode": "+57",
+      "flag": "🇨🇴"
+    },
+    {
+      "code": "KM",
+      "name": "Comoros",
+      "zipcode": "+269",
+      "flag": "🇰🇲"
+    },
+    {
+      "code": "CG",
+      "name": "Congo",
+      "zipcode": "+242",
+      "flag": "🇨🇬"
+    },
+    {
+      "code": "CD",
+      "name": "Congo, The Democratic Republic of The",
+      "zipcode": "+243",
+      "flag": "🇨🇩"
+    },
+    {
+      "code": "CK",
+      "name": "Cook Islands",
+      "zipcode": "+682",
+      "flag": "🇨🇰"
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "zipcode": "+506",
+      "flag": "🇨🇷"
+    },
+    {
+      "code": "CIV",
+      "name": "Cote D'ivoire",
+      "zipcode": "+225",
+      "flag": "🇨🇮"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "zipcode": "+385",
+      "flag": "🇭🇷"
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "zipcode": "+53",
+      "flag": "🇨🇺"
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "zipcode": "+357",
+      "flag": "🇨🇾"
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
+      "zipcode": "+420",
+      "flag": "🇨🇿"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "zipcode": "+45",
+      "flag": "🇩🇰"
+    },
+    {
+      "code": "DJ",
+      "name": "Djibouti",
+      "zipcode": "+253",
+      "flag": "🇩🇯"
+    },
+    {
+      "code": "DM",
+      "name": "Dominica",
+      "zipcode": "+1 767",
+      "flag": "🇩🇲"
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "zipcode": "+1 849",
+      "flag": "🇩🇴"
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "zipcode": "+593",
+      "flag": "🇪🇨"
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "zipcode": "+20",
+      "flag": "🇪🇬"
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador",
+      "zipcode": "+503",
+      "flag": "🇸🇻"
+    },
+    {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "zipcode": "+240",
+      "flag": "🇬🇶"
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "zipcode": "+291",
+      "flag": "🇪🇷"
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "zipcode": "+372",
+      "flag": "🇪🇪"
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "zipcode": "+251",
+      "flag": "🇪🇹"
+    },
+    {
+      "code": "FK",
+      "name": "Falkland Islands (Malvinas)",
+      "zipcode": "+500",
+      "flag": "🇫🇰"
+    },
+    {
+      "code": "FO",
+      "name": "Faroe Islands",
+      "zipcode": "+298",
+      "flag": "🇫🇴"
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "zipcode": "+679",
+      "flag": "🇫🇯"
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "zipcode": "+358",
+      "flag": "🇫🇮"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "zipcode": "+33",
+      "flag": "🇫🇷"
+    },
+    {
+      "code": "GF",
+      "name": "French Guiana",
+      "zipcode": "+594",
+      "flag": "🇬🇫"
+    },
+    {
+      "code": "PF",
+      "name": "French Polynesia",
+      "zipcode": "+689",
+      "flag": "🇵🇫"
+    },
+    {
+      "code": "TF",
+      "name": "French Southern Territories",
+      "zipcode": "+262",
+      "flag": "🇹🇫"
+    },
+    {
+      "code": "GA",
+      "name": "Gabon",
+      "zipcode": "+241",
+      "flag": "🇬🇦"
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "zipcode": "+220",
+      "flag": "🇬🇲"
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "zipcode": "+995",
+      "flag": "🇬🇪"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "zipcode": "+49",
+      "flag": "🇩🇪"
+    },
+    {
+      "code": "GHA",
+      "name": "Ghana",
+      "zipcode": "+233",
+      "flag": "🇬🇭"
+    },
+    {
+      "code": "GI",
+      "name": "Gibraltar",
+      "zipcode": "+350",
+      "flag": "🇬🇮"
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "zipcode": "+30",
+      "flag": "🇬🇷"
+    },
+    {
+      "code": "GL",
+      "name": "Greenland",
+      "zipcode": "+299",
+      "flag": "🇬🇱"
+    },
+    {
+      "code": "GD",
+      "name": "Grenada",
+      "zipcode": "+1 473",
+      "flag": "🇬🇩"
+    },
+    {
+      "code": "GP",
+      "name": "Guadeloupe",
+      "zipcode": "+590",
+      "flag": "🇬🇵"
+    },
+    {
+      "code": "GU",
+      "name": "Guam",
+      "zipcode": "+1 671",
+      "flag": "🇬🇺"
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "zipcode": "+502",
+      "flag": "🇬🇹"
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "zipcode": "+224",
+      "flag": "🇬🇳"
+    },
+    {
+      "code": "GW",
+      "name": "Guinea-bissau",
+      "zipcode": "+245",
+      "flag": "🇬🇼"
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "zipcode": "+592",
+      "flag": "🇬🇾"
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "zipcode": "+509",
+      "flag": "🇭🇹"
+    },
+    {
+      "code": "HM",
+      "name": "Heard Island and Mcdonald Islands",
+      "zipcode": "+672",
+      "flag": "🇭🇲"
+    },
+    {
+      "code": "VA",
+      "name": "Holy See (Vatican City State)",
+      "zipcode": "+379",
+      "flag": "🇻🇦"
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "zipcode": "+504",
+      "flag": "🇭🇳"
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "zipcode": "+852",
+      "flag": "🇭🇰"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "zipcode": "+36",
+      "flag": "🇭🇺"
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "zipcode": "+354",
+      "flag": "🇮🇸"
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "zipcode": "+91",
+      "flag": "🇮🇳"
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "zipcode": "+62",
+      "flag": "🇮🇩"
+    },
+    {
+      "code": "IR",
+      "name": "Iran, Islamic Republic of",
+      "zipcode": "+98",
+      "flag": "🇮🇷"
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "zipcode": "+964",
+      "flag": "🇮🇶"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "zipcode": "+353",
+      "flag": "🇮🇪"
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "zipcode": "+972",
+      "flag": "🇮🇱"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "zipcode": "+39",
+      "flag": "🇮🇹"
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "zipcode": "+1 876",
+      "flag": "🇯🇲"
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "zipcode": "+81",
+      "flag": "🇯🇵"
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "zipcode": "+962",
+      "flag": "🇯🇴"
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "zipcode": "+7",
+      "flag": "🇰🇿"
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "zipcode": "+254",
+      "flag": "🇰🇪"
+    },
+    {
+      "code": "KI",
+      "name": "Kiribati",
+      "zipcode": "+686",
+      "flag": "🇰🇮"
+    },
+    {
+      "code": "KP",
+      "name": "Korea, Democratic People's Republic of",
+      "zipcode": "+850",
+      "flag": "🇰🇵"
+    },
+    {
+      "code": "KR",
+      "name": "Korea, Republic of",
+      "zipcode": "+82",
+      "flag": "🇰🇷"
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "zipcode": "+965",
+      "flag": "🇰🇼"
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "zipcode": "+996",
+      "flag": "🇰🇬"
+    },
+    {
+      "code": "LA",
+      "name": "Lao People's Democratic Republic",
+      "zipcode": "+856",
+      "flag": "🇱🇦"
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "zipcode": "+371",
+      "flag": "🇱🇻"
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "zipcode": "+961",
+      "flag": "🇱🇧"
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "zipcode": "+266",
+      "flag": "🇱🇸"
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "zipcode": "+231",
+      "flag": "🇱🇷"
+    },
+    {
+      "code": "LY",
+      "name": "Libyan Arab Jamahiriya",
+      "zipcode": "+218",
+      "flag": "🇱🇾"
+    },
+    {
+      "code": "LI",
+      "name": "Liechtenstein",
+      "zipcode": "+423",
+      "flag": "🇱🇮"
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "zipcode": "+370",
+      "flag": "🇱🇹"
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "zipcode": "+352",
+      "flag": "🇱🇺"
+    },
+    {
+      "code": "MO",
+      "name": "Macao",
+      "zipcode": "+853",
+      "flag": "🇲🇴"
+    },
+    {
+      "code": "MK",
+      "name": "Macedonia, The Former Yugoslav Republic of",
+      "zipcode": "+389",
+      "flag": "🇲🇰"
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "zipcode": "+261",
+      "flag": "🇲🇬"
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "zipcode": "+265",
+      "flag": "🇲🇼"
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "zipcode": "+60",
+      "flag": "🇲🇾"
+    },
+    {
+      "code": "MV",
+      "name": "Maldives",
+      "zipcode": "+960",
+      "flag": "🇲🇻"
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "zipcode": "+223",
+      "flag": "🇲🇱"
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "zipcode": "+356",
+      "flag": "🇲🇹"
+    },
+    {
+      "code": "MH",
+      "name": "Marshall Islands",
+      "zipcode": "+692",
+      "flag": "🇲🇭"
+    },
+    {
+      "code": "MQ",
+      "name": "Martinique",
+      "zipcode": "+596",
+      "flag": "🇲🇶"
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "zipcode": "+222",
+      "flag": "🇲🇷"
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "zipcode": "+230",
+      "flag": "🇲🇺"
+    },
+    {
+      "code": "YT",
+      "name": "Mayotte",
+      "zipcode": "+262",
+      "flag": "🇾🇹"
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "zipcode": "+52",
+      "flag": "🇲🇽"
+    },
+    {
+      "code": "FM",
+      "name": "Micronesia, Federated States of",
+      "zipcode": "+691",
+      "flag": "🇫🇲"
+    },
+    {
+      "code": "MD",
+      "name": "Moldova, Republic of",
+      "zipcode": "+373",
+      "flag": "🇲🇩"
+    },
+    {
+      "code": "MC",
+      "name": "Monaco",
+      "zipcode": "+377",
+      "flag": "🇲🇨"
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "zipcode": "+976",
+      "flag": "🇲🇳"
+    },
+    {
+      "code": "MS",
+      "name": "Montserrat",
+      "zipcode": "+1 664",
+      "flag": "🇲🇸"
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "zipcode": "+212",
+      "flag": "🇲🇦"
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "zipcode": "+258",
+      "flag": "🇲🇿"
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "zipcode": "+95",
+      "flag": "🇲🇲"
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "zipcode": "+264",
+      "flag": "🇳🇦"
+    },
+    {
+      "code": "NR",
+      "name": "Nauru",
+      "zipcode": "+674",
+      "flag": "🇳🇷"
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "zipcode": "+977",
+      "flag": "🇳🇵"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "zipcode": "+31",
+      "flag": "🇳🇱"
+    },
+    {
+      "code": "AN",
+      "name": "Netherlands Antilles",
+      "zipcode": "+599",
+      "flag": "🇦🇳"
+    },
+    {
+      "code": "NC",
+      "name": "New Caledonia",
+      "zipcode": "+687",
+      "flag": "🇳🇨"
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "zipcode": "+64",
+      "flag": "🇳🇿"
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua",
+      "zipcode": "+505",
+      "flag": "🇳🇮"
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "zipcode": "+227",
+      "flag": "🇳🇪"
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "zipcode": "+234",
+      "flag": "🇳🇬",
+      "states": [
+        {
+          "name": "Abia",
+          "code": "AB"
+        },
+        {
+          "name": "Adamawa",
+          "code": "AD"
+        },
+        {
+          "name": "Akwa Ibom",
+          "code": "AK"
+        },
+        {
+          "name": "Anambra",
+          "code": "AN"
+        },
+        {
+          "name": "Bauchi",
+          "code": "BA"
+        },
+        {
+          "name": "Bayelsa",
+          "code": "BY"
+        },
+        {
+          "name": "Benue",
+          "code": "BE"
+        },
+        {
+          "name": "Borno",
+          "code": "BO"
+        },
+        {
+          "name": "Cross River",
+          "code": "CR"
+        },
+        {
+          "name": "Delta",
+          "code": "DE"
+        },
+        {
+          "name": "Ebonyi",
+          "code": "EB"
+        },
+        {
+          "name": "Edo",
+          "code": "ED"
+        },
+        {
+          "name": "Ekiti",
+          "code": "EK"
+        },
+        {
+          "name": "Enugu",
+          "code": "EN"
+        },
+        {
+          "name": "FCT",
+          "code": "FC"
+        },
+        {
+          "name": "Gombe",
+          "code": "GO"
+        },
+        {
+          "name": "Imo",
+          "code": "IM"
+        },
+        {
+          "name": "Jigawa",
+          "code": "JI"
+        },
+        {
+          "name": "Kaduna",
+          "code": "KD"
+        },
+        {
+          "name": "Kano",
+          "code": "KN"
+        },
+        {
+          "name": "Katsina",
+          "code": "KT"
+        },
+        {
+          "name": "Kebbi",
+          "code": "KE"
+        },
+        {
+          "name": "Kogi",
+          "code": "KO"
+        },
+        {
+          "name": "Kwara",
+          "code": "KW"
+        },
+        {
+          "name": "Lagos",
+          "code": "LA"
+        },
+        {
+          "name": "Nasarawa",
+          "code": "NA"
+        },
+        {
+          "name": "Niger",
+          "code": "NI"
+        },
+        {
+          "name": "Ogun",
+          "code": "OG"
+        },
+        {
+          "name": "Ondo",
+          "code": "ON"
+        },
+        {
+          "name": "Osun",
+          "code": "OS"
+        },
+        {
+          "name": "Oyo",
+          "code": "OY"
+        },
+        {
+          "name": "Plateau",
+          "code": "PL"
+        },
+        {
+          "name": "Rivers",
+          "code": "RI"
+        },
+        {
+          "name": "Sokoto",
+          "code": "SO"
+        },
+        {
+          "name": "Taraba",
+          "code": "TA"
+        },
+        {
+          "name": "Yobe",
+          "code": "YO"
+        },
+        {
+          "name": "Zamfara",
+          "code": "ZA"
+        }
+      ]
+    },
+    {
+      "code": "NU",
+      "name": "Niue",
+      "zipcode": "+683",
+      "flag": "🇳🇺"
+    },
+    {
+      "code": "NF",
+      "name": "Norfolk Island",
+      "zipcode": "+672",
+      "flag": "🇳🇫"
+    },
+    {
+      "code": "MP",
+      "name": "Northern Mariana Islands",
+      "zipcode": "+1 670",
+      "flag": "🇲🇵"
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "zipcode": "+47",
+      "flag": "🇳🇴"
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "zipcode": "+968",
+      "flag": "🇴🇲"
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "zipcode": "+92",
+      "flag": "🇵🇰"
+    },
+    {
+      "code": "PW",
+      "name": "Palau",
+      "zipcode": "+680",
+      "flag": "🇵🇼"
+    },
+    {
+      "code": "PS",
+      "name": "Palestinian Territory, Occupied",
+      "zipcode": "+970",
+      "flag": "🇵🇸"
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "zipcode": "+507",
+      "flag": "🇵🇦"
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "zipcode": "+675",
+      "flag": "🇵🇬"
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "zipcode": "+595",
+      "flag": "🇵🇾"
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "zipcode": "+51",
+      "flag": "🇵🇪"
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "zipcode": "+63",
+      "flag": "🇵🇭"
+    },
+    {
+      "code": "PN",
+      "name": "Pitcairn",
+      "zipcode": "+64",
+      "flag": "🇵🇳"
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "zipcode": "+48",
+      "flag": "🇵🇱"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "zipcode": "+351",
+      "flag": "🇵🇹"
+    },
+    {
+      "code": "PR",
+      "name": "Puerto Rico",
+      "zipcode": "+1 787",
+      "flag": "🇵🇷"
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "zipcode": "+974",
+      "flag": "🇶🇦"
+    },
+    {
+      "code": "RE",
+      "name": "Reunion",
+      "zipcode": "+262",
+      "flag": "🇷🇪"
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "zipcode": "+40",
+      "flag": "🇷🇴"
+    },
+    {
+      "code": "RU",
+      "name": "Russian Federation",
+      "zipcode": "+7",
+      "flag": "🇷🇺"
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "zipcode": "+250",
+      "flag": "🇷🇼"
+    },
+    {
+      "code": "SH",
+      "name": "Saint Helena",
+      "zipcode": "+290",
+      "flag": "🇸🇭"
+    },
+    {
+      "code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "zipcode": "+1 869",
+      "flag": "🇰🇳"
+    },
+    {
+      "code": "LC",
+      "name": "Saint Lucia",
+      "zipcode": "+1 758",
+      "flag": "🇱🇨"
+    },
+    {
+      "code": "PM",
+      "name": "Saint Pierre and Miquelon",
+      "zipcode": "+508",
+      "flag": "🇵🇲"
+    },
+    {
+      "code": "VC",
+      "name": "Saint Vincent and The Grenadines",
+      "zipcode": "+1 784",
+      "flag": "🇻🇨"
+    },
+    {
+      "code": "WS",
+      "name": "Samoa",
+      "zipcode": "+685",
+      "flag": "🇼🇸"
+    },
+    {
+      "code": "SM",
+      "name": "San Marino",
+      "zipcode": "+378",
+      "flag": "🇸🇲"
+    },
+    {
+      "code": "ST",
+      "name": "Sao Tome and Principe",
+      "zipcode": "+239",
+      "flag": "🇸🇹"
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "zipcode": "+966",
+      "flag": "🇸🇦"
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "zipcode": "+221",
+      "flag": "🇸🇳"
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "zipcode": "+381",
+      "flag": "🇷🇸"
+    },
+    {
+      "code": "SC",
+      "name": "Seychelles",
+      "zipcode": "+248",
+      "flag": "🇸🇨"
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "zipcode": "+232",
+      "flag": "🇸🇱"
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "zipcode": "+65",
+      "flag": "🇸🇬"
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "zipcode": "+421",
+      "flag": "🇸🇰"
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "zipcode": "+386",
+      "flag": "🇸🇮"
+    },
+    {
+      "code": "SB",
+      "name": "Solomon Islands",
+      "zipcode": "+677",
+      "flag": "🇸🇧"
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "zipcode": "+252",
+      "flag": "🇸🇴"
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "zipcode": "+27",
+      "flag": "🇿🇦"
+    },
+    {
+      "code": "GS",
+      "name": "South Georgia and The South Sandwich Islands",
+      "zipcode": "+500",
+      "flag": "🇬🇸"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "zipcode": "+34",
+      "flag": "🇪🇸"
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "zipcode": "+94",
+      "flag": "🇱🇰"
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "zipcode": "+249",
+      "flag": "🇸🇩"
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "zipcode": "+597",
+      "flag": "🇸🇷"
+    },
+    {
+      "code": "SJ",
+      "name": "Svalbard and Jan Mayen",
+      "zipcode": "+47",
+      "flag": "🇸🇯"
+    },
+    {
+      "code": "SZ",
+      "name": "Swaziland",
+      "zipcode": "+268",
+      "flag": "🇸🇿"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "zipcode": "+46",
+      "flag": "🇸🇪"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "zipcode": "+41",
+      "flag": "🇨🇭"
+    },
+    {
+      "code": "SY",
+      "name": "Syrian Arab Republic",
+      "zipcode": "+963",
+      "flag": "🇸🇾"
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan, Province of China",
+      "zipcode": "+886",
+      "flag": "🇹🇼"
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "zipcode": "+992",
+      "flag": "🇹🇯"
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania, United Republic of",
+      "zipcode": "+255",
+      "flag": "🇹🇿"
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "zipcode": "+66",
+      "flag": "🇹🇭"
+    },
+    {
+      "code": "TL",
+      "name": "Timor-leste",
+      "zipcode": "+670",
+      "flag": "🇹🇱"
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "zipcode": "+228",
+      "flag": "🇹🇬"
+    },
+    {
+      "code": "TK",
+      "name": "Tokelau",
+      "zipcode": "+690",
+      "flag": "🇹🇰"
+    },
+    {
+      "code": "TO",
+      "name": "Tonga",
+      "zipcode": "+676",
+      "flag": "🇹🇴"
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "zipcode": "+1 868",
+      "flag": "🇹🇹"
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "zipcode": "+216",
+      "flag": "🇹🇳"
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "zipcode": "+90",
+      "flag": "🇹🇷"
+    },
+    {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "zipcode": "+993",
+      "flag": "🇹🇲"
+    },
+    {
+      "code": "TC",
+      "name": "Turks and Caicos Islands",
+      "zipcode": "+1 649",
+      "flag": "🇹🇨"
+    },
+    {
+      "code": "TV",
+      "name": "Tuvalu",
+      "zipcode": "+688",
+      "flag": "🇹🇻"
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "zipcode": "+256",
+      "flag": "🇺🇬"
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "zipcode": "+380",
+      "flag": "🇺🇦"
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "zipcode": "+971",
+      "flag": "🇦🇪"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "zipcode": "+44",
+      "flag": "🇬🇧"
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "zipcode": "+1",
+      "flag": "🇺🇸",
+      "states": [
+        {
+          "name": "Alabama",
+          "code": "AL"
+        },
+        {
+          "name": "Alaska",
+          "code": "AK"
+        },
+        {
+          "name": "Arizona",
+          "code": "AZ"
+        },
+        {
+          "name": "Arkansas",
+          "code": "AR"
+        },
+        {
+          "name": "California",
+          "code": "CA"
+        },
+        {
+          "name": "Colorado",
+          "code": "CO"
+        },
+        {
+          "name": "Connecticut",
+          "code": "CT"
+        },
+        {
+          "name": "Delaware",
+          "code": "DE"
+        },
+        {
+          "name": "District of Columbia",
+          "code": "DC"
+        },
+        {
+          "name": "Florida",
+          "code": "FL"
+        },
+        {
+          "name": "Georgia",
+          "code": "GA"
+        },
+        {
+          "name": "Hawaii",
+          "code": "HI"
+        },
+        {
+          "name": "Idaho",
+          "code": "ID"
+        },
+        {
+          "name": "Illinois",
+          "code": "IL"
+        },
+        {
+          "name": "Indiana",
+          "code": "IN"
+        },
+        {
+          "name": "Iowa",
+          "code": "IA"
+        },
+        {
+          "name": "Kansas",
+          "code": "KS"
+        },
+        {
+          "name": "Kentucky",
+          "code": "KY"
+        },
+        {
+          "name": "Louisiana",
+          "code": "LA"
+        },
+        {
+          "name": "Maine",
+          "code": "ME"
+        },
+        {
+          "name": "Maryland",
+          "code": "MD"
+        },
+        {
+          "name": "Massachusetts",
+          "code": "MA"
+        },
+        {
+          "name": "Michigan",
+          "code": "MI"
+        },
+        {
+          "name": "Minnesota",
+          "code": "MN"
+        },
+        {
+          "name": "Mississippi",
+          "code": "MS"
+        },
+        {
+          "name": "Missouri",
+          "code": "MO"
+        },
+        {
+          "name": "Montana",
+          "code": "MT"
+        },
+        {
+          "name": "Nebraska",
+          "code": "NE"
+        },
+        {
+          "name": "Nevada",
+          "code": "NV"
+        },
+        {
+          "name": "New Hampshire",
+          "code": "NH"
+        },
+        {
+          "name": "New Jersey",
+          "code": "NJ"
+        },
+        {
+          "name": "New Mexico",
+          "code": "NM"
+        },
+        {
+          "name": "New York",
+          "code": "NY"
+        },
+        {
+          "name": "North Carolina",
+          "code": "NC"
+        },
+        {
+          "name": "North Dakota",
+          "code": "ND"
+        },
+        {
+          "name": "Ohio",
+          "code": "OH"
+        },
+        {
+          "name": "Oklahoma",
+          "code": "OK"
+        },
+        {
+          "name": "Oregon",
+          "code": "OR"
+        },
+        {
+          "name": "Pennsylvania",
+          "code": "PA"
+        },
+        {
+          "name": "Rhode Island",
+          "code": "RI"
+        },
+        {
+          "name": "South Carolina",
+          "code": "SC"
+        },
+        {
+          "name": "South Dakota",
+          "code": "SD"
+        },
+        {
+          "name": "Tennessee",
+          "code": "TN"
+        },
+        {
+          "name": "Texas",
+          "code": "TX"
+        },
+        {
+          "name": "Utah",
+          "code": "UT"
+        },
+        {
+          "name": "Vermont",
+          "code": "VT"
+        },
+        {
+          "name": "Virginia",
+          "code": "VA"
+        },
+        {
+          "name": "Washington",
+          "code": "WA"
+        },
+        {
+          "name": "West Virginia",
+          "code": "WV"
+        },
+        {
+          "name": "Wisconsin",
+          "code": "WI"
+        },
+        {
+          "name": "Wyoming",
+          "code": "WY"
+        }
+      ]
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "zipcode": "+598",
+      "flag": "🇺🇾"
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "zipcode": "+998",
+      "flag": "🇺🇿"
+    },
+    {
+      "code": "VU",
+      "name": "Vanuatu",
+      "zipcode": "+678",
+      "flag": "🇻🇺"
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "zipcode": "+58",
+      "flag": "🇻🇪"
+    },
+    {
+      "code": "VN",
+      "name": "Viet Nam",
+      "zipcode": "+84",
+      "flag": "🇻🇳"
+    },
+    {
+      "code": "VG",
+      "name": "Virgin Islands, British",
+      "zipcode": "+1 284",
+      "flag": "🇻🇬"
+    },
+    {
+      "code": "VI",
+      "name": "Virgin Islands, U.S.",
+      "zipcode": "+1 340",
+      "flag": "🇻🇮"
+    },
+    {
+      "code": "WF",
+      "name": "Wallis and Futuna",
+      "zipcode": "+681",
+      "flag": "🇼🇫"
+    },
+    {
+      "code": "EH",
+      "name": "Western Sahara",
+      "zipcode": "+212",
+      "flag": "🇪🇭"
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "zipcode": "+967",
+      "flag": "🇾🇪"
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "zipcode": "+260",
+      "flag": "🇿🇲"
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "zipcode": "+263",
+      "flag": "🇿🇼"
+    }
+  ]
+}
