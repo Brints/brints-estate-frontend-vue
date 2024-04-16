@@ -622,7 +622,108 @@
       "code": "IL",
       "name": "Israel",
       "zipcode": "+972",
-      "flag": "🇮🇱"
+      "flag": "🇮🇱",
+      "states": [
+        {
+          "name": "Central District",
+          "code": "CD",
+          "towns": [
+            "Kfar Saba",
+            "Netanya",
+            "Petah Tikva",
+            "Ra'anana",
+            "Ramat HaSharon",
+            "Rehovot",
+            "Rishon LeZion",
+            "Yavne"
+          ]
+        },
+        {
+          "name": "Haifa District",
+          "code": "HD",
+          "towns": [
+            "Haifa",
+            "Hadera",
+            "Kiryat Ata",
+            "Kiryat Bialik",
+            "Kiryat Motzkin",
+            "Kiryat Yam",
+            "Nesher",
+            "Or Akiva",
+            "Tirat Carmel",
+            "Zichron Ya'akov"
+          ]
+        },
+        {
+          "name": "Jerusalem District",
+          "code": "JD",
+          "towns": [
+            "Jerusalem",
+            "Abu Ghosh",
+            "Mevaseret Zion",
+            "Modi'in-Maccabim-Re'ut",
+            "Ma'ale Adumim",
+            "Beit Shemesh",
+            "Giv'at Ze'ev",
+            "Gush Etzion",
+            "Mazkeret Batya",
+            "Mevaseret Zion",
+            "Tzur Hadassah"
+          ]
+        },
+        {
+          "name": "Northern District",
+          "code": "ND",
+          "towns": [
+            "Acre",
+            "Karmiel",
+            "Ma'alot-Tarshiha",
+            "Nahariya",
+            "Nazareth",
+            "Safed",
+            "Shaghur",
+            "Shefa-'Amr",
+            "Tiberias"
+          ]
+        },
+        {
+          "name": "Southern District",
+          "code": "SD",
+          "towns": [
+            "Ashdod",
+            "Ashkelon",
+            "Beersheba",
+            "Dimona",
+            "Eilat",
+            "Kiryat Gat",
+            "Netivot",
+            "Ofakim",
+            "Rahat",
+            "Sderot"
+          ]
+        },
+        {
+          "name": "Tel Aviv District",
+          "code": "TAD",
+          "towns": [
+            "Tel Aviv",
+            "Bat Yam",
+            "Bnei Brak",
+            "Giv'atayim",
+            "Herzliya",
+            "Holon",
+            "Kfar Saba",
+            "Ramat Gan",
+            "Ramat HaSharon",
+            "Rishon LeZion"
+          ]
+        },
+        {
+          "name": "Judea and Samaria Area",
+          "code": "JSA",
+          "towns": ["Ariel", "Ma'ale Adumim", "Modi'in Illit"]
+        }
+      ]
     },
     {
       "code": "IT",
