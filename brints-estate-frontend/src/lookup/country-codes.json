@@ -76,7 +76,124 @@
       "code": "AU",
       "name": "Australia",
       "zipcode": "+61",
-      "flag": "🇦🇺"
+      "flag": "🇦🇺",
+      "states": [
+        {
+          "name": "New South Wales",
+          "code": "NSW",
+          "towns": [
+            "Sydney",
+            "Albury",
+            "Armidale",
+            "Bathurst",
+            "Blue Mountains",
+            "Broken Hill",
+            "Campbelltown",
+            "Cessnock",
+            "Dubbo",
+            "Goulburn",
+            "Grafton",
+            "Lithgow",
+            "Liverpool",
+            "Newcastle",
+            "Orange",
+            "Parramatta",
+            "Penrith",
+            "Queanbeyan",
+            "Tamworth",
+            "Wagga Wagga",
+            "Wollongong"
+          ]
+        },
+        {
+          "name": "Queensland",
+          "code": "QLD",
+          "towns": [
+            "Brisbane",
+            "Bundaberg",
+            "Cairns",
+            "Caloundra",
+            "Charters Towers",
+            "Gladstone",
+            "Gold Coast",
+            "Gympie",
+            "Hervey Bay",
+            "Ipswich",
+            "Logan City",
+            "Mackay",
+            "Maryborough",
+            "Mount Isa",
+            "Redcliffe",
+            "Rockhampton",
+            "Sunshine Coast",
+            "Toowoomba",
+            "Townsville",
+            "Warwick"
+          ]
+        },
+        {
+          "name": "South Australia",
+          "code": "SA",
+          "towns": [
+            "Adelaide",
+            "Mount Gambier",
+            "Murray Bridge",
+            "Port Augusta",
+            "Port Pirie",
+            "Port Lincoln",
+            "Victor Harbor",
+            "Whyalla"
+          ]
+        },
+        {
+          "name": "Tasmania",
+          "code": "TAS",
+          "towns": ["Hobart", "City of Clarence", "City of Glenorchy", "City of Hobart", "City of Kingston"]
+        },
+        {
+          "name": "Victoria",
+          "code": "VIC",
+          "towns": [
+            "Melbourne",
+            "Ararat",
+            "Bairnsdale",
+            "Benalla",
+            "Ballarat",
+            "Bendigo",
+            "Dandenong",
+            "Frankston",
+            "Geelong",
+            "Hamilton",
+            "Horsham",
+            "Latrobe City",
+            "Melton",
+            "Mildura",
+            "Sale",
+            "Shepparton",
+            "Swan Hill",
+            "Wangaratta",
+            "Warrnambool",
+            "Wodonga"
+          ]
+        },
+        {
+          "name": "Western Australia",
+          "code": "WA",
+          "towns": [
+            "Perth",
+            "Albany",
+            "Bunbury",
+            "Busselton",
+            "Fremantle",
+            "Geraldton",
+            "Joondalup",
+            "Kalgoorlie",
+            "Karratha",
+            "Mandurah",
+            "Rockingham"
+          ]
+        }
+      ]
     },
     {
       "code": "AT",
@@ -2254,7 +2371,45 @@
       "code": "ZA",
       "name": "South Africa",
       "zipcode": "+27",
-      "flag": "🇿🇦"
+      "flag": "🇿🇦",
+      "states": [
+        {
+          "name": "Eastern Cape",
+          "code": "EC"
+        },
+        {
+          "name": "Free State",
+          "code": "FS"
+        },
+        {
+          "name": "Gauteng",
+          "code": "GT"
+        },
+        {
+          "name": "KwaZulu-Natal",
+          "code": "NL"
+        },
+        {
+          "name": "Limpopo",
+          "code": "LP"
+        },
+        {
+          "name": "Mpumalanga",
+          "code": "MP"
+        },
+        {
+          "name": "North West",
+          "code": "NW"
+        },
+        {
+          "name": "Northern Cape",
+          "code": "NC"
+        },
+        {
+          "name": "Western Cape",
+          "code": "WC"
+        }
+      ]
     },
     {
       "code": "GS",
