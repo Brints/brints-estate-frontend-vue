@@ -7,6 +7,10 @@ export default {
       type: String,
       required: true,
     },
+    label: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -15,11 +19,16 @@ export default {
       type: String,
       default: "",
     },
+    icon: {
+      type: String,
+      default: "",
+    },
   },
 
   data() {
     return {
       selectedValue: this.value,
+      url: "https://emojicdn.elk.sh/",
     };
   },
 
@@ -63,7 +72,7 @@ export default {
 };
 </script>
 
-<template>
+<!-- <template>
   <div :class="$style.form_group">
     <slot name="label">
       <span><font-awesome-icon :icon="icon" /></span>
@@ -72,16 +81,37 @@ export default {
 
     <select :id="id" :name="name" v-model.trim="selectedValue">
       <option value="">Country Code</option>
-      <option v-for="country in countries" :key="country.code" :value="country.code">
+      <option v-for="country in countries" :key="country.code" :value="country.zipcode">
         <span>{{ flagEmoji(country.flag) }}</span>
 
         {{ country.name }} {{ country.zipcode }}
       </option>
     </select>
   </div>
+</template> -->
+
+<template>
+  <div :class="$style.form_group">
+    <div :class="$style.label_group">
+      <span><font-awesome-icon :icon="icon" /></span>
+      <label :for="id">{{ label }}<span class="text-red-500">*</span></label>
+    </div>
+
+    <select :id="id" :name="name" v-model.trim="selectedValue">
+      <option value="">Country Code</option>
+      <option v-for="country in countries" :key="country.code" :value="country.zipcode">
+        <span><img :src="url + country.flag" /> {{ country.zipcode }}</span>
+        <span :class="$style.zipcode">{{ country.name }}</span>
+      </option>
+    </select>
+  </div>
 </template>
 
 <style module>
+.form_group {
+  margin-bottom: 1rem;
+}
+
 .form_group select {
   width: 100%;
   padding: 0.5rem;
@@ -95,14 +125,16 @@ select:focus {
   border-color: #2563eb;
 }
 
-select option {
+option {
   background-color: #3d3a3a;
-  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
 }
 
 select option:hover {
   background-color: #2563eb;
   color: white;
+  padding: 1rem 0;
 }
 
 img {
@@ -115,4 +147,12 @@ img {
   display: block;
   margin-bottom: 0.5rem;
 }
+
+.label_group {
+  display: flex;
+  gap: 0.5rem;
+}
+/* .flag_emoji {
+  font-family: "Noto Color Emoji", sans-serif;
+} */
 </style>
