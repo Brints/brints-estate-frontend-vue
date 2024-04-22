@@ -6,7 +6,7 @@
       "capital": "Kabul",
       "zipcode": "+93",
       "flag": "🇦🇫",
-      "states": [
+      "province": [
         {
           "name": "Badakhshan",
           "code": "BDS",
@@ -536,7 +536,7 @@
       "capital": "Tirana",
       "zipcode": "+355",
       "flag": "🇦🇱",
-      "states": [
+      "province": [
         {
           "name": "Berat",
           "code": "BR",
@@ -619,7 +619,7 @@
       "capital": "Algiers",
       "zipcode": "+213",
       "flag": "🇩🇿",
-      "states": [
+      "province": [
         {
           "name": "Adrar",
           "code": "01",
@@ -1367,20 +1367,417 @@
     {
       "code": "AS",
       "name": "American Samoa",
+      "capital": "Pago Pago",
       "zipcode": "+1 684",
-      "flag": "🇦🇸"
+      "flag": "🇦🇸",
+      "province": [
+        {
+          "name": "Eastern District",
+          "code": "E",
+          "towns": ["Fagatogo", "Futiga", "Malaeimi", "Malaeloa/Aitulagi", "Mapusagafou", "Pago Pago", "Tafuna"]
+        },
+        {
+          "name": "Manu'a District",
+          "code": "M",
+          "towns": ["Ofu", "Olosega", "Ta'u"]
+        },
+        {
+          "name": "Rose Atoll",
+          "code": "R",
+          "towns": ["Rose Atoll"]
+        },
+        {
+          "name": "Swains Island",
+          "code": "S",
+          "towns": ["Swains Island"]
+        },
+        {
+          "name": "Western District",
+          "code": "W",
+          "towns": [
+            "Amanave",
+            "Aoloau",
+            "Fagasa",
+            "Fagatua",
+            "Faganeanea",
+            "Lauli'i",
+            "Leone",
+            "Lepua",
+            "Malaeloa/Ituau",
+            "Masefau",
+            "Nua",
+            "Nu'uuli",
+            "Ofu",
+            "Olosega",
+            "Onenoa",
+            "Pago Pago",
+            "Tula",
+            "Vatia"
+          ]
+        }
+      ]
     },
     {
       "code": "AD",
       "name": "Andorra",
+      "capital": "Andorra la Vella",
       "zipcode": "+376",
-      "flag": "🇦🇩"
+      "flag": "🇦🇩",
+      "province": [
+        {
+          "name": "Andorra la Vella",
+          "code": "07",
+          "towns": ["Andorra la Vella", "Santa Coloma", "Sant Julià de Lòria"]
+        },
+        {
+          "name": "Canillo",
+          "code": "02",
+          "towns": ["Canillo", "El Tarter", "Incles", "Meritxell", "Pas de la Casa", "Soldeu"]
+        },
+        {
+          "name": "Encamp",
+          "code": "03",
+          "towns": ["Encamp", "El Pas de la Casa", "Grau Roig", "Les Bons", "Les Escaldes", "Vila"]
+        },
+        {
+          "name": "Escaldes-Engordany",
+          "code": "08",
+          "towns": ["Engordany", "Escaldes", "La Massana", "Ordino", "Sant Julià de Lòria"]
+        },
+        {
+          "name": "La Massana",
+          "code": "04",
+          "towns": ["Arinsal", "El Serrat", "Erts", "La Massana", "Llorts", "Ordino", "Sispony", "Vila"]
+        },
+        {
+          "name": "Ordino",
+          "code": "05",
+          "towns": ["Ansalonga", "Arans", "Arcalís", "Llorts", "Ordino", "Sornàs"]
+        },
+        {
+          "name": "Sant Julià de Lòria",
+          "code": "06",
+          "towns": [
+            "Aixirivall",
+            "Aixovall",
+            "Aubinyà",
+            "Bixessarri",
+            "Fontaneda",
+            "Juberri",
+            "Llumeneres",
+            "Nagol",
+            "Sant Julià de Lòria",
+            "Aixirivall",
+            "Aixovall",
+            "Aubinyà",
+            "Bixessarri",
+            "Fontaneda",
+            "Juberri",
+            "Llumeneres",
+            "Nagol",
+            "Sant Julià de Lòria"
+          ]
+        }
+      ]
     },
     {
       "code": "AO",
       "name": "Angola",
+      "capital": "Luanda",
       "zipcode": "+244",
-      "flag": "🇦🇴"
+      "flag": "🇦🇴",
+      "province": [
+        {
+          "name": "Bengo",
+          "code": "BGO",
+          "towns": [
+            "Ambriz",
+            "Bula Atumba",
+            "Dande",
+            "Dembos",
+            "Nambuangongo",
+            "Pango Aluquém",
+            "Quibaxe",
+            "Quicabo",
+            "Quixinge",
+            "Ucua"
+          ]
+        },
+        {
+          "name": "Benguela",
+          "code": "BGU",
+          "towns": [
+            "Balombo",
+            "Baía Farta",
+            "Benguela",
+            "Bocoio",
+            "Caimbambo",
+            "Catumbela",
+            "Chongorói",
+            "Cubal",
+            "Ganda",
+            "Lobito",
+            "Maxinde",
+            "Moco",
+            "Quibala",
+            "Waku Kungo"
+          ]
+        },
+        {
+          "name": "Bié",
+          "code": "BIE",
+          "towns": [
+            "Andulo",
+            "Camacupa",
+            "Catabola",
+            "Chinguar",
+            "Chitembo",
+            "Cuemba",
+            "Cunhinga",
+            "Cuito",
+            "Nharea",
+            "Quibala",
+            "Waku Kungo"
+          ]
+        },
+        {
+          "name": "Cabinda",
+          "code": "CAB",
+          "towns": [
+            "Belize",
+            "Buco-Zau",
+            "Cabinda",
+            "Cacongo",
+            "Landana",
+            "Lândana",
+            "Luzamba",
+            "Necuto",
+            "Tando Zinze",
+            "Tchiowa",
+            "Tomboco"
+          ]
+        },
+        {
+          "name": "Cuando Cubango",
+          "code": "CCU",
+          "towns": [
+            "Calai",
+            "Cuangar",
+            "Cuchi",
+            "Cuito Cuanavale",
+            "Dirico",
+            "Longa",
+            "Menongue",
+            "Mavinga",
+            "Nancova",
+            "Rivungo"
+          ]
+        },
+        {
+          "name": "Cuanza Norte",
+          "code": "CNO",
+          "towns": [
+            "Ambaca",
+            "Banga",
+            "Bolongongo",
+            "Bula Atumba",
+            "Cambambe",
+            "Cazengo",
+            "Golungo Alto",
+            "Gonguembo",
+            "Lucala",
+            "Quiculungo",
+            "Samba Caju",
+            "Uige"
+          ]
+        },
+        {
+          "name": "Cuanza Sul",
+          "code": "CUS",
+          "towns": [
+            "Amboim",
+            "Cassongue",
+            "Conda",
+            "Ebo",
+            "Libolo",
+            "Mussende",
+            "Porto Amboim",
+            "Quibala",
+            "Quilenda",
+            "Seles",
+            "Sumbe",
+            "Waku Kungo"
+          ]
+        },
+        {
+          "name": "Cunene",
+          "code": "CNN",
+          "towns": ["Cahama", "Cuanhama", "Curoca", "Cuvelai", "Namacunde", "Ombadja", "Ondjiva"]
+        },
+        {
+          "name": "Huambo",
+          "code": "HUA",
+          "towns": [
+            "Bailundo",
+            "Caála",
+            "Ekunha",
+            "Huambo",
+            "Londuimbali",
+            "Longonjo",
+            "Mungo",
+            "Tchikala-Tcholohanga",
+            "Tchindjenje",
+            "Ucuma"
+          ]
+        },
+        {
+          "name": "Huíla",
+          "code": "HUI",
+          "towns": [
+            "Caconda",
+            "Cacula",
+            "Caluquembe",
+            "Chiange",
+            "Chibia",
+            "Chicomba",
+            "Chipindo",
+            "Humpata",
+            "Jamba",
+            "Lubango",
+            "Matala",
+            "Quilengues",
+            "Quipungo"
+          ]
+        },
+        {
+          "name": "Luanda",
+          "code": "LUA",
+          "towns": [
+            "Belas",
+            "Cacuaco",
+            "Cazenga",
+            "Ícolo e Bengo",
+            "Luanda",
+            "Quiçama",
+            "Talatona",
+            "Viana",
+            "Vila Nova de Kifangondo"
+          ]
+        },
+        {
+          "name": "Lunda Norte",
+          "code": "LNO",
+          "towns": [
+            "Cambulo",
+            "Capenda-Camulemba",
+            "Caungula",
+            "Chitato",
+            "Cuango",
+            "Cuilo",
+            "Lóvua",
+            "Lubalo",
+            "Lucapa",
+            "Xá-Muteba"
+          ]
+        },
+        {
+          "name": "Lunda Sul",
+          "code": "LSU",
+          "towns": ["Cacolo", "Dala", "Muconda", "Saurimo"]
+        },
+        {
+          "name": "Malanje",
+          "code": "MAL",
+          "towns": [
+            "Cacuso",
+            "Calandula",
+            "Cambundi-Catembo",
+            "Cangandala",
+            "Caombo",
+            "Cuaba Nzoji",
+            "Cunda-Dia-Baze",
+            "Kiwaba Nzoji",
+            "Luquembo",
+            "Malanje",
+            "Marimba",
+            "Massango",
+            "Mucari",
+            "Quela",
+            "Quirima",
+            "Quela",
+            "Quirima",
+            "Quissanga"
+          ]
+        },
+        {
+          "name": "Moxico",
+          "code": "MOX",
+          "towns": [
+            "Alto Zambeze",
+            "Bundas",
+            "Camanongue",
+            "Cameia",
+            "Cangamba",
+            "Chitau",
+            "Cuangar",
+            "Cuito Cuanavale",
+            "Léua",
+            "Luacano",
+            "Luau",
+            "Luchazes",
+            "Lumbala N'guimbo",
+            "Lutembo",
+            "Mavinga",
+            "Moxico",
+            "Namacunde",
+            "Ninda",
+            "Rivungo",
+            "Século",
+            "Sombo",
+            "Vicungo"
+          ]
+        },
+        {
+          "name": "Namibe",
+          "code": "NAM",
+          "towns": ["Bibala", "Camucuio", "Moçâmedes", "Tômbua", "Virei"]
+        },
+        {
+          "name": "Uíge",
+          "code": "UIG",
+          "towns": [
+            "Alto Cauale",
+            "Ambuila",
+            "Bembe",
+            "Buengas",
+            "Bungo",
+            "Damba",
+            "Mucaba",
+            "Negage",
+            "Puri",
+            "Quitexe",
+            "Sanza Pombo",
+            "Songo",
+            "Uíge"
+          ]
+        },
+        {
+          "name": "Zaire",
+          "code": "ZAI",
+          "towns": [
+            "Ambriz",
+            "Bula Atumba",
+            "Dande",
+            "Dembos",
+            "Nambuangongo",
+            "Pango Aluquém",
+            "Quibaxe",
+            "Quicabo",
+            "Quixinge",
+            "Ucua"
+          ]
+        }
+      ]
     },
     {
       "code": "AI",
@@ -1423,7 +1820,7 @@
       "name": "Australia",
       "zipcode": "+61",
       "flag": "🇦🇺",
-      "states": [
+      "provice": [
         {
           "name": "New South Wales",
           "code": "NSW",
@@ -2086,7 +2483,7 @@
       "name": "Israel",
       "zipcode": "+972",
       "flag": "🇮🇱",
-      "states": [
+      "provice": [
         {
           "name": "Central District",
           "code": "CD",
@@ -2500,7 +2897,7 @@
       "capital": "Abuja",
       "zipcode": "+234",
       "flag": "🇳🇬",
-      "states": [
+      "province": [
         {
           "name": "Abia",
           "code": "AB",
@@ -3720,7 +4117,7 @@
       "capital": "Pretoria",
       "zipcode": "+27",
       "flag": "🇿🇦",
-      "states": [
+      "province": [
         {
           "name": "Eastern Cape",
           "code": "EC",
@@ -4256,7 +4653,7 @@
       "capital": "Abu Dhabi",
       "zipcode": "+971",
       "flag": "🇦🇪",
-      "states": [
+      "province": [
         {
           "name": "Abu Dhabi",
           "code": "AZ",
@@ -4300,7 +4697,7 @@
       "capital": "London",
       "zipcode": "+44",
       "flag": "🇬🇧",
-      "states": [
+      "province": [
         {
           "name": "England",
           "code": "ENG",
@@ -4517,7 +4914,7 @@
       "capital": "Washington, D.C.",
       "zipcode": "+1",
       "flag": "🇺🇸",
-      "states": [
+      "province": [
         {
           "name": "Alabama",
           "code": "AL",
@@ -7968,8 +8365,60 @@
     {
       "code": "ZW",
       "name": "Zimbabwe",
+      "capital": "Harare",
       "zipcode": "+263",
-      "flag": "🇿🇼"
+      "flag": "🇿🇼",
+      "province": [
+        {
+          "name": "Bulawayo",
+          "towns": ["Bulawayo"]
+        },
+        {
+          "name": "Harare",
+          "towns": ["Harare"]
+        },
+        {
+          "name": "Manicaland",
+          "towns": ["Buhera", "Chimanimani", "Chipinge", "Makoni", "Mutare", "Mutasa", "Nyanga"]
+        },
+        {
+          "name": "Mashonaland Central",
+          "towns": ["Bindura", "Centenary", "Guruve", "Mazowe", "Mount Darwin", "Rushinga", "Shamva"]
+        },
+        {
+          "name": "Mashonaland East",
+          "towns": [
+            "Chikomba",
+            "Goromonzi",
+            "Marondera",
+            "Mudzi",
+            "Murehwa",
+            "Mutoko",
+            "Seke",
+            "Uzumba-Maramba-Pfungwe"
+          ]
+        },
+        {
+          "name": "Mashonaland West",
+          "towns": ["Chegutu", "Hurungwe", "Kadoma", "Kariba", "Makonde", "Zvimba"]
+        },
+        {
+          "name": "Masvingo",
+          "towns": ["Bikita", "Chiredzi", "Chivi", "Gutu", "Masvingo", "Mwenezi", "Zaka"]
+        },
+        {
+          "name": "Matabeleland North",
+          "towns": ["Binga", "Bubi", "Hwange", "Nkayi", "Tsholotsho", "Umguza"]
+        },
+        {
+          "name": "Matabeleland South",
+          "towns": ["Beitbridge", "Bulilima", "Gwanda", "Insiza", "Mangwe", "Matobo"]
+        },
+        {
+          "name": "Midlands",
+          "towns": ["Chirumhanzu", "Gokwe", "Kwekwe", "Mberengwa", "Shurugwi", "Zvishavane"]
+        }
+      ]
     }
   ]
 }
