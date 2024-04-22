@@ -19,16 +19,20 @@
 <style module>
 .header_links {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-items: center;
+  gap: 4rem;
 }
 
 nav a {
   padding: 0.3rem;
 }
 
-nav a:hover {
-  border-bottom: 2px solid #7a7a7a;
-  transition: all 2s ease-in-out;
+nav a:hover,
+nav a:active,
+nav a.router-link-active {
+  color: #f1a80a;
+  border-bottom: 1px solid #f1a80a;
 }
 </style>
