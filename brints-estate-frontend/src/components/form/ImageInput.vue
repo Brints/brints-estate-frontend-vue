@@ -17,12 +17,9 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-
-  methods: {
-    onFileChange(event) {
-      const file = event.target.files[0];
-      this.$emit("input", file);
+    icon: {
+      type: String,
+      default: "",
     },
   },
 };
@@ -30,19 +27,17 @@ export default {
 
 <template>
   <div :class="$style.form_group">
-    <label :for="id"
-      ><slot name="label">{{ label }}</slot></label
-    >
+    <div className="flex">
+      <span className="mr-2"><font-awesome-icon :icon="icon" /></span>
+
+      <label :for="id"
+        ><slot name="label">{{ label }}</slot></label
+      >
+    </div>
     <slot name="input">
-      <input
-        :class="$style.form_control"
-        type="file"
-        :id="id"
-        :name="name"
-        @input="$emit('input', $event.target.value)"
-        @change="onFileChange"
-        :multiple="multiple"
-      />
+      <input :class="$style.form_control" type="file" :id="id" :name="name" :multiple="multiple" />
+      <!-- @input="$emit('input', $event.target.value)" -->
+      <!-- @change="onFileChange" -->
     </slot>
   </div>
 </template>
