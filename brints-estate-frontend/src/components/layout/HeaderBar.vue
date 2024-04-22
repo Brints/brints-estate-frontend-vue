@@ -21,14 +21,12 @@ export default {
 
 <style module>
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 5rem;
-  padding: 0 1rem;
+  padding: 2rem 5rem;
   background-color: #3a0061;
-  margin-bottom: 5rem;
+  /* margin-bottom: 5rem; */
 }
 </style>
