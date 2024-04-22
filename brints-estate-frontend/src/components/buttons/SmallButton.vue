@@ -1,15 +1,25 @@
-<script></script>
+<script setup>
+defineProps({
+  type: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+});
+</script>
 
 <template>
-  <button type="submit" :class="$style.small_button">
-    <slot></slot>
+  <button :type="type" :label="label" :class="$style.small_button">
+    <slot>{{ label }}</slot>
   </button>
 </template>
 
 <style module>
 .small_button {
   background-color: #363333;
-  /* border: 1px solid #130f0f; */
   padding: 3px 20px;
   text-align: center;
   text-decoration: none;
@@ -22,7 +32,6 @@
 
 .small_button:hover {
   filter: brightness(160%);
-  border-bottom: 2px solid #0ae90a;
   transition: all 1s ease-in-out;
 }
 </style>
