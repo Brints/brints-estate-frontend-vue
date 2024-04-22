@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from "vue";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { ref, watch, computed } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+// import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 const props = defineProps({
   id: {
@@ -31,35 +31,97 @@ const props = defineProps({
   },
   icon: {
     type: String,
+    required: true,
     default: "",
   },
   special: {
     type: String,
     default: "",
   },
-  error: {
-    type: String,
-    default: "",
+  rules: {
+    type: Object,
+    default: () => ({}),
   },
 });
 
 const inputValue = ref(props.value);
 const isPasswordVisible = ref(false);
+const v$ = useVuelidate(props.rules, { inputValue });
 
 const togglePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
 
+const errors = computed(() => {
+  const errors = [];
+  if (v$.value.$invalid) {
+    for (const key in v$.value.$params) {
+      if (!v$.value[key].$dirty) {
+        continue;
+      }
+
+      if (!v$.value[key]) {
+        errors.push(v$.value.$params[key].$message);
+      }
+    }
+  }
+
+  return errors;
+});
+
+// const errors = computed(() => {
+//   const errors = [];
+//   if (props.rules.required && !inputValue.value) {
+//     errors.push("This field is required");
+//   }
+
+//   if (props.rules.minLength && inputValue.value.length < props.rules.minLength) {
+//     errors.push(`This field must be at least ${props.rules.minLength} characters`);
+//   }
+
+//   // email validation
+//   if (props.rules.email && !/^\S+@\S+\.\S+$/.test(inputValue.value)) {
+//     errors.push("This field must be a valid email address");
+//   }
+
+//   // password validation - characters must be greater than 7
+//   if (props.rules.password && inputValue.value.length < 8) {
+//     errors.push("Password must be at least 8 characters");
+//   }
+
+//   // password validation - must contain at least one uppercase
+//   if (props.rules.password && !/[A-Z]/.test(inputValue.value)) {
+//     errors.push("Password must contain at least one uppercase letter");
+//   }
+
+//   // password validation - must contain at least one lowercase
+//   if (props.rules.password && !/[a-z]/.test(inputValue.value)) {
+//     errors.push("Password must contain at least one lowercase letter");
+//   }
+
+//   // password validation - must contain at least one number
+//   if (props.rules.password && !/[0-9]/.test(inputValue.value)) {
+//     errors.push("Password must contain at least one number");
+//   }
+
+//   // password validation - must contain at least one special character
+//   if (props.rules.password && !/[!@#$%^&*]/.test(inputValue.value)) {
+//     errors.push("Password must contain at least one special character");
+//   }
+
+//   // check if confirm password matches password
+//   if (props.rules.confirmPassword && inputValue.value !== props.rules.password) {
+//     errors.push("Password does not match");
+//   }
+
+//   return errors;
+// });
+
 const watchValue = () => {
   inputValue.value = props.value;
 };
 
-const watchInputValue = () => {
-  inputValue.value = props.value;
-};
-
-watchValue();
-watchInputValue();
+watch(() => props.value, watchValue);
 </script>
 
 <template>
@@ -80,7 +142,12 @@ watchInputValue();
     <span v-if="special" :class="$style.special" @click="togglePassword">
       <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" />
     </span>
-    <slot name="error" :error="error"></slot>
+
+    <div v-if="errors.length" class="text-red-500">
+      <ul>
+        <li v-for="error in errors" :key="error">{{ error }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -90,7 +157,7 @@ watchInputValue();
 }
 
 .form_group label {
-  display: block;
+  /* display: block; */
   margin-bottom: 0.5rem;
 }
 
@@ -118,6 +185,6 @@ input:focus {
   position: relative;
   cursor: pointer;
   top: -2.27rem;
-  right: -21.17rem;
+  right: -21rem;
 }
 </style>
