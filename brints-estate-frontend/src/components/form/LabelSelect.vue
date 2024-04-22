@@ -17,6 +17,14 @@ export default {
       type: String,
       default: "",
     },
+    icon: {
+      type: String,
+      default: "",
+    },
+    rules: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   data() {
@@ -30,19 +38,30 @@ export default {
       this.selectedValue = newValue;
     },
   },
+
+  computed: {
+    error() {
+      const errors = [];
+      if (this.rules.required && !this.selectedValue) {
+        errors.push("This field is required");
+      }
+      return errors;
+    },
+  },
 };
 </script>
 
 <template>
   <div :class="$style.form_group">
-    <label :for="id"
-      ><slot name="label">{{ label }}</slot></label
-    >
-    <slot name="select">
-      <select :class="$style.form_control" :id="id" :name="name" v-model.trim="selectedValue">
-        <slot></slot>
-      </select>
-    </slot>
+    <div :class="$style.label_group">
+      <span><font-awesome-icon :icon="icon" /></span>
+      <label :for="id">{{ label }}<span class="text-red-500">*</span></label>
+    </div>
+
+    <select :id="id" :name="name" v-model.trim="selectedValue" :class="{ error: error.length }">
+      <slot></slot>
+    </select>
+    <small v-if="error.length" class="text-red-500">{{ error[0] }}</small>
   </div>
 </template>
 
@@ -51,7 +70,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-.form_control {
+select {
   width: 100%;
   height: 3rem;
   padding: 0.5rem;
@@ -107,5 +126,10 @@ export default {
 
 .form_group select option:focus {
   outline: none;
+}
+
+.label_group {
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
