@@ -13,6 +13,7 @@ function attachRippleListener(button) {
 defineProps({
   type: {
     type: String,
+    required: true,
   },
   status: {
     type: String,
@@ -52,7 +53,7 @@ button {
   border: none;
   background-color: rgb(79 70 229);
   color: #f5f5f5;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-transform: capitalize;
   letter-spacing: 1px;
   cursor: pointer;
@@ -60,6 +61,11 @@ button {
   border-radius: 6px;
   overflow: hidden;
   /* margin: 10px; */
+}
+
+button:hover {
+  filter: brightness(1.2);
+  transition: all 0.4s ease-in-out;
 }
 
 button:focus {
@@ -78,6 +84,10 @@ button .circle {
 
 .reset_btn {
   background-color: rgb(88, 9, 9);
+}
+
+.signup {
+  background-color: var(--vt-c-indigo);
 }
 
 @keyframes scale {
