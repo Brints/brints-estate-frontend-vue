@@ -1,8 +1,7 @@
 <script></script>
 
 <template>
-  <!-- @submit.prevent="$emit('submit-form')" -->
-  <form :class="$style.main_form">
+  <form novalidate :class="$style.main_form">
     <fieldset>
       <legend>
         <slot name="legend"></slot>
@@ -15,6 +14,7 @@
 
 <style module>
 .main_form {
+  position: absolute;
   width: 100%;
   max-width: 798px;
   margin: 0 auto;
@@ -27,7 +27,6 @@ fieldset {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px 20px;
-  margin: 20px 0;
 }
 
 legend {
