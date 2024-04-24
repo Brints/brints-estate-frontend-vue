@@ -15,7 +15,7 @@ defineProps({
     type: String,
     required: true,
   },
-  status: {
+  mode: {
     type: String,
   },
 });
@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <button ref="buttonType" :type="type" :class="status">
+  <button ref="buttonType" :type="type" :class="mode">
     <slot></slot>
   </button>
 </template>
