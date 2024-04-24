@@ -11,8 +11,8 @@ import SmallButton from "@/components/buttons/SmallButton.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+// import { useVuelidate } from "@vuelidate/core";
+// import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 const router = useRouter();
 
@@ -29,19 +29,19 @@ const formData = ref({
 
 let loading = ref(false);
 
-const validations = {
-  formData: {
-    fullname: { required },
-    email: { required, email: email },
-    phone: { required },
-    gender: { required },
-    password: { required, minLength: minLength(8) },
-    confirmPassword: { required, sameAs: sameAs("password") },
-    code: { required },
-  },
-};
+// const validations = {
+//   formData: {
+//     fullname: { required },
+//     email: { required, email: email },
+//     phone: { required },
+//     gender: { required },
+//     password: { required, minLength: minLength(8) },
+//     confirmPassword: { required, sameAs: sameAs("password") },
+//     code: { required },
+//   },
+// };
 
-const v$ = useVuelidate(validations, formData);
+// const v$ = useVuelidate(validations, formData);
 
 const handleInput = (e) => {
   const { name, value } = e.target;
@@ -59,6 +59,8 @@ const handleSubmit = async () => {
   //
   loading.value = true;
 
+  // Run validations
+
   // Create a new FormData instance
   const data = new FormData();
   data.append("fullname", formData.value.fullname);
@@ -70,7 +72,7 @@ const handleSubmit = async () => {
   data.append("avatar", formData.value.avatar);
   data.append("code", formData.value.code);
 
-  console.log(...data);
+  // console.log(...data);
 
   try {
     const response = await axios.post(`${url}/user/register`, data, {
@@ -78,9 +80,13 @@ const handleSubmit = async () => {
         "Content-Type": "multipart/form-data",
       },
     });
-    const payload = response.data;
+    const userData = response.data;
+    const payload = userData.payload;
+    console.log(payload);
 
-    if (payload.statusCode === 201) {
+    const phoneNumber = payload.phone;
+
+    if (userData.statusCode === 201) {
       formData.value = {
         fullname: "",
         email: "",
@@ -92,8 +98,8 @@ const handleSubmit = async () => {
         code: "",
       };
       // Redirect to login page
-      router.push({ name: "login" });
-      console.log("User created successfully");
+      // router.push({ name: "login" });
+      router.push(`/verify-phone/${phoneNumber}`);
     }
   } catch (error) {
     const response = error.response.data;
@@ -131,7 +137,7 @@ const handleSubmit = async () => {
               placeholder="Enter your full name"
               @input="handleInput"
               icon="user"
-              :rules="v$.formData.fullname"
+              asterisk="*"
             />
 
             <BaseInput
@@ -142,7 +148,7 @@ const handleSubmit = async () => {
               placeholder="Enter your email address"
               @input="handleInput"
               icon="envelope"
-              :rules="v$.formData.email"
+              asterisk="*"
             />
 
             <BaseInput
@@ -154,7 +160,7 @@ const handleSubmit = async () => {
               @input="handleInput"
               icon="lock"
               special="eye-slash"
-              :rules="v$.formData.password"
+              asterisk="*"
             />
           </section>
 
@@ -166,6 +172,7 @@ const handleSubmit = async () => {
                 name="code"
                 icon="globe"
                 @input="handleInput"
+                asterisk="*"
               ></CountryCodeSelect>
 
               <BaseInput
@@ -176,18 +183,11 @@ const handleSubmit = async () => {
                 placeholder="Enter your phone number"
                 @input="handleInput"
                 icon="phone"
-                :rules="v$.formData.phone"
+                asterisk="*"
               />
             </div>
 
-            <LabelSelect
-              label="Gender"
-              id="gender"
-              name="gender"
-              icon="venus-mars"
-              @input="handleInput"
-              :rules="v$.formData.gender"
-            >
+            <LabelSelect label="Gender" id="gender" name="gender" icon="venus-mars" @input="handleInput" asterisk="*">
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -202,14 +202,14 @@ const handleSubmit = async () => {
               @input="handleInput"
               icon="lock"
               special="eye-slash"
-              :rules="v$.formData.confirmPassword"
+              asterisk="*"
             />
           </section>
         </section>
         <SmallButton type="button" label="Generate Password" :class="$style.generate_password" />
         <div :class="$style.btns_wrapper">
-          <BaseButton type="submit" status="signup">Signup</BaseButton>
-          <BaseButton type="reset" status="reset_btn">Reset</BaseButton>
+          <BaseButton type="submit" mode="signup">Signup</BaseButton>
+          <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
         </div>
       </template>
     </BaseForm>
