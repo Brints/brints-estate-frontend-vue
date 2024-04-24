@@ -21,6 +21,9 @@ export default {
       type: String,
       default: "",
     },
+    asterisk: {
+      type: String,
+    },
     rules: {
       type: Object,
       default: () => ({}),
@@ -55,7 +58,9 @@ export default {
   <div :class="$style.form_group">
     <div :class="$style.label_group">
       <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id">{{ label }}<span class="text-red-500">*</span></label>
+      <label :for="id"
+        >{{ label }}<span v-if="asterisk" class="text-red-500">{{ asterisk }}</span></label
+      >
     </div>
 
     <select :id="id" :name="name" v-model.trim="selectedValue" :class="{ error: error.length }">
