@@ -23,6 +23,9 @@ export default {
       type: String,
       default: "",
     },
+    asterisk: {
+      type: String,
+    },
   },
 
   data() {
@@ -94,14 +97,17 @@ export default {
   <div :class="$style.form_group">
     <div :class="$style.label_group">
       <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id">{{ label }}<span class="text-red-500">*</span></label>
+      <label :for="id"
+        >{{ label }}<span v-if="asterisk" class="text-red-500">{{ asterisk }}</span></label
+      >
     </div>
 
     <select :id="id" :name="name" v-model.trim="selectedValue">
       <option value="">Country Code</option>
       <option v-for="country in countries" :key="country.code" :value="country.zipcode">
-        <span><img :src="url + country.flag" /> {{ country.zipcode }}</span>
-        <span :class="$style.zipcode">{{ country.name }}</span>
+        <!-- <span><img :src="url + country.flag" /> {{ country.zipcode }}</span>
+        <span :class="$style.zipcode">{{ country.name }}</span> -->
+        ({{ country.zipcode }}) - <span :class="$style.country">{{ country.name }}</span>
       </option>
     </select>
   </div>
@@ -112,35 +118,15 @@ export default {
   margin-bottom: 1rem;
 }
 
+.country {
+  color: red;
+}
+
 .form_group select {
-  width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-select:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-option {
-  background-color: #3d3a3a;
-  border-radius: 1rem;
-  margin: 1rem 0;
-}
-
-select option:hover {
-  background-color: #2563eb;
-  color: white;
-  padding: 1rem 0;
-}
-
-img {
-  width: 30px;
-  height: 30px;
-  margin-right: 0.5rem;
 }
 
 .form_group label {
@@ -152,7 +138,8 @@ img {
   display: flex;
   gap: 0.5rem;
 }
-/* .flag_emoji {
-  font-family: "Noto Color Emoji", sans-serif;
-} */
+
+option {
+  background-color: #060657;
+}
 </style>
