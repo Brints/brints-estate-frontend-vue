@@ -1,35 +1,3 @@
-<!-- <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import HeaderBar from "@/components/HeaderBar.vue";
-
-let aboutUs = ref(null);
-let imageUrl = ref("");
-let loading = ref(false);
-
-onMounted(() => {
-  fetchAboutUs();
-});
-
-const url = import.meta.env.VITE_BACKEND_URL;
-
-async function fetchAboutUs() {
-  try {
-    loading.value = true;
-    const response = await axios.get(`${url}/admin/about-us`);
-    aboutUs.value = response.data.payload;
-    for (const item of aboutUs.value) {
-      imageUrl.value = item.image[0].url;
-    }
-    console.log(imageUrl.value);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    loading.value = false;
-  }
-}
-</script> -->
-
 <script>
 import axios from "axios";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
@@ -58,7 +26,6 @@ export default {
         for (const item of this.aboutUs) {
           this.imageUrl = item.image[0].url;
         }
-        console.log(this.imageUrl);
       } catch (error) {
         console.error(error);
       } finally {
@@ -122,11 +89,11 @@ export default {
   justify-content: center;
 }
 
-.imageContainer {
+/* .imageContainer {
   position: absolute;
   width: 100%;
   height: 100px;
-}
+} */
 
 .no_content {
   display: flex;
