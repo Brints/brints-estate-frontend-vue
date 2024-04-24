@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 
-const router = createRouter({
+const userRouter = createRouter({
   history: createWebHistory(),
   routes: [
     {
@@ -25,20 +25,10 @@ const router = createRouter({
       component: () => import("../views/users/SignupPage.vue"),
     },
     {
-      path: "/verify-email",
-      name: "verify-email",
-      component: null,
-    },
-    {
-      path: "/verify-phone/:phone",
-      name: "verify-phone",
-      component: () => import("../views/users/OTPVerification.vue"),
-    },
-    {
       path: "/:path(.*)*",
       component: () => import("../views/NotFound.vue"),
     },
   ],
 });
 
-export default router;
+export default userRouter;
