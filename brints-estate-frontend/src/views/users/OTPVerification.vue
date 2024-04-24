@@ -42,7 +42,7 @@ export default {
         <h1>OTP Verification</h1>
       </template>
       <template #content>
-        <BaseInput id="otp" label="OTP" type="text" name="otp" placeholder="Enter OTP" icon="" @input="handleInput" />
+        <BaseInput id="otp" label="OTP" type="text" name="otp" placeholder="Enter OTP" @input="handleInput" />
         <BaseButton type="submit" :loading="loading">Verify OTP</BaseButton>
       </template>
     </BaseForm>
