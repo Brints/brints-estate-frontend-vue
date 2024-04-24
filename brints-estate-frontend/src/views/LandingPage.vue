@@ -66,7 +66,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
             Do you have an account?
             <div className="flex justify-center">
               <router-link :to="{ name: 'login' }">
-                <SmallButton><span className="text-green-400">Login</span></SmallButton>
+                <SmallButton type="submit"><span className="text-green-400">Login</span></SmallButton>
               </router-link>
             </div>
           </SignInSignUpInfo>
@@ -76,7 +76,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
             Ready to hop in and explore?
             <div className="flex justify-center">
               <router-link :to="{ name: 'signup' }">
-                <SmallButton><span className="text-indigo-600">Sign Up</span></SmallButton>
+                <SmallButton type="submit"><span className="text-indigo-600">Sign Up</span></SmallButton>
               </router-link>
             </div>
           </SignInSignUpInfo>
