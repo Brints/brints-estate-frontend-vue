@@ -3,6 +3,8 @@ import { ref, watch, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 // import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
+const emit = defineEmits(["update:modelValue"]);
+
 const props = defineProps({
   id: {
     type: String,
@@ -142,6 +144,7 @@ watch(() => props.value, watchValue);
       :name="name"
       :placeholder="placeholder"
       v-model.trim="inputValue"
+      @input="() => emit('update:modelValue', inputValue)"
     />
 
     <span v-if="special" :class="$style.special" @click="togglePassword">
