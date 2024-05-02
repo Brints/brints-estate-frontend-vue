@@ -1,7 +1,5 @@
 <script setup>
-import { ref, watch, computed } from "vue";
-import { useVuelidate } from "@vuelidate/core";
-// import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { ref, watch } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -36,43 +34,20 @@ const props = defineProps({
     required: false,
     default: "",
   },
-  special: {
-    type: String,
-    default: "",
-  },
   asterisk: {
     type: String,
   },
-  rules: {
-    type: Object,
-    default: () => ({}),
+  special: {
+    type: Boolean,
   },
 });
 
 const inputValue = ref(props.value);
 const isPasswordVisible = ref(false);
-const v$ = useVuelidate(props.rules, { inputValue });
 
 const togglePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
-
-const errors = computed(() => {
-  const errors = [];
-  if (v$.value.$invalid) {
-    for (const key in v$.value.$params) {
-      if (!v$.value[key].$dirty) {
-        continue;
-      }
-
-      if (!v$.value[key]) {
-        errors.push(v$.value.$params[key].$message);
-      }
-    }
-  }
-
-  return errors;
-});
 
 // const errors = computed(() => {
 //   const errors = [];
@@ -147,15 +122,9 @@ watch(() => props.value, watchValue);
       @input="() => emit('update:modelValue', inputValue)"
     />
 
-    <span v-if="special" :class="$style.special" @click="togglePassword">
-      <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" />
+    <span v-if="special" :class="$style.special_font">
+      <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
     </span>
-
-    <div v-if="errors.length" class="text-red-500">
-      <ul>
-        <li v-for="error in errors" :key="error">{{ error }}</li>
-      </ul>
-    </div>
   </div>
 </template>
 
@@ -189,10 +158,14 @@ input:focus {
   border-color: #2563eb;
 }
 
-.special {
+/* input[type="password"] {
   position: relative;
-  cursor: pointer;
-  top: -2.27rem;
-  right: -21rem;
+  bottom: 0.5rem;
+} */
+
+.special_font {
+  position: relative;
+  bottom: 2.3rem;
+  left: 21rem;
 }
 </style>
