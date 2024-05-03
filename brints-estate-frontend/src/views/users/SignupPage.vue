@@ -7,12 +7,10 @@ import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
-import SmallButton from "@/components/buttons/SmallButton.vue";
+// import SmallButton from "@/components/buttons/SmallButton.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
-// import { useVuelidate } from "@vuelidate/core";
-// import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 const router = useRouter();
 
@@ -29,24 +27,10 @@ const formData = ref({
 
 let loading = ref(false);
 
-// const validations = {
-//   formData: {
-//     fullname: { required },
-//     email: { required, email: email },
-//     phone: { required },
-//     gender: { required },
-//     password: { required, minLength: minLength(8) },
-//     confirmPassword: { required, sameAs: sameAs("password") },
-//     code: { required },
-//   },
+// const handleInput = (e) => {
+//   const { name, value } = e.target;
+//   formData.value = { ...formData.value, [name]: value };
 // };
-
-// const v$ = useVuelidate(validations, formData);
-
-const handleInput = (e) => {
-  const { name, value } = e.target;
-  formData.value = { ...formData.value, [name]: value };
-};
 
 const onFileChange = (e) => {
   const file = e.target.files[0];
@@ -56,10 +40,10 @@ const onFileChange = (e) => {
 const url = import.meta.env.VITE_BACKEND_URL;
 
 const handleSubmit = async () => {
-  //
+  // Set loading to true
   loading.value = true;
 
-  // Run validations
+  // TODO: Run validations
 
   // Create a new FormData instance
   const data = new FormData();
@@ -72,7 +56,9 @@ const handleSubmit = async () => {
   data.append("avatar", formData.value.avatar);
   data.append("code", formData.value.code);
 
-  // console.log(...data);
+  for (let [key, value] of data.entries()) {
+    console.log(`${key}: ${value}`);
+  }
 
   try {
     const response = await axios.post(`${url}/user/register`, data, {
@@ -80,8 +66,14 @@ const handleSubmit = async () => {
         "Content-Type": "multipart/form-data",
       },
     });
+
+    if (!response.ok) {
+      // handle error
+    }
+
     const userData = response.data;
     const payload = userData.payload;
+    // const payload = {...userData.payload}
     console.log(payload);
 
     const phoneNumber = payload.phone;
@@ -135,9 +127,9 @@ const handleSubmit = async () => {
               name="fullname"
               type="text"
               placeholder="Enter your full name"
-              @input="handleInput"
               icon="user"
               asterisk="*"
+              @update:modelValue="(value) => (formData.fullname = value)"
             />
 
             <BaseInput
@@ -146,9 +138,9 @@ const handleSubmit = async () => {
               name="email"
               type="email"
               placeholder="Enter your email address"
-              @input="handleInput"
               icon="envelope"
               asterisk="*"
+              @update:modelValue="(value) => (formData.email = value)"
             />
 
             <BaseInput
@@ -157,10 +149,11 @@ const handleSubmit = async () => {
               name="password"
               type="password"
               placeholder="Enter your password"
-              @input="handleInput"
               icon="lock"
-              special="eye-slash"
               asterisk="*"
+              special="eye"
+              special_icon="password_eye"
+              @update:modelValue="(value) => (formData.password = value)"
             />
           </section>
 
@@ -171,8 +164,8 @@ const handleSubmit = async () => {
                 id="code"
                 name="code"
                 icon="globe"
-                @input="handleInput"
                 asterisk="*"
+                @update:modelValue="(value) => formData.code"
               ></CountryCodeSelect>
 
               <BaseInput
@@ -181,13 +174,20 @@ const handleSubmit = async () => {
                 name="phone"
                 type="tel"
                 placeholder="Enter your phone number"
-                @input="handleInput"
                 icon="phone"
                 asterisk="*"
+                @update:modelValue="(value) => (formData.phone = value)"
               />
             </div>
 
-            <LabelSelect label="Gender" id="gender" name="gender" icon="venus-mars" @input="handleInput" asterisk="*">
+            <LabelSelect
+              label="Gender"
+              id="gender"
+              name="gender"
+              icon="venus-mars"
+              asterisk="*"
+              @update:modelValue="(value) => (formData.gender = value)"
+            >
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -199,14 +199,15 @@ const handleSubmit = async () => {
               name="confirmPassword"
               type="password"
               placeholder="Confirm your password"
-              @input="handleInput"
               icon="lock"
-              special="eye-slash"
               asterisk="*"
+              special="eye"
+              special_icon="confirm_eye"
+              @update:modelValue="(value) => (formData.confirmPassword = value)"
             />
           </section>
         </section>
-        <SmallButton type="button" label="Generate Password" :class="$style.generate_password" />
+        <!-- <SmallButton type="button" label="Generate Password" :class="$style.generate_password" /> -->
         <div :class="$style.btns_wrapper">
           <BaseButton type="submit" mode="signup">Signup</BaseButton>
           <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
