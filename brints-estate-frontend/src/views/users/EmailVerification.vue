@@ -13,12 +13,14 @@ let loading = ref(false);
       <p>Please wait...</p>
     </div>
 
-    <div v-else>
+    <div v-else :class="$style.output">
       <SuccessMessage>
         <p>Your email has been verified successfully.</p>
       </SuccessMessage>
       <!-- Login Button -->
-      <BaseButton type="button" class="btn btn-primary" @click="login"> Login </BaseButton>
+      <router-link to="/login">
+        <BaseButton type="button" mode="primary">Login</BaseButton>
+      </router-link>
     </div>
   </div>
 </template>
@@ -30,5 +32,16 @@ let loading = ref(false);
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.container > * {
+  margin-bottom: 1rem;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
