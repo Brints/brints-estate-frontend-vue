@@ -38,7 +38,10 @@ const props = defineProps({
     type: String,
   },
   special: {
-    type: Boolean,
+    type: String,
+  },
+  special_icon: {
+    type: String,
   },
 });
 
@@ -122,7 +125,7 @@ watch(() => props.value, watchValue);
       @input="() => emit('update:modelValue', inputValue)"
     />
 
-    <span v-if="special" :class="$style.special_font">
+    <span v-if="special" :class="special_icon">
       <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
     </span>
   </div>
@@ -158,14 +161,12 @@ input:focus {
   border-color: #2563eb;
 }
 
-/* input[type="password"] {
-  position: relative;
-  bottom: 0.5rem;
-} */
+.confirm_eye {
+  color: #2563eb;
+}
 
-.special_font {
-  position: relative;
-  bottom: 2.3rem;
-  left: 21rem;
+.password_eye {
+  position: absolute;
+  cursor: pointer;
 }
 </style>
