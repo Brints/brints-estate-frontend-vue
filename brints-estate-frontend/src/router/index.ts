@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: "/verify-email",
       name: "verify-email",
-      component: null,
+      component: () => import("../views/users/EmailVerification.vue"),
     },
     {
       path: "/verify-phone/:phone",
