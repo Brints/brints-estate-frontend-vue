@@ -21,7 +21,7 @@ const props = defineProps({
     required: true,
     default: "text",
     validator: (value) => {
-      return ["text", "email", "password"].includes(value);
+      return ["text", "email", "password", "tel"].includes(value);
     },
   },
   name: {
