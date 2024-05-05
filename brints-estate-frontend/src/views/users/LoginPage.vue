@@ -13,7 +13,7 @@ const url = "https://emojicdn.elk.sh/";
   <div :class="$style.container">
     <h1>Login Page</h1>
     <ul>
-      <li v-for="country in countries" :key="country.code">
+      <li v-for="(country, index) in countries" :key="index">
         {{ country.name }} <span class="mr-5"><img :src="`${url}${country.flag}`" /></span> {{ country.zipcode }}
       </li>
     </ul>
@@ -36,9 +36,4 @@ ul li {
   padding: 0.5rem;
   border: 1px solid #ccc;
 }
-
-/* ul li img {
-  width: 30px;
-  height: 30px;
-} */
 </style>

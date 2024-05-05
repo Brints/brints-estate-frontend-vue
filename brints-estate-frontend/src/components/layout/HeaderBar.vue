@@ -27,6 +27,5 @@ export default {
   width: 100%;
   padding: 2rem 5rem;
   background-color: #3a0061;
-  /* margin-bottom: 5rem; */
 }
 </style>

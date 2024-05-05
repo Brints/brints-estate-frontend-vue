@@ -7,7 +7,7 @@ import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
-// import SmallButton from "@/components/buttons/SmallButton.vue";
+import SmallButton from "@/components/buttons/SmallButton.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -27,10 +27,10 @@ const formData = ref({
 
 let loading = ref(false);
 
-// const handleInput = (e) => {
-//   const { name, value } = e.target;
-//   formData.value = { ...formData.value, [name]: value };
-// };
+const handleInput = (e) => {
+  const { name, value } = e.target;
+  formData.value = { ...formData.value, [name]: value };
+};
 
 const onFileChange = (e) => {
   const file = e.target.files[0];
@@ -76,8 +76,6 @@ const handleSubmit = async () => {
     // const payload = {...userData.payload}
     console.log(payload);
 
-    const phoneNumber = payload.phone;
-
     if (userData.statusCode === 201) {
       formData.value = {
         fullname: "",
@@ -91,7 +89,7 @@ const handleSubmit = async () => {
       };
       // Redirect to login page
       // router.push({ name: "login" });
-      router.push(`/verify-phone/${phoneNumber}`);
+      router.push("/verify-phone");
     }
   } catch (error) {
     const response = error.response.data;
@@ -109,14 +107,7 @@ const handleSubmit = async () => {
       <template #legend>
         <h1>Sign Up</h1>
       </template>
-      <template #info>
-        <p className="text-center mb-1">
-          Have an account already?
-          <span className="hover:border-b text-lime-500 hover:text-lime-900 transition-all duration-300"
-            ><RouterLink to="/login">Login</RouterLink></span
-          >
-        </p>
-      </template>
+
       <template #content>
         <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" @change="onFileChange" />
         <section :class="$style.form_content">
@@ -129,7 +120,7 @@ const handleSubmit = async () => {
               placeholder="Enter your full name"
               icon="user"
               asterisk="*"
-              @update:modelValue="(value) => (formData.fullname = value)"
+              @input="handleInput"
             />
 
             <BaseInput
@@ -140,7 +131,7 @@ const handleSubmit = async () => {
               placeholder="Enter your email address"
               icon="envelope"
               asterisk="*"
-              @update:modelValue="(value) => (formData.email = value)"
+              @input="handleInput"
             />
 
             <BaseInput
@@ -153,7 +144,7 @@ const handleSubmit = async () => {
               asterisk="*"
               special="eye"
               special_icon="password_eye"
-              @update:modelValue="(value) => (formData.password = value)"
+              @input="handleInput"
             />
           </section>
 
@@ -165,7 +156,7 @@ const handleSubmit = async () => {
                 name="code"
                 icon="globe"
                 asterisk="*"
-                @update:modelValue="(value) => formData.code"
+                @input="handleInput"
               ></CountryCodeSelect>
 
               <BaseInput
@@ -176,18 +167,11 @@ const handleSubmit = async () => {
                 placeholder="Enter your phone number"
                 icon="phone"
                 asterisk="*"
-                @update:modelValue="(value) => (formData.phone = value)"
+                @input="handleInput"
               />
             </div>
 
-            <LabelSelect
-              label="Gender"
-              id="gender"
-              name="gender"
-              icon="venus-mars"
-              asterisk="*"
-              @update:modelValue="(value) => (formData.gender = value)"
-            >
+            <LabelSelect label="Gender" id="gender" name="gender" icon="venus-mars" asterisk="*" @input="handleInput">
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -203,11 +187,11 @@ const handleSubmit = async () => {
               asterisk="*"
               special="eye"
               special_icon="confirm_eye"
-              @update:modelValue="(value) => (formData.confirmPassword = value)"
+              @input="handleInput"
             />
           </section>
         </section>
-        <!-- <SmallButton type="button" label="Generate Password" :class="$style.generate_password" /> -->
+        <SmallButton type="button" label="Generate Password" button="generate_password" />
         <div :class="$style.btns_wrapper">
           <BaseButton type="submit" mode="signup">Signup</BaseButton>
           <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
@@ -223,7 +207,7 @@ const handleSubmit = async () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 5rem 0;
+  margin: 1rem 0;
 }
 
 .form_content {
@@ -249,13 +233,5 @@ const handleSubmit = async () => {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 10px;
-}
-
-.generate_password {
-  position: relative;
-  bottom: 8.35rem;
-  left: 10rem;
-  background-color: #050555;
-  border: 2px solid #0c0b0b;
 }
 </style>

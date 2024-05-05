@@ -6,7 +6,6 @@
       <legend>
         <slot name="legend"></slot>
       </legend>
-      <slot name="info"></slot>
       <slot name="content"></slot>
     </fieldset>
   </form>
@@ -14,7 +13,7 @@
 
 <style module>
 .main_form {
-  position: absolute;
+  position: relative;
   width: 100%;
   max-width: 798px;
   margin: 0 auto;
