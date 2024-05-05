@@ -37,7 +37,9 @@ function scale(num, in_min, in_max, out_min, out_max) {
     <div className="bg-slate-800 bg-opacity-80 pt-10 px-10 rounded-lg flex flex-col items-center">
       <h1 className="text-4xl font-bold text-center">
         Welcome to
-        <span className="border-y text-lime-500">Brints <span className="text-indigo-600">Estate</span></span>
+        <span className="brints-logo border-y text-lime-500"
+          >Brints <span className="text-indigo-600">Estate</span></span
+        >
       </h1>
       <p className="text-center text-lg mt-5">
         We are a real estate company that provides you with the best properties in the market.
@@ -81,6 +83,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
 .bg {
   position: absolute;
   filter: blur(0px);
+  background-color: #000;
 }
 .loading-text {
   position: absolute;
@@ -90,5 +93,31 @@ function scale(num, in_min, in_max, out_min, out_max) {
   color: #fff;
   transform: translate(-50%, -50%);
   z-index: 100;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  /* replace background image with background color */
+  .bg {
+    background-image: none;
+  }
+  .brints-logo {
+    display: block;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* replace background image with background color */
+  .bg {
+    background-image: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
 }
 </style>
