@@ -1,25 +1,35 @@
 <script setup>
 import { ref, watch } from "vue";
 
-const emit = defineEmits(["update:modelValue"]);
-
 const props = defineProps({
   id: {
     type: String,
     required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
   label: {
     type: String,
     required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
   type: {
     type: String,
     required: true,
     default: "text",
+    validator: (value) => {
+      return ["text", "email", "password"].includes(value);
+    },
   },
   name: {
     type: String,
     required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
   placeholder: {
     type: String,
@@ -36,12 +46,21 @@ const props = defineProps({
   },
   asterisk: {
     type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
   special: {
     type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
   special_icon: {
     type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
   },
 });
 
@@ -122,10 +141,9 @@ watch(() => props.value, watchValue);
       :name="name"
       :placeholder="placeholder"
       v-model.trim="inputValue"
-      @input="() => emit('update:modelValue', inputValue)"
     />
 
-    <span v-if="special" :class="special_icon">
+    <span v-if="special" :class="{ password_eye: special_icon, confirm_eye: special_icon }">
       <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
     </span>
   </div>
