@@ -33,6 +33,12 @@ export default {
       }
     },
   },
+
+  computed: {
+    backgroundImage() {
+      return `linear-gradient(rgb(83, 95, 110, 0.7), rgba(0, 0, 0, 0.7)), url('${this.imageUrl}')`;
+    },
+  },
 };
 </script>
 
@@ -49,7 +55,7 @@ export default {
 
       <section v-else-if="aboutUs" class="about-contents">
         <div v-for="item in aboutUs" :key="item._id">
-          <div
+          <!-- <div
             :class="$style.imageContainer"
             className="bg-center bg-cover bg-no-repeat"
             :style="{
@@ -62,8 +68,15 @@ export default {
             >
               Looking for apartment? Do you have a property for sale or lease? Brints Estate got you covered.
             </h1>
-          </div>
+          </div> -->
 
+          <div :class="$style.imageContainer">
+            <h1
+              className="bg-zinc-300 rounded-lg text-xl relative top-1/2 left-14 w-80 p-6 text-emerald-700 -translate-y-2/4 "
+            >
+              Looking for apartment? Do you have a property for sale or lease? Brints Estate got you covered.
+            </h1>
+          </div>
           <div className="mt-8">
             <h1 className="lowercase text-5xl text-center border-b-2">
               {{ item.title }}
@@ -89,11 +102,10 @@ export default {
   justify-content: center;
 }
 
-/* .imageContainer {
-  position: absolute;
-  width: 100%;
-  height: 100px;
-} */
+.imageContainer {
+  height: 100vh;
+  background: v-bind("backgroundImage") center center/cover no-repeat;
+}
 
 .no_content {
   display: flex;
