@@ -127,8 +127,8 @@ watch(() => props.value, watchValue);
 </script>
 
 <template>
-  <div :class="$style.form_group">
-    <div :class="$style.label_group">
+  <div class="form_group">
+    <div class="label_group">
       <span><font-awesome-icon :icon="icon" /></span>
       <label :for="id"
         >{{ label }}<span v-if="asterisk" class="text-red-500">{{ asterisk }}</span></label
@@ -143,19 +143,18 @@ watch(() => props.value, watchValue);
       v-model.trim="inputValue"
     />
 
-    <span v-if="special" :class="{ password_eye: special_icon, confirm_eye: special_icon }">
+    <span v-if="special" :class="special_icon">
       <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
     </span>
   </div>
 </template>
 
-<style module>
+<style scoped>
 .form_group {
   margin-bottom: 1rem;
 }
 
 .form_group label {
-  /* display: block; */
   margin-bottom: 0.5rem;
 }
 
@@ -179,12 +178,17 @@ input:focus {
   border-color: #2563eb;
 }
 
-.confirm_eye {
-  color: #2563eb;
+.password_eye {
+  cursor: pointer;
+  position: absolute;
+  bottom: 6.85rem;
+  left: 23rem;
 }
 
-.password_eye {
-  position: absolute;
+.confirm_eye {
   cursor: pointer;
+  position: absolute;
+  bottom: 6.85rem;
+  right: 2.32rem;
 }
 </style>
