@@ -34,10 +34,6 @@ export default {
     asterisk: {
       type: String,
     },
-    rules: {
-      type: Object,
-      default: () => ({}),
-    },
   },
 
   data() {
@@ -49,16 +45,6 @@ export default {
   watch: {
     value(newValue) {
       this.selectedValue = newValue;
-    },
-  },
-
-  computed: {
-    error() {
-      const errors = [];
-      if (this.rules.required && !this.selectedValue) {
-        errors.push("This field is required");
-      }
-      return errors;
     },
   },
 };
@@ -73,10 +59,9 @@ export default {
       >
     </div>
 
-    <select :id="id" :name="name" v-model.trim="selectedValue" :class="{ error: error.length }">
+    <select :id="id" :name="name" v-model.trim="selectedValue">
       <slot></slot>
     </select>
-    <small v-if="error.length" class="text-red-500">{{ error[0] }}</small>
   </div>
 </template>
 

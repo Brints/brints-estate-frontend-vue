@@ -1106,36 +1106,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vuelidate/core@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@vuelidate/core@npm:2.0.3"
-  dependencies:
-    vue-demi: "npm:^0.13.11"
-  peerDependencies:
-    "@vue/composition-api": ^1.0.0-rc.1
-    vue: ^2.0.0 || >=3.0.0
-  peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
-  checksum: 10c0/bdd5df3692adcb9bef3dc430f3ec4c763364b27691008a4f1e3cc28ad492f5ae0e8c1cc60585ef220ecac9ad65e0a0a312e7ae3bb56a1ed05c765adb04a0d533
-  languageName: node
-  linkType: hard
-
-"@vuelidate/validators@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@vuelidate/validators@npm:2.0.4"
-  dependencies:
-    vue-demi: "npm:^0.13.11"
-  peerDependencies:
-    "@vue/composition-api": ^1.0.0-rc.1
-    vue: ^2.0.0 || >=3.0.0
-  peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
-  checksum: 10c0/53cb362b5b561b22fb1d1021ab0d78e0fbf3324efba78a88f53b8b3ac996d546aabb9cd1069256ddb877d70841ea1f4771cb0f6b6b8a1074efbd972c6549c2fc
-  languageName: node
-  linkType: hard
-
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -1488,8 +1458,6 @@ __metadata:
     "@vue/runtime-dom": "npm:^3.4.21"
     "@vue/test-utils": "npm:^2.4.4"
     "@vue/tsconfig": "npm:^0.5.1"
-    "@vuelidate/core": "npm:^2.0.3"
-    "@vuelidate/validators": "npm:^2.0.4"
     autoprefixer: "npm:^10.4.18"
     axios: "npm:^1.6.8"
     cypress: "npm:^13.6.6"
@@ -1510,7 +1478,6 @@ __metadata:
     vue: "npm:^3.4.21"
     vue-router: "npm:^4.3.0"
     vue-tsc: "npm:^2.0.6"
-    vuelidate: "npm:^0.7.7"
   languageName: unknown
   linkType: soft
 
@@ -5655,22 +5622,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-demi@npm:^0.13.11":
-  version: 0.13.11
-  resolution: "vue-demi@npm:0.13.11"
-  peerDependencies:
-    "@vue/composition-api": ^1.0.0-rc.1
-    vue: ^3.0.0-0 || ^2.6.0
-  peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
-  bin:
-    vue-demi-fix: bin/vue-demi-fix.js
-    vue-demi-switch: bin/vue-demi-switch.js
-  checksum: 10c0/8f1a38e41e3dd0a4821c87231c664dcc00e6dbf5eecd3de397b7ddb6ae01f173aed5385c55a3c3239be36145742f1a5be407662fc67f9c4515ea691dd0ac93e1
-  languageName: node
-  linkType: hard
-
 "vue-eslint-parser@npm:^9.3.1, vue-eslint-parser@npm:^9.4.2":
   version: 9.4.2
   resolution: "vue-eslint-parser@npm:9.4.2"
@@ -5739,13 +5690,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/888cea9ff79d6401872de85b381e4ff7a87df23d37b43363fdfea9892935c2925bd4fc29a278ff92ee8137d4baf819c4319b9c5d5240bddc7437b8865092d2f6
-  languageName: node
-  linkType: hard
-
-"vuelidate@npm:^0.7.7":
-  version: 0.7.7
-  resolution: "vuelidate@npm:0.7.7"
-  checksum: 10c0/7232c438d9eecc2b8a34158c018560a1834634484ef1524139464a0770192bbec7de8c2fcabc4bf203b1169cc04af628e77f10a9ca29a6dc5d56a614fc60dd45
   languageName: node
   linkType: hard
 

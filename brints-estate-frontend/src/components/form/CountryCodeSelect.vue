@@ -41,14 +41,8 @@ export default {
   data() {
     return {
       selectedValue: this.value,
-      url: "https://emojicdn.elk.sh/",
+      countries: CountriesData.countries,
     };
-  },
-
-  computed: {
-    countries() {
-      return CountriesData.countries;
-    },
   },
 
   watch: {
@@ -61,47 +55,9 @@ export default {
     handleInput() {
       this.$emit("input", this.selectedValue);
     },
-
-    convertToEmoji(str) {
-      const codePoints = str.codePointAt(0).toString(16);
-      return String.fromCodePoint(`0x${codePoints}`);
-    },
-
-    flagEmoji(str) {
-      return this.convertToEmoji(str);
-    },
-
-    flagUrl(flag) {
-      // create image element
-      const img = document.createElement("img");
-      img.src = `https://emojicdn.elk.sh/${flag}`;
-      return img;
-    },
-
-    flagAlt(name) {
-      return name;
-    },
   },
 };
 </script>
-
-<!-- <template>
-  <div :class="$style.form_group">
-    <slot name="label">
-      <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id">{{ label }}</label>
-    </slot>
-
-    <select :id="id" :name="name" v-model.trim="selectedValue">
-      <option value="">Country Code</option>
-      <option v-for="country in countries" :key="country.code" :value="country.zipcode">
-        <span>{{ flagEmoji(country.flag) }}</span>
-
-        {{ country.name }} {{ country.zipcode }}
-      </option>
-    </select>
-  </div>
-</template> -->
 
 <template>
   <div :class="$style.form_group">
@@ -114,9 +70,7 @@ export default {
 
     <select :id="id" :name="name" v-model.trim="selectedValue">
       <option value="">Country Code</option>
-      <option v-for="country in countries" :key="country.code" :value="country.zipcode">
-        <!-- <span><img :src="url + country.flag" /> {{ country.zipcode }}</span>
-        <span :class="$style.zipcode">{{ country.name }}</span> -->
+      <option v-for="(country, index) in countries" :key="index" :value="country.zipcode">
         ({{ country.zipcode }}) - <span :class="$style.country">{{ country.name }}</span>
       </option>
     </select>

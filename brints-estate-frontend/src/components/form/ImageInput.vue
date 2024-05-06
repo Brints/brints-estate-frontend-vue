@@ -46,8 +46,6 @@ export default {
     </div>
     <slot name="input">
       <input :class="$style.form_control" type="file" :id="id" :name="name" :multiple="multiple" />
-      <!-- @input="$emit('input', $event.target.value)" -->
-      <!-- @change="onFileChange" -->
     </slot>
   </div>
 </template>

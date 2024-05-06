@@ -118,8 +118,8 @@ const handleSubmit = async () => {
               name="fullname"
               type="text"
               placeholder="Enter your full name"
-              icon="user"
               asterisk="*"
+              icon="user"
               @input="handleInput"
             />
 
@@ -129,8 +129,8 @@ const handleSubmit = async () => {
               name="email"
               type="email"
               placeholder="Enter your email address"
-              icon="envelope"
               asterisk="*"
+              icon="envelope"
               @input="handleInput"
             />
 
@@ -140,8 +140,8 @@ const handleSubmit = async () => {
               name="password"
               type="password"
               placeholder="Enter your password"
-              icon="lock"
               asterisk="*"
+              icon="lock"
               special="eye"
               special_icon="password_eye"
               @input="handleInput"
@@ -154,8 +154,8 @@ const handleSubmit = async () => {
                 label="Code"
                 id="code"
                 name="code"
-                icon="globe"
                 asterisk="*"
+                icon="globe"
                 @input="handleInput"
               ></CountryCodeSelect>
 
@@ -165,13 +165,13 @@ const handleSubmit = async () => {
                 name="phone"
                 type="tel"
                 placeholder="Enter your phone number"
-                icon="phone"
                 asterisk="*"
+                icon="phone"
                 @input="handleInput"
               />
             </div>
 
-            <LabelSelect label="Gender" id="gender" name="gender" icon="venus-mars" asterisk="*" @input="handleInput">
+            <LabelSelect label="Gender" id="gender" name="gender" asterisk="*" icon="venus-mars" @input="handleInput">
               <option value="">Choose your Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -183,8 +183,8 @@ const handleSubmit = async () => {
               name="confirmPassword"
               type="password"
               placeholder="Confirm your password"
-              icon="lock"
               asterisk="*"
+              icon="lock"
               special="eye"
               special_icon="confirm_eye"
               @input="handleInput"
