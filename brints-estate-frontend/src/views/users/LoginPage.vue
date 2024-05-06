@@ -1,39 +1,86 @@
 <script setup>
 import HeaderBar from "@/components/layout/HeaderBar.vue";
-import CountriesData from "@/lookup/country-codes.json";
+import BaseForm from "@/components/form/BaseForm.vue";
+import BaseInput from "@/components/form/BaseInput.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+// import axios from "axios";
 
-const countries = CountriesData.countries;
-const url = "https://emojicdn.elk.sh/";
+const handleInput = (e) => {
+  const { name, value } = e.target;
+  console.log(name, value);
+};
+
+const handleSubmit = () => {
+  console.log("Form submitted");
+};
 </script>
 
 <template>
   <div class="nav-links">
     <HeaderBar></HeaderBar>
   </div>
-  <div :class="$style.container">
-    <h1>Login Page</h1>
-    <ul>
-      <li v-for="(country, index) in countries" :key="index">
-        {{ country.name }} <span class="mr-5"><img :src="`${url}${country.flag}`" /></span> {{ country.zipcode }}
-      </li>
-    </ul>
+
+  <div class="wrapper">
+    <BaseForm class="form" @submit.prevent="handleSubmit">
+      <template v-slot:legend>
+        <h1 class="text-2xl font-bold text-center">Login</h1>
+      </template>
+
+      <template v-slot:content>
+        <BaseInput
+          label="Email"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email address"
+          asterisk="*"
+          icon="envelope"
+          @input="handleInput"
+        />
+
+        <BaseInput
+          label="Password"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          asterisk="*"
+          icon="lock"
+          special="eye"
+          special_icon="login_password"
+          @input="handleInput"
+        />
+        <div class="btn">
+          <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton>
+          <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
+        </div>
+      </template>
+    </BaseForm>
   </div>
 </template>
 
-<style module>
-ul {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1rem;
-  list-style: none;
-  padding: 1rem;
+<style scoped>
+.wrapper {
+  margin: 2rem 0;
 }
 
-ul li {
+.form {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
   align-items: center;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
+}
+
+.btn p {
+  padding-left: 2rem;
+  border-left: 1px solid #333;
 }
 </style>
