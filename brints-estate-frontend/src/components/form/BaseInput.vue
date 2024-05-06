@@ -150,4 +150,11 @@ input:focus {
   bottom: 6.85rem;
   right: 2.32rem;
 }
+
+.login_password {
+  cursor: pointer;
+  position: absolute;
+  bottom: 7.2rem;
+  right: 3.75rem;
+}
 </style>
