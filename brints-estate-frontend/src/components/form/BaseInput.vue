@@ -8,12 +8,6 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 // Add the icons to the library
 library.add(fas);
 
-defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-});
-
 const props = defineProps({
   id: {
     type: String,
