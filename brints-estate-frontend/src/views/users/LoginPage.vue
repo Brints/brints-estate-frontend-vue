@@ -16,16 +16,10 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="nav-links">
-    <HeaderBar></HeaderBar>
-  </div>
+  <HeaderBar></HeaderBar>
 
   <div class="wrapper">
-    <BaseForm class="form" @submit.prevent="handleSubmit">
-      <template v-slot:legend>
-        <h1 class="text-2xl font-bold text-center">Login</h1>
-      </template>
-
+    <BaseForm class="form" @submit.prevent="handleSubmit" legend="Login">
       <template v-slot:content>
         <BaseInput
           label="Email"
