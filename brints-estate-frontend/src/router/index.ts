@@ -30,7 +30,7 @@ const router = createRouter({
       component: () => import("../views/users/EmailVerification.vue"),
     },
     {
-      path: "/verify-phone/:phone",
+      path: "/verify-phone",
       name: "verify-phone",
       component: () => import("../views/users/OTPVerification.vue"),
     },
