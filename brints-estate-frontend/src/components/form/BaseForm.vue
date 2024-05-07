@@ -1,17 +1,27 @@
-<script></script>
+<script setup>
+defineProps({
+  legend: {
+    type: String,
+    default: "",
+  },
+  mode: {
+    type: String,
+  },
+});
+</script>
 
 <template>
-  <form novalidate :class="$style.main_form">
+  <form novalidate class="main_form">
     <fieldset>
-      <legend>
-        <slot name="legend"></slot>
+      <legend v-if="legend" :legend="legend" :class="mode">
+        <h1>{{ legend }}</h1>
       </legend>
       <slot name="content"></slot>
     </fieldset>
   </form>
 </template>
 
-<style module>
+<style scoped>
 .main_form {
   position: relative;
   width: 100%;
@@ -33,5 +43,11 @@ legend {
   font-weight: bold;
   margin-bottom: 10px;
   padding: 0 10px;
+}
+
+.signup {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #dd0707;
 }
 </style>
