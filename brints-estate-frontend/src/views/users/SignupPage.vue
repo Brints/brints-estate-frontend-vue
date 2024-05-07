@@ -87,9 +87,8 @@ const handleSubmit = async () => {
         avatar: null,
         code: "",
       };
-      // Redirect to login page
-      // router.push({ name: "login" });
-      router.push("/verify-phone");
+      // Redirect to otp verification page
+      router.push({ name: "verify-phone" });
     }
   } catch (error) {
     const response = error.response.data;
@@ -103,11 +102,7 @@ const handleSubmit = async () => {
 <template>
   <HeaderBar></HeaderBar>
   <main :class="$style.wrapper">
-    <BaseForm @submit.prevent="handleSubmit">
-      <template #legend>
-        <h1>Sign Up</h1>
-      </template>
-
+    <BaseForm @submit.prevent="handleSubmit" legend="Sign Up" mode="signup">
       <template #content>
         <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" @change="onFileChange" />
         <section :class="$style.form_content">
@@ -194,6 +189,7 @@ const handleSubmit = async () => {
         <SmallButton type="button" label="Generate Password" button="generate_password" />
         <div :class="$style.btns_wrapper">
           <BaseButton type="submit" mode="signup">Signup</BaseButton>
+          <BaseButton type="button" mode="google">Signup with Google</BaseButton>
           <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
         </div>
       </template>
@@ -224,7 +220,7 @@ const handleSubmit = async () => {
 
 .btns_wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding-bottom: 1rem;
 }
