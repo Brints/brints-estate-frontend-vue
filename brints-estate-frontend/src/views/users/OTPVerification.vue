@@ -37,10 +37,7 @@ export default {
 
 <template>
   <div :class="$style.wrapper">
-    <BaseForm @submit.prevent="submit" :loading="loading">
-      <template #legend>
-        <h1>OTP Verification</h1>
-      </template>
+    <BaseForm @submit.prevent="submit" :loading="loading" legend="OTP Verification">
       <template #content>
         <BaseInput id="otp" label="OTP" type="text" name="otp" placeholder="Enter OTP" @input="handleInput" />
         <BaseButton type="submit" :loading="loading">Verify OTP</BaseButton>
@@ -55,5 +52,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
 }
 </style>
