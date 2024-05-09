@@ -45,7 +45,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
         We are a real estate company that provides you with the best properties in the market.
       </p>
       <div className="mt-5 flex justify-center gap-2">
-        <router-link to="#" className="border-r-2 pr-2">
+        <router-link :to="{ name: 'company' }" className="border-r-2 pr-2">
           <span className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >Company Profile</span
           ></router-link
@@ -55,7 +55,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
             >About Us</span
           ></router-link
         >
-        <router-link to="#" className="pr-2">
+        <router-link :to="{ name: 'contact' }" className="pr-2">
           <span className=" hover:border-b-2 hover:border-lime-500 hover:text-lime-900 transition-all duration-300"
             >Contact Us</span
           ></router-link
@@ -68,7 +68,7 @@ function scale(num, in_min, in_max, out_min, out_max) {
             Ready to hop in and explore?
             <div className="flex justify-center">
               <router-link :to="{ name: 'login' }">
-                <SmallButton type="submit"><span className="text-green-400">Click to Proceed</span></SmallButton>
+                <SmallButton type="submit"><span className="text-green-400">Get Started</span></SmallButton>
               </router-link>
             </div>
           </SignInSignUpInfo>
