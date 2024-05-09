@@ -10,8 +10,8 @@
     </nav>
 
     <nav className="flex gap-4">
-      <router-link to="/signup">Register</router-link>
-      <router-link to="/login">Login</router-link>
+      <router-link :to="{ name: 'signup' }">Register</router-link>
+      <router-link :to="{ name: 'login' }">Login</router-link>
     </nav>
   </header>
 </template>
@@ -30,9 +30,12 @@ nav a {
 }
 
 nav a:hover,
-nav a:active,
-nav a.router-link-active {
+nav a:active {
   color: #f1a80a;
   border-bottom: 1px solid #f1a80a;
+}
+
+.router-link-active {
+  color: #fff;
 }
 </style>
