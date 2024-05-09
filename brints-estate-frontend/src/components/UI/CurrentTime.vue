@@ -20,7 +20,6 @@ onMounted(() => {
 
 <template>
   <div class="current-time">
-    <span>Current Time: </span>
     <span class="hour">{{ hour }}</span
     >:<span class="minute">{{ minute }}</span
     >:<span class="second">{{ seconds }}</span> <span class="ampm">{{ ampm }}</span>
