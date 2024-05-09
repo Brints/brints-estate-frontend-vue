@@ -3,7 +3,9 @@
 <template>
   <div :class="$style.logo">
     <img src="/logo.png" alt="Brints Estate Logo" />
-    <h1>Brints <span className="border-y">Estate</span></h1>
+    <router-link :to="{ name: 'landing-page' }">
+      <h1>Brints <span className="border-y">Estate</span></h1>
+    </router-link>
   </div>
 </template>
 
