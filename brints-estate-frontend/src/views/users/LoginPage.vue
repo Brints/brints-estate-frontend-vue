@@ -3,7 +3,7 @@ import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
-// import axios from "axios";
+import CurrentTime from "@/components/UI/CurrentTime.vue";
 
 const handleInput = (e) => {
   const { name, value } = e.target;
@@ -17,6 +17,10 @@ const handleSubmit = () => {
 
 <template>
   <HeaderBar></HeaderBar>
+  <div class="time">
+    <span className="mr-1">Current Time:</span>
+    <CurrentTime></CurrentTime>
+  </div>
 
   <div class="wrapper">
     <BaseForm class="form" @submit.prevent="handleSubmit" legend="Login">
@@ -76,5 +80,11 @@ const handleSubmit = () => {
 .btn p {
   padding-left: 2rem;
   border-left: 1px solid #333;
+}
+
+.time {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
 }
 </style>
