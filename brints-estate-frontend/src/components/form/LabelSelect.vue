@@ -1,15 +1,12 @@
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { fas } from "@fortawesome/free-solid-svg-icons";
 
-// Add the icons to the library
-library.add(fas);
+// // Add the icons to the library
+// library.add(fas);
 
 export default {
-  components: {
-    FontAwesomeIcon,
-  },
   props: {
     label: {
       type: String,
