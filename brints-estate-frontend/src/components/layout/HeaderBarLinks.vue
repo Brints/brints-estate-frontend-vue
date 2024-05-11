@@ -32,7 +32,7 @@ nav a {
 }
 
 nav a:hover,
-.router-link-active {
+.active-link {
   color: #f1a80a;
   border-bottom: 1px solid #f1a80a;
 }
