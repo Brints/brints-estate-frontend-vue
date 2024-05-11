@@ -6,6 +6,7 @@ import userRoutes from "./userRoutes";
 const routes = [...baseRoutes, ...userRoutes];
 
 const router = createRouter({
+  linkActiveClass: "active-link",
   history: createWebHistory(),
   routes,
 });
