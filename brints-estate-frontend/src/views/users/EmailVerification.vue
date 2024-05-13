@@ -12,7 +12,7 @@ const token = router.currentRoute.value.query.token;
 
 // Send a GET request function to the backend to verify the email using fetch
 const verifyEmail = async () => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/user/verify-email?email=${email}&token=${token}`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/user/verify-email?token=${token}&email=${email}`;
 
   try {
     const response = await fetch(url, {
@@ -42,10 +42,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div :class="$style.wrapper">
     <p v-if="loading">Verifying email...</p>
     <p v-else>Email verified successfully. Redirecting to the login page...</p>
   </div>
 </template>
 
-<style module></style>
+<style module>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+}
+</style>
