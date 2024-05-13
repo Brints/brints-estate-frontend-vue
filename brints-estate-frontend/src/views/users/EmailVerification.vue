@@ -42,7 +42,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <p v-if="loading">Verifying email...</p>
+    <p v-else>Email verified successfully. Redirecting to the login page...</p>
+  </div>
 </template>
 
 <style module></style>
