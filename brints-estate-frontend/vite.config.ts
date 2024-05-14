@@ -12,4 +12,18 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vue: ["vue"],
+          "vue-router": ["vue-router"],
+          pinia: ["pinia"],
+          axios: ["axios"],
+          "vue-i18n": ["vue-i18n"],
+          "vue-fontawesome": ["@fortawesome/vue-fontawesome"],
+        },
+      },
+    },
+  },
 });
