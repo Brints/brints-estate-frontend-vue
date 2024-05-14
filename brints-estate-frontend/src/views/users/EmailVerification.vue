@@ -59,10 +59,6 @@ onMounted(() => {
   </div>
 </template>
 
-<!-- <p v-if="loading">Verifying email...</p>
-    <SuccessMessage v-else>Email verified successfully. Redirecting to the login page...</SuccessMessage>
-    <ErrorMessage :message="errorMessage" /> -->
-
 <style module>
 .wrapper {
   display: flex;
