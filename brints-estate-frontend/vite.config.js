@@ -4,10 +4,10 @@ import vue from "@vitejs/plugin-vue";
 import envCompatible from "vite-plugin-env-compatible";
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), envCompatible()],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    plugins: [vue(), envCompatible()],
+    resolve: {
+        alias: {
+            "@": fileURLToPath(new URL("./src", import.meta.url)),
+        },
     },
-  },
 });

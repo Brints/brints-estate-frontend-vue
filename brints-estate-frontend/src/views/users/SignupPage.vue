@@ -17,6 +17,7 @@ const userStore = useUserStore();
 
 const router = useRouter();
 
+const errorMessage = ref("");
 const formData = ref({
   fullname: "",
   email: "",
@@ -97,6 +98,7 @@ const handleSubmit = async () => {
       router.push({ name: "verify-phone" });
     }
   } catch (error) {
+    errorMessage.value = error.message;
     const response = error.response.data;
     console.error(response);
   } finally {
