@@ -1,47 +1,70 @@
 <script setup>
-import { ref } from "vue";
-import SuccessMessage from "@/components/messages/SuccessMessage.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
-let loading = ref(false);
+import SuccessMessage from "@/components/messages/SuccessMessage.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+
+const router = useRouter();
+
+const loading = ref(true);
+const errorMessage = ref("");
+
+// Parse the email and token from the URL query string
+// const email = router.currentRoute.value.query.email;
+// const token = router.currentRoute.value.query.token;
+const queryParams = new URLSearchParams(window.location.search);
+const email = queryParams.get("email");
+const token = queryParams.get("token");
+
+// Send a GET request function to the backend to verify the email using fetch
+const verifyEmail = async () => {
+  const url = `${import.meta.env.VITE_BACKEND_URL}/user/verify-email?token=${token}&email=${email}`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to verify email: ${response.statusText}`);
+    }
+
+    loading.value = false;
+
+    // Redirect to the login page
+    setTimeout(() => {
+      router.push({ name: "login" });
+    }, 2000);
+  } catch (error) {
+    console.error(error.message);
+    errorMessage.value = error.message;
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  verifyEmail();
+});
 </script>
 
 <template>
-  <div :class="$style.container">
-    <div v-if="loading">
-      <p>Loading...</p>
-      <p>Please wait...</p>
-    </div>
-
-    <div v-else :class="$style.output">
-      <SuccessMessage>
-        <p>Your email has been verified successfully.</p>
-      </SuccessMessage>
-      <!-- Login Button -->
-      <router-link to="/login">
-        <BaseButton type="button" mode="primary">Login</BaseButton>
-      </router-link>
-    </div>
+  <div :class="$style.wrapper">
+    <p v-if="loading">Verifying email...</p>
+    <SuccessMessage v-else-if="!loading && !errorMessage"
+      >Email verified successfully. Redirecting to the login page...</SuccessMessage
+    >
+    <ErrorMessage v-else :message="errorMessage" />
   </div>
 </template>
 
 <style module>
-.container {
+.wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
-
-.container > * {
-  margin-bottom: 1rem;
-}
-
-.output {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  font-size: 1.5rem;
 }
 </style>

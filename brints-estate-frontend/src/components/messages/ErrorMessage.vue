@@ -1,23 +1,23 @@
 <script setup>
-// import { ref } from "vue";
+import { ref, defineProps } from "vue";
 
-// const message = ref("");
+const props = defineProps({
+  message: {
+    type: String,
+  },
+});
 
-// const setMessage = (msg) => {
-//   message.value = msg;
-// };
+const message = ref(props.message);
 </script>
 
 <template>
-  <div class="alert alert-success">
-    <p><slot></slot></p>
-  </div>
+  <div v-if="message">{{ message }}</div>
 </template>
 
 <style scoped>
-.alert {
+div {
   padding: 20px;
-  background-color: #4caf50;
+  background-color: #f44336;
   color: white;
   margin-bottom: 15px;
 }

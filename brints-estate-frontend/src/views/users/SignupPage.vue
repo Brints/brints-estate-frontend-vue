@@ -11,9 +11,13 @@ import SmallButton from "@/components/buttons/SmallButton.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
+
+const userStore = useUserStore();
 
 const router = useRouter();
 
+const errorMessage = ref("");
 const formData = ref({
   fullname: "",
   email: "",
@@ -56,9 +60,9 @@ const handleSubmit = async () => {
   data.append("avatar", formData.value.avatar);
   data.append("code", formData.value.code);
 
-  for (let [key, value] of data.entries()) {
-    console.log(`${key}: ${value}`);
-  }
+  // for (let [key, value] of data.entries()) {
+  //   console.log(`${key}: ${value}`);
+  // }
 
   try {
     const response = await axios.post(`${url}/user/register`, data, {
@@ -73,8 +77,10 @@ const handleSubmit = async () => {
 
     const userData = response.data;
     const payload = userData.payload;
-    // const payload = {...userData.payload}
-    console.log(payload);
+
+    // store phone number
+    // userStore.setPhone(payload.phone);
+    userStore.phoneNumber = payload.phone;
 
     if (userData.statusCode === 201) {
       formData.value = {
@@ -88,9 +94,11 @@ const handleSubmit = async () => {
         code: "",
       };
       // Redirect to otp verification page
+      // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
       router.push({ name: "verify-phone" });
     }
   } catch (error) {
+    errorMessage.value = error.message;
     const response = error.response.data;
     console.error(response);
   } finally {

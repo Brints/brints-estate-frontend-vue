@@ -13,19 +13,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // import the free solid icons
-import {
-  faEye,
-  faEyeSlash,
-  faEnvelope,
-  faUser,
-  faLock,
-  faGlobe,
-  faPhone,
-  faVenusMars,
-} from "@fortawesome/free-solid-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 // add the imported icons to the library
-library.add(faEye, faEyeSlash, faEnvelope, faUser, faLock, faGlobe, faPhone, faVenusMars);
+library.add(fas);
 
 const app = createApp(App);
 
