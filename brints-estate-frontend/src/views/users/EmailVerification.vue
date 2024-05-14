@@ -2,9 +2,13 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
+import SuccessMessage from "@/components/messages/SuccessMessage.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+
 const router = useRouter();
 
 const loading = ref(true);
+const errorMessage = ref("");
 
 // Parse the email and token from the URL query string
 // const email = router.currentRoute.value.query.email;
@@ -34,6 +38,7 @@ const verifyEmail = async () => {
     }, 2000);
   } catch (error) {
     console.error(error.message);
+    errorMessage.value = error.message;
   } finally {
     loading.value = false;
   }
@@ -47,9 +52,16 @@ onMounted(() => {
 <template>
   <div :class="$style.wrapper">
     <p v-if="loading">Verifying email...</p>
-    <p v-else>Email verified successfully. Redirecting to the login page...</p>
+    <SuccessMessage v-else-if="!loading && !errorMessage"
+      >Email verified successfully. Redirecting to the login page...</SuccessMessage
+    >
+    <ErrorMessage v-else :message="errorMessage" />
   </div>
 </template>
+
+<!-- <p v-if="loading">Verifying email...</p>
+    <SuccessMessage v-else>Email verified successfully. Redirecting to the login page...</SuccessMessage>
+    <ErrorMessage :message="errorMessage" /> -->
 
 <style module>
 .wrapper {
