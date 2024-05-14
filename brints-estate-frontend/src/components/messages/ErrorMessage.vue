@@ -1,0 +1,39 @@
+<script setup>
+import { ref, defineProps } from "vue";
+
+const props = defineProps({
+  message: {
+    type: String,
+  },
+});
+
+const message = ref(props.message);
+</script>
+
+<template>
+  <div v-if="message">{{ message }}</div>
+</template>
+
+<style scoped>
+div {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
