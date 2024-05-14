@@ -20,7 +20,6 @@ export default defineConfig({
           "vue-router": ["vue-router"],
           pinia: ["pinia"],
           axios: ["axios"],
-          "vue-i18n": ["vue-i18n"],
           "vue-fontawesome": ["@fortawesome/vue-fontawesome"],
         },
       },
