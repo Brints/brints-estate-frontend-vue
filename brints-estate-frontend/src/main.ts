@@ -21,8 +21,8 @@ library.add(fas);
 const app = createApp(App);
 
 // make the fontawesome icon component available globally
-app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.use(createPinia());
 app.use(router);
+app.component("FontAwesomeIcon", FontAwesomeIcon);
 
 app.mount("#app");
