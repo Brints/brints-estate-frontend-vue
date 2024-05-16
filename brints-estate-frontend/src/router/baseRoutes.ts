@@ -33,6 +33,14 @@ const baseRoutes = [
       requiresAuth: false,
     },
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/NotFound.vue"),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 export default baseRoutes;
