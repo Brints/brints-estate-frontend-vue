@@ -1,5 +1,13 @@
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faUpload);
 export default {
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     label: {
       type: String,

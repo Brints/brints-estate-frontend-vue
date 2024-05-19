@@ -1,7 +1,16 @@
 <script>
 import CountriesData from "@/lookup/country-codes.json";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faGlobe);
+
 export default {
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     id: {
       type: String,

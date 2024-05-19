@@ -1,6 +1,14 @@
 <script setup>
 import { ref, watch } from "vue";
 
+// import the fontawesome core
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+
+// import the fontawesome icon
+library.add(faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone);
+
 const props = defineProps({
   id: {
     type: String,
