@@ -1,9 +1,9 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faGlobe, faVenusMars } from "@fortawesome/free-solid-svg-icons";
+import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faGlobe, faVenusMars);
+library.add(faVenusMars);
 
 export default {
   components: {
