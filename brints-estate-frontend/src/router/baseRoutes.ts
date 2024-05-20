@@ -1,4 +1,4 @@
-import LandingPage from "@/views/LandingPage.vue";
+import LandingPage from "@/views/base/LandingPage.vue";
 
 const baseRoutes = [
   {
@@ -12,7 +12,7 @@ const baseRoutes = [
   {
     path: "/about",
     name: "about",
-    component: () => import("@/views/AboutUs.vue"),
+    component: () => import("@/views/base/AboutUs.vue"),
     meta: {
       requiresAuth: false,
     },
@@ -20,7 +20,7 @@ const baseRoutes = [
   {
     path: "/contact",
     name: "contact",
-    component: () => import("@/views/ContactUs.vue"),
+    component: () => import("@/views/base/ContactUs.vue"),
     meta: {
       requiresAuth: false,
     },
@@ -28,7 +28,7 @@ const baseRoutes = [
   {
     path: "/company",
     name: "company",
-    component: () => import("@/views/CompanyProfile.vue"),
+    component: () => import("@/views/base/CompanyProfile.vue"),
     meta: {
       requiresAuth: false,
     },
@@ -36,7 +36,7 @@ const baseRoutes = [
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
-    component: () => import("@/views/NotFound.vue"),
+    component: () => import("@/views/base/NotFound.vue"),
     meta: {
       requiresAuth: false,
     },
