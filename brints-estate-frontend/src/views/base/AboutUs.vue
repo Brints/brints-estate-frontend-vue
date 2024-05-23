@@ -55,21 +55,6 @@ export default {
 
       <section v-else-if="aboutUs" class="about-contents">
         <div v-for="item in aboutUs" :key="item._id">
-          <!-- <div
-            :class="$style.imageContainer"
-            className="bg-center bg-cover bg-no-repeat"
-            :style="{
-              height: '100vh',
-              backgroundImage: `linear-gradient(rgb(83, 95, 110, 0.7), rgba(0, 0, 0, 0.7)), url('${imageUrl}')`,
-            }"
-          >
-            <h1
-              className="bg-zinc-300 rounded-lg text-xl relative top-1/2 left-14 w-80 p-6 text-emerald-700 -translate-y-2/4 "
-            >
-              Looking for apartment? Do you have a property for sale or lease? Brints Estate got you covered.
-            </h1>
-          </div> -->
-
           <div :class="$style.imageContainer">
             <h1
               className="bg-zinc-300 rounded-lg text-xl relative top-1/2 left-14 w-80 p-6 text-emerald-700 -translate-y-2/4 "
