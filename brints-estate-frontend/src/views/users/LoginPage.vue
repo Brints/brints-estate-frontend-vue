@@ -16,50 +16,57 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <HeaderBar></HeaderBar>
-  <div class="time">
-    <span className="mr-1">Current Time:</span>
-    <CurrentTime></CurrentTime>
+  <div class="header">
+    <HeaderBar></HeaderBar>
   </div>
 
   <div class="wrapper">
-    <BaseForm class="form" @submit.prevent="handleSubmit" legend="Login">
-      <template v-slot:content>
-        <BaseInput
-          label="Email"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Enter your email address"
-          asterisk="*"
-          icon="envelope"
-          @input="handleInput"
-        />
+    <div class="left">
+      <BaseForm class="form" @submit.prevent="handleSubmit" legend="Login">
+        <template v-slot:content>
+          <BaseInput
+            label="Email"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email address"
+            asterisk="*"
+            icon="envelope"
+            @input="handleInput"
+          />
 
-        <BaseInput
-          label="Password"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Enter your password"
-          asterisk="*"
-          icon="lock"
-          special="eye"
-          special_icon="login_password"
-          @input="handleInput"
-        />
-        <div class="btn">
-          <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton>
-          <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
-        </div>
-      </template>
-    </BaseForm>
+          <BaseInput
+            label="Password"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            asterisk="*"
+            icon="lock"
+            special="eye"
+            special_icon="login_password"
+            @input="handleInput"
+          />
+          <div class="btn">
+            <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton>
+            <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
+          </div>
+        </template>
+      </BaseForm>
+    </div>
+
+    <div class="right">
+      <CurrentTime></CurrentTime>
+      <!-- add image background -->
+    </div>
   </div>
 </template>
 
 <style scoped>
 .wrapper {
-  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: calc(100vh - 7.2rem);
 }
 
 .form {
@@ -82,9 +89,24 @@ const handleSubmit = () => {
   border-left: 1px solid #333;
 }
 
-.time {
+/* .time {
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+} */
+
+.right {
+  background-image: url("@/assets/images/house-3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
