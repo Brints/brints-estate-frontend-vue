@@ -60,9 +60,9 @@ const handleSubmit = async () => {
   data.append("avatar", formData.value.avatar);
   data.append("code", formData.value.code);
 
-  // for (let [key, value] of data.entries()) {
-  //   console.log(`${key}: ${value}`);
-  // }
+  for (let [key, value] of data.entries()) {
+    console.log(`${key}: ${value}`);
+  }
 
   try {
     const response = await axios.post(`${url}/user/register`, data, {
@@ -105,6 +105,8 @@ const handleSubmit = async () => {
     loading.value = false;
   }
 };
+
+// set signup button to disabled and changed text to Submitting when loading is true
 </script>
 
 <template>
@@ -196,7 +198,7 @@ const handleSubmit = async () => {
         </section>
         <SmallButton type="button" label="Generate Password" button="generate_password" />
         <div :class="$style.btns_wrapper">
-          <BaseButton type="submit" mode="signup">Signup</BaseButton>
+          <BaseButton type="submit" mode="signup" :disabled="loading">Signup</BaseButton>
           <BaseButton type="button" mode="google">Signup with Google</BaseButton>
           <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
         </div>
