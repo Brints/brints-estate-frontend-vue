@@ -32,7 +32,7 @@ const handleSubmit = async () => {
     const { data } = response;
 
     if (data.statusCode === 200) {
-      router.push({ name: "login" });
+      router.push({ name: "success" });
     }
   } catch (error) {
     console.error(error);
