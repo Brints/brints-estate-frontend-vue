@@ -31,6 +31,11 @@ const userRoutes = [
       requiresAuth: false,
     },
   },
+  {
+    path: "/success",
+    name: "success",
+    component: () => import("@/views/users/SuccessPage.vue"),
+  },
 ];
 
 export default userRoutes;
