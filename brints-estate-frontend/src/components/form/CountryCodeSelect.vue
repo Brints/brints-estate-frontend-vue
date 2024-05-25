@@ -1,5 +1,6 @@
 <script>
 import CountriesData from "@/lookup/country-codes.json";
+import { formatCountryCode } from "@/services/formatters";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -55,6 +56,12 @@ export default {
       this.$emit("input", this.selectedValue);
     },
   },
+
+  computed: {
+    formatCountryCode() {
+      return formatCountryCode;
+    },
+  },
 };
 </script>
 
@@ -68,9 +75,10 @@ export default {
     </div>
 
     <select :id="id" :name="name" v-model.trim="selectedValue">
-      <option value="">Country Code</option>
+      <option value="">(Pick One)</option>
       <option v-for="(country, index) in countries" :key="index" :value="country.zipcode">
-        ({{ country.zipcode }}) - <span :class="$style.country">{{ country.name }}</span>
+        <!-- ({{ country.zipcode }}) - {{ country.name }} -->
+        {{ formatCountryCode(country) }}
       </option>
     </select>
   </div>
@@ -79,10 +87,6 @@ export default {
 <style module>
 .form_group {
   margin-bottom: 1rem;
-}
-
-.country {
-  color: red;
 }
 
 .form_group select {
@@ -103,6 +107,13 @@ export default {
 }
 
 option {
-  background-color: #060657;
+  background-color: #696972;
+  padding: 1rem 0;
+  font-size: 1rem;
+}
+
+option:hover {
+  background-color: #f4f4f4;
+  padding: 1rem 0;
 }
 </style>
