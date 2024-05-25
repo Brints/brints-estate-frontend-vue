@@ -9,6 +9,8 @@ import { faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone } from "@fortawe
 // import the fontawesome icon
 library.add(faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone);
 
+// const emits = defineEmits(["inputData"]);
+
 const props = defineProps({
   id: {
     type: String,
@@ -100,7 +102,7 @@ watch(() => props.value, watchValue);
       :id="id"
       :name="name"
       :placeholder="placeholder"
-      v-model.trim="inputValue"
+      v-model="inputValue"
     />
 
     <span v-if="special" :class="special_icon">
