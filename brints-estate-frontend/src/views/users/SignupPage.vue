@@ -8,6 +8,7 @@ import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
 import SmallButton from "@/components/buttons/SmallButton.vue";
+import ErrorMessages from "@/components/messages/ErrorMessage.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -98,9 +99,8 @@ const handleSubmit = async () => {
       router.push({ name: "verify-phone" });
     }
   } catch (error) {
-    errorMessage.value = error.message;
     const response = error.response.data;
-    console.error(response);
+    errorMessage.value = response.error.message;
   } finally {
     loading.value = false;
   }
@@ -112,6 +112,9 @@ const handleSubmit = async () => {
 <template>
   <HeaderBar></HeaderBar>
   <main :class="$style.wrapper">
+    <div v-if="errorMessage" class="error_message">
+      <ErrorMessages :message="errorMessage" />
+    </div>
     <BaseForm @submit.prevent="handleSubmit" legend="Sign Up" mode="signup">
       <template #content>
         <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" @change="onFileChange" />
@@ -212,6 +215,7 @@ const handleSubmit = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   margin: 1rem 0;
 }
