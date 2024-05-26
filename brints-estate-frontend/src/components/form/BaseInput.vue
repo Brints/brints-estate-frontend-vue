@@ -170,9 +170,19 @@ input:focus {
       <span><font-awesome-icon :icon="icon" /></span>
       <label :for="id">
         {{ label }}
-        <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span
-        >s
+        <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span>
       </label>
+    </div>
+
+    <div class="input-group">
+      <input
+        :type="type === 'password' && isPasswordVisible ? 'text' : type"
+        :id="id"
+        :name="name"
+        :placeholder="placeholder"
+        v-model="modelValue"
+        :class="{ 'is-invalid': $v.modelValue.$error }"
+      />
     </div>
   </div>
 </template>
