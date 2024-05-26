@@ -165,7 +165,7 @@ input:focus {
 <script setup>
 import { ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, email, minLength } from "@vuelidate/validators";
 
 const props = defineProps({
   id: {
@@ -229,6 +229,39 @@ const props = defineProps({
     },
   },
 });
+
+// emit the input event
+const emit = defineEmits(["update:modelValue"]);
+
+const isPasswordVisible = ref(false);
+
+const togglePassword = () => {
+  isPasswordVisible.value = !isPasswordVisible.value;
+};
+
+const v$ = useVuelidate({
+  modelValue: {
+    required,
+    email,
+    minLength: minLength(6),
+  },
+});
+
+// watch the modelValue
+watch(
+  () => props.modelValue,
+  (value) => {
+    v$.modelValue.$model = value;
+  }
+);
+
+// watch the v$ modelValue
+watch(
+  () => v$.modelValue.$model,
+  (value) => {
+    emit("update:modelValue", value);
+  }
+);
 </script>
 
 <template>
