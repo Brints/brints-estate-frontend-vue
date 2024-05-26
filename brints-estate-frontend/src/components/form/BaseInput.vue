@@ -162,7 +162,74 @@ input:focus {
 }
 </style> -->
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+  label: {
+    type: String,
+    required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+  type: {
+    type: String,
+    required: true,
+    default: "text",
+    validator: (value) => {
+      return ["text", "email", "password", "tel"].includes(value);
+    },
+  },
+  name: {
+    type: String,
+    required: true,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  modelValue: {
+    type: String,
+    default: "",
+  },
+  icon: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  asterisk: {
+    type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+  special: {
+    type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+  special_icon: {
+    type: String,
+    validator: (value) => {
+      return value.length > 0;
+    },
+  },
+});
+</script>
 
 <template>
   <div class="base-input">
@@ -180,7 +247,7 @@ input:focus {
         :id="id"
         :name="name"
         :placeholder="placeholder"
-        v-model="modelValue"
+        :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         :class="{ 'is-invalid': $v.modelValue.$error }"
       />
