@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, watch } from "vue";
 
 // import the fontawesome core
@@ -86,9 +86,9 @@ const watchValue = () => {
 };
 
 watch(() => props.value, watchValue);
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <div class="form_group">
     <div class="label_group">
       <span><font-awesome-icon :icon="icon" /></span>
@@ -109,9 +109,9 @@ watch(() => props.value, watchValue);
       <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
     </span>
   </div>
-</template>
+</template> -->
 
-<style scoped>
+<!-- <style scoped>
 .form_group {
   margin-bottom: 1rem;
 }
@@ -160,4 +160,21 @@ input:focus {
   bottom: 7.2rem;
   right: 3.75rem;
 }
-</style>
+</style> -->
+
+<script setup></script>
+
+<template>
+  <div class="base-input">
+    <div class="label-group">
+      <span><font-awesome-icon :icon="icon" /></span>
+      <label :for="id">
+        {{ label }}
+        <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span
+        >s
+      </label>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
