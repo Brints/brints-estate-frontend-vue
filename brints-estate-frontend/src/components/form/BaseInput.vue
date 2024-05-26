@@ -181,6 +181,7 @@ input:focus {
         :name="name"
         :placeholder="placeholder"
         v-model="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
         :class="{ 'is-invalid': $v.modelValue.$error }"
       />
       <div v-if="$v.modelValue.$error" class="invalid-feedback">{{ $v.modelValue.$errors }}</div>
