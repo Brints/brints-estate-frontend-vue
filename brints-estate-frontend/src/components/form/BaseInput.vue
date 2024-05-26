@@ -183,7 +183,12 @@ input:focus {
         v-model="modelValue"
         :class="{ 'is-invalid': $v.modelValue.$error }"
       />
+      <div v-if="$v.modelValue.$error" class="invalid-feedback">{{ $v.modelValue.$errors }}</div>
     </div>
+
+    <span v-if="special" :class="special_icon">
+      <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
+    </span>
   </div>
 </template>
 
