@@ -238,7 +238,7 @@ const props = defineProps({
 });
 
 // emit the input event
-const emit = defineEmits(["update:modelValue"]);
+defineEmits(["update:modelValue"]);
 
 const isPasswordVisible = ref(false);
 
@@ -265,9 +265,10 @@ const togglePassword = () => {
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :class="{ 'is-invalid': $v.modelValue.$error }"
+        :class="{ 'is-invalid': isError }"
       />
-      <div v-if="$v.modelValue.$error" class="invalid-feedback">{{ $v.modelValue.$errors }}</div>
+      <!-- :class="{ 'is-invalid': $v.modelValue.$error }" -->
+      <div v-if="isError" class="invalid-feedback">{{ validationMessage }}</div>
     </div>
 
     <span v-if="special" :class="special_icon">
@@ -324,5 +325,16 @@ input:focus {
   position: absolute;
   bottom: 7.2rem;
   right: 3.75rem;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.is-invalid {
+  border-color: #dc3545;
 }
 </style>
