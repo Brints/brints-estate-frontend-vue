@@ -163,9 +163,16 @@ input:focus {
 </style> -->
 
 <script setup>
-import { ref } from "vue";
-import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
+import { ref, watch } from "vue";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+
+// import the fontawesome icon
+library.add(faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone);
+
+// const emits = defineEmits(["inputData"]);
 
 const props = defineProps({
   id: {
@@ -238,30 +245,6 @@ const isPasswordVisible = ref(false);
 const togglePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
-
-const v$ = useVuelidate({
-  modelValue: {
-    required,
-    email,
-    minLength: minLength(6),
-  },
-});
-
-// watch the modelValue
-watch(
-  () => props.modelValue,
-  (value) => {
-    v$.modelValue.$model = value;
-  }
-);
-
-// watch the v$ modelValue
-watch(
-  () => v$.modelValue.$model,
-  (value) => {
-    emit("update:modelValue", value);
-  }
-);
 </script>
 
 <template>
@@ -293,4 +276,53 @@ watch(
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.base-input {
+  margin-bottom: 1rem;
+}
+
+.label_group label {
+  margin-bottom: 0.5rem;
+}
+
+.label_group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.password_eye {
+  cursor: pointer;
+  position: absolute;
+  bottom: 6.85rem;
+  left: 23rem;
+}
+
+.confirm_eye {
+  cursor: pointer;
+  position: absolute;
+  bottom: 6.85rem;
+  right: 2.32rem;
+}
+
+.login_password {
+  cursor: pointer;
+  position: absolute;
+  bottom: 7.2rem;
+  right: 3.75rem;
+}
+</style>
