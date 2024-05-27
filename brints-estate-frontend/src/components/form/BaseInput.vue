@@ -163,7 +163,7 @@ input:focus {
 </style> -->
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -174,7 +174,7 @@ library.add(faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone);
 
 // const emits = defineEmits(["inputData"]);
 
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     required: true,
@@ -234,6 +234,14 @@ const props = defineProps({
     validator: (value) => {
       return value.length > 0;
     },
+  },
+  isError: {
+    type: Boolean,
+    default: false,
+  },
+  validationMessage: {
+    type: String,
+    default: "",
   },
 });
 
