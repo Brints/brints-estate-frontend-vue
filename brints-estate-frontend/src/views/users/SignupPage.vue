@@ -1,5 +1,6 @@
-<script setup>
+<!-- <script setup>
 import { ref } from "vue";
+
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
@@ -107,9 +108,9 @@ const handleSubmit = async () => {
 };
 
 // set signup button to disabled and changed text to Submitting when loading is true
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <HeaderBar></HeaderBar>
   <main :class="$style.wrapper">
     <div v-if="errorMessage" class="error_message">
@@ -208,9 +209,9 @@ const handleSubmit = async () => {
       </template>
     </BaseForm>
   </main>
-</template>
+</template> -->
 
-<style module>
+<!-- <style module>
 .wrapper {
   display: flex;
   justify-content: center;
@@ -237,6 +238,256 @@ const handleSubmit = async () => {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding-bottom: 1rem;
+}
+
+.phone {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+</style> -->
+
+<script setup>
+import { ref } from "vue";
+
+import BaseForm from "@/components/form/BaseForm.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import BaseInput from "@/components/form/BaseInput.vue";
+import LabelSelect from "@/components/form/LabelSelect.vue";
+import ImageInput from "@/components/form/ImageInput.vue";
+import HeaderBar from "@/components/layout/HeaderBar.vue";
+import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
+// import SmallButton from "@/components/buttons/SmallButton.vue";
+import ErrorMessages from "@/components/messages/ErrorMessage.vue";
+
+import axios from "axios";
+
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
+
+const userStore = useUserStore();
+
+const router = useRouter();
+
+const errorMessage = ref("");
+const loading = ref(false);
+const formData = ref({
+  fullname: "",
+  email: "",
+  phone: "",
+  password: "",
+  confirmPassword: "",
+  avatar: null,
+  code: "",
+  gender: "",
+});
+
+const url = import.meta.env.VITE_BACKEND_URL;
+
+const signup = () => {
+  const data = new FormData();
+  data.append("fullname", formData.value.fullname);
+  data.append("email", formData.value.email);
+  data.append("phone", formData.value.phone);
+  data.append("password", formData.value.password);
+  data.append("confirmPassword", formData.value.confirmPassword);
+  data.append("avatar", formData.value.avatar);
+  data.append("code", formData.value.code);
+
+  // for (let [key, value] of data.entries()) {
+  //   console.log(`${key}: ${value}`);
+  // }
+
+  try {
+    loading.value = true;
+    axios.post(`${url}/user/register`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (!response.ok) {
+      // handle error
+    }
+
+    const userData = response.data;
+    const payload = userData.payload;
+
+    // store phone number
+    // userStore.setPhone(payload.phone);
+    userStore.phoneNumber = payload.phone;
+
+    if (userData.statusCode === 201) {
+      formData.value = {
+        fullname: "",
+        email: "",
+        phone: "",
+        gender: "",
+        password: "",
+        confirmPassword: "",
+        avatar: null,
+        code: "",
+      };
+      // Redirect to otp verification page
+      // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
+      router.push({ name: "verify-phone" });
+    }
+  } catch (error) {
+    const response = error.response.data;
+    errorMessage.value = response.error.message;
+  } finally {
+    loading.value = false;
+  }
+};
+</script>
+
+<template>
+  <div class="header">
+    <HeaderBar></HeaderBar>
+  </div>
+
+  <main :class="$style.wrapper">
+    <div v-if="errorMessage" class="error_message">
+      <ErrorMessages :message="errorMessage" />
+    </div>
+
+    <BaseForm :class="$style.form" @submit="signup">
+      <fieldset>
+        <legend>Sign Up</legend>
+
+        <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" />
+
+        <section :class="$style.form_content">
+          <section :class="$style.left_column">
+            <BaseInput
+              v-model="formData.fullname"
+              label="Full Name"
+              id="fullname"
+              name="fullname"
+              type="text"
+              placeholder="Enter your full name"
+              asterisk="*"
+              icon="user"
+            />
+
+            <BaseInput
+              v-model="formData.email"
+              label="Email"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email address"
+              asterisk="*"
+              icon="envelope"
+            />
+
+            <BaseInput
+              v-model="formData.password"
+              label="Password"
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              asterisk="*"
+              icon="lock"
+              special="eye"
+              special_icon="password_eye"
+            />
+          </section>
+
+          <section :class="$style.right_column">
+            <div :class="$style.phone">
+              <CountryCodeSelect
+                v-model="formData.code"
+                label="Code"
+                id="code"
+                name="code"
+                asterisk="*"
+                icon="globe"
+                @input="handleInput"
+              ></CountryCodeSelect>
+
+              <BaseInput
+                v-model="formData.phone"
+                label="Phone"
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Enter your phone number"
+                asterisk="*"
+                icon="phone"
+              />
+            </div>
+
+            <LabelSelect
+              label="Gender"
+              id="gender"
+              name="gender"
+              asterisk="*"
+              icon="venus-mars"
+              v-model="formData.gender"
+            >
+              <option value="">Choose your Gender</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </LabelSelect>
+
+            <BaseInput
+              v-model="formData.confirmPassword"
+              label="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              asterisk="*"
+              icon="lock"
+              special="eye"
+              special_icon="confirm_eye"
+            />
+          </section>
+        </section>
+        <div :class="$style.btns_wrapper">
+          <BaseButton type="submit" mode="signup">Signup</BaseButton>
+          <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
+        </div>
+      </fieldset>
+    </BaseForm>
+  </main>
+</template>
+
+<style module>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 1rem 0;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+legend {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.form_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.left_column,
+.right_column {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .phone {
