@@ -5,11 +5,16 @@ defineProps({
 </script>
 
 <template>
-  <small class="text-red-500" v-if="model.$invalid">
-    <ul>
-      <li v-for="error in model.$errors" :key="error">{{ error.$message }}</li>
-    </ul>
-  </small>
+  <div v-if="model.$invalid">
+    <small class="invalid-feedback" v-for="(error, index) in model.$errors" :key="index">{{ error.$message }}</small>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  display: block;
+  margin-top: 0.25rem;
+}
+</style>
