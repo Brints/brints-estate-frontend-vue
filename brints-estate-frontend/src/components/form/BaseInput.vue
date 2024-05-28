@@ -111,57 +111,6 @@ watch(() => props.value, watchValue);
   </div>
 </template> -->
 
-<!-- <style scoped>
-.form_group {
-  margin-bottom: 1rem;
-}
-
-.form_group label {
-  margin-bottom: 0.5rem;
-}
-
-.label_group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-input {
-  width: 100%;
-  height: 3rem;
-  background-color: transparent;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-input:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-.password_eye {
-  cursor: pointer;
-  position: absolute;
-  bottom: 6.85rem;
-  left: 23rem;
-}
-
-.confirm_eye {
-  cursor: pointer;
-  position: absolute;
-  bottom: 6.85rem;
-  right: 2.32rem;
-}
-
-.login_password {
-  cursor: pointer;
-  position: absolute;
-  bottom: 7.2rem;
-  right: 3.75rem;
-}
-</style> -->
-
 <script setup>
 import { ref } from "vue";
 
@@ -171,8 +120,6 @@ import { faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone } from "@fortawe
 
 // import the fontawesome icon
 library.add(faEye, faEyeSlash, faLock, faUser, faEnvelope, faPhone);
-
-// const emits = defineEmits(["inputData"]);
 
 defineProps({
   id: {
@@ -239,9 +186,9 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  validationMessage: {
-    type: String,
-    default: "",
+  rules: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -257,7 +204,7 @@ const togglePassword = () => {
 
 <template>
   <div class="base-input">
-    <div class="label-group">
+    <div class="label_group">
       <span><font-awesome-icon :icon="icon" /></span>
       <label :for="id">
         {{ label }}
@@ -273,10 +220,7 @@ const togglePassword = () => {
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :class="{ 'is-invalid': isError }"
       />
-      <!-- :class="{ 'is-invalid': $v.modelValue.$error }" -->
-      <div v-if="isError" class="invalid-feedback">{{ validationMessage }}</div>
     </div>
 
     <span v-if="special" :class="special_icon">
@@ -286,10 +230,6 @@ const togglePassword = () => {
 </template>
 
 <style scoped>
-.base-input {
-  margin-bottom: 1rem;
-}
-
 .label_group label {
   margin-bottom: 0.5rem;
 }
@@ -297,6 +237,11 @@ const togglePassword = () => {
 .label_group {
   display: flex;
   gap: 0.5rem;
+}
+
+.input-group {
+  display: grid;
+  grid-template-rows: 1fr minmax(1rem);
 }
 
 input {
@@ -328,10 +273,10 @@ input:focus {
   right: 2.32rem;
 }
 
-.login_password {
+.login_eye_icon {
   cursor: pointer;
   position: absolute;
-  bottom: 7.2rem;
+  bottom: 32%;
   right: 3.75rem;
 }
 
@@ -342,7 +287,7 @@ input:focus {
   margin-top: 0.25rem;
 }
 
-.is-invalid {
+/* .is-invalid {
   border-color: #dc3545;
-}
+} */
 </style>
