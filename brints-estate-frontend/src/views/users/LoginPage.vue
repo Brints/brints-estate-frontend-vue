@@ -63,24 +63,42 @@ const handleSubmit = () => {
 
 <script setup>
 import { ref } from "vue";
+// import { useAuthStore } from "@/stores/authStore";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
+import ValidationError from "@/components/messages/ValidationError.vue";
 
 import { useVuelidate } from "@vuelidate/core";
-import { required, email as emailValidator } from "@vuelidate/validators";
+import { required, email, minLength, maxLength } from "@vuelidate/validators";
+// import { emailValidator } from "@/services/validations";
 
-const email = ref("");
-const password = ref("");
+const credentials = ref({
+  email: "",
+  password: "",
+});
 
 const rules = {
-  email: { required, email: emailValidator },
-  password: { required },
+  email: { required, email },
+  password: { required, minLength: minLength(8), maxLength: maxLength(16) },
 };
 
-const v$ = useVuelidate(rules, { email, password });
+const v$ = useVuelidate(rules, credentials);
+
+// const authStore = useAuthStore();
+
+const login = async () => {
+  if (!(await v$.value.$validate())) return;
+  // v$.$touch();
+  // if (v$.$invalid) {
+  //   return;
+  // }
+  // authStore.login({ email: email.value, password: password.value });
+};
+
+//const errorMessage = computed(() => authStore.error);
 </script>
 
 <template>
@@ -93,41 +111,49 @@ const v$ = useVuelidate(rules, { email, password });
       <BaseForm class="form" @submit="login">
         <fieldset>
           <legend>Login</legend>
-          <BaseInput
-            v-model="email"
-            label="Email"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter your email address"
-            asterisk="*"
-            icon="envelope"
-            :validationMessage="v$.email.$error ? 'Email is required.' : ''"
-          />
 
-          <BaseInput
-            v-model="password"
-            label="Password"
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            asterisk="*"
-            icon="lock"
-            special="eye"
-            special_icon="login_password"
-            :validationMessage="v$.password.$error ? 'Password is required.' : ''"
-          />
+          <div class="email-input">
+            <BaseInput
+              v-model="v$.email.$model"
+              label="Email"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email address"
+              asterisk="*"
+              icon="envelope"
+            />
+            <!-- :isError="v$.$invalid"
+              :rules="v$.email.$errors" -->
+            <ValidationError :model="v$.email"></ValidationError>
+          </div>
+
+          <div class="password-input">
+            <BaseInput
+              v-model="v$.password.$model"
+              label="Password"
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              asterisk="*"
+              icon="lock"
+              special="eye"
+              special_icon="login_eye_icon"
+            />
+            <ValidationError :model="v$.password"></ValidationError>
+          </div>
+
           <div class="btn">
-            <!-- <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton> -->
-            <BaseButton
-              type="submit"
-              :disabled="!v$.$anyDirty || v$.$invalid"
-              class="bg-lime-500 hover:bg-lime-700 text-white"
-            >
-              Login
-            </BaseButton>
-            <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
+            <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton>
+
+            <div>
+              <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
+              <p>
+                Forgot Password?
+                <router-link :to="{ name: 'forgot-password' }" class="text-lime-500">Reset</router-link>
+              </p>
+            </div>
           </div>
         </fieldset>
       </BaseForm>
@@ -190,5 +216,12 @@ legend {
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.email-input,
+.password-input {
+  display: grid;
+  grid-template-rows: 1fr minmax(1rem);
+  margin-bottom: 1rem;
 }
 </style>
