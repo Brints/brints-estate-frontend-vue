@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 defineProps({
   legend: {
     type: String,
@@ -8,9 +8,9 @@ defineProps({
     type: String,
   },
 });
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <form novalidate class="main_form">
     <fieldset>
       <legend v-if="legend" :legend="legend" :class="mode">
@@ -18,6 +18,20 @@ defineProps({
       </legend>
       <slot name="content"></slot>
     </fieldset>
+  </form>
+</template> -->
+
+<script setup>
+const emit = defineEmits(["submit"]);
+
+const handleSubmit = () => {
+  emit("submit");
+};
+</script>
+
+<template>
+  <form novalidate class="main_form" @submit.prevent="handleSubmit">
+    <slot></slot>
   </form>
 </template>
 
@@ -30,24 +44,5 @@ defineProps({
   padding: 10px;
   border: none;
   border-radius: 5px;
-}
-
-fieldset {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
-legend {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding: 0 10px;
-}
-
-.signup {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  color: #dd0707;
 }
 </style>
