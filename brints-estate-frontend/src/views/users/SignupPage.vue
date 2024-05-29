@@ -249,6 +249,10 @@ const handleSubmit = async () => {
 
 <script setup>
 import { ref } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength, maxLength, sameAs, helpers } from "@vuelidate/validators";
+
+import { passwordValidator } from "../../services/validations";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -259,6 +263,7 @@ import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
 // import SmallButton from "@/components/buttons/SmallButton.vue";
 import ErrorMessages from "@/components/messages/ErrorMessage.vue";
+import ValidationError from "@/components/messages/ValidationError.vue";
 
 import axios from "axios";
 
@@ -282,9 +287,45 @@ const formData = ref({
   gender: "",
 });
 
+const rules = {
+  fullname: {
+    required: helpers.withMessage("Fullname is required", required),
+  },
+  email: {
+    required: helpers.withMessage("Email is required", required),
+    email: helpers.withMessage("Email must be valid", email),
+  },
+  phone: {
+    required: helpers.withMessage("Phone number is required", required),
+  },
+  password: {
+    required: helpers.withMessage("Password is required", required),
+    minLength: helpers.withMessage("Password must be at least 6 characters", minLength(6)),
+    maxLength: helpers.withMessage("Password must be at most 16 characters", maxLength(16)),
+    passwordValidator: helpers.withMessage(
+      "Password must contain at least one uppercase, one lowercase, one number and one special character",
+      passwordValidator
+    ),
+  },
+  confirmPassword: {
+    required: helpers.withMessage("Confirm Password is required", required),
+    sameAs: helpers.withMessage("Password does not match", sameAs(formData.value.password)),
+  },
+  avatar: {
+    required: helpers.withMessage("Avatar is required", required),
+  },
+  code: {
+    required: helpers.withMessage("Country code is required", required),
+  },
+};
+
+const v$ = useVuelidate(rules, formData);
+
 const url = import.meta.env.VITE_BACKEND_URL;
 
-const signup = () => {
+const signup = async () => {
+  if (!(await v$.value.$validate())) return;
+
   const data = new FormData();
   data.append("fullname", formData.value.fullname);
   data.append("email", formData.value.email);
@@ -295,9 +336,9 @@ const signup = () => {
   data.append("code", formData.value.code);
   data.append("gender", formData.value.gender);
 
-  for (let [key, value] of data.entries()) {
-    console.log(`${key}: ${value}`);
-  }
+  // for (let [key, value] of data.entries()) {
+  //   console.log(`${key}: ${value}`);
+  // }
 
   try {
     loading.value = true;
@@ -315,7 +356,6 @@ const signup = () => {
     const payload = userData.payload;
 
     // store phone number
-    // userStore.setPhone(payload.phone);
     userStore.phoneNumber = payload.phone;
 
     if (userData.statusCode === 201) {
@@ -358,94 +398,111 @@ const signup = () => {
       <fieldset>
         <legend>Sign Up</legend>
 
-        <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
+        <div :class="$style.img_label">
+          <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
+        </div>
 
         <section :class="$style.form_content">
           <section :class="$style.left_column">
-            <BaseInput
-              v-model="formData.fullname"
-              label="Full Name"
-              id="fullname"
-              name="fullname"
-              type="text"
-              placeholder="Enter your full name"
-              asterisk="*"
-              icon="user"
-            />
+            <div :class="$style.fullname_label">
+              <BaseInput
+                v-model="formData.fullname"
+                label="Full Name"
+                id="fullname"
+                name="fullname"
+                type="text"
+                placeholder="Enter your full name"
+                asterisk="*"
+                icon="user"
+              />
+            </div>
 
-            <BaseInput
-              v-model="formData.email"
-              label="Email"
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Enter your email address"
-              asterisk="*"
-              icon="envelope"
-            />
+            <div :class="$style.email_label">
+              <BaseInput
+                v-model="formData.email"
+                label="Email"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email address"
+                asterisk="*"
+                icon="envelope"
+              />
+            </div>
 
-            <BaseInput
-              v-model="formData.password"
-              label="Password"
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              asterisk="*"
-              icon="lock"
-              special="eye"
-              special_icon="password_eye"
-            />
+            <div :class="$style.password_label">
+              <BaseInput
+                v-model="v$.password.$model"
+                label="Password"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                asterisk="*"
+                icon="lock"
+                special="eye"
+                special_icon="password_eye"
+              />
+              <ValidationError :model="v$.password"></ValidationError>
+            </div>
           </section>
 
           <section :class="$style.right_column">
             <div :class="$style.phone">
-              <CountryCodeSelect
-                v-model="formData.code"
-                label="Code"
-                id="code"
-                name="code"
-                asterisk="*"
-                icon="globe"
-              ></CountryCodeSelect>
+              <div :class="$style.code_label">
+                <CountryCodeSelect
+                  v-model="formData.code"
+                  label="Code"
+                  id="code"
+                  name="code"
+                  asterisk="*"
+                  icon="globe"
+                ></CountryCodeSelect>
+              </div>
 
-              <BaseInput
-                v-model="formData.phone"
-                label="Phone"
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="Enter your phone number"
-                asterisk="*"
-                icon="phone"
-              />
+              <div :class="$style.phone_label">
+                <BaseInput
+                  v-model="formData.phone"
+                  label="Phone"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  asterisk="*"
+                  icon="phone"
+                />
+              </div>
             </div>
 
-            <LabelSelect
-              label="Gender"
-              id="gender"
-              name="gender"
-              asterisk="*"
-              icon="venus-mars"
-              v-model="formData.gender"
-            >
-              <option value="">Choose your Gender</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-            </LabelSelect>
+            <div :class="$style.gender_label">
+              <LabelSelect
+                label="Gender"
+                id="gender"
+                name="gender"
+                asterisk="*"
+                icon="venus-mars"
+                v-model="formData.gender"
+              >
+                <option value="">Choose your Gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </LabelSelect>
+            </div>
 
-            <BaseInput
-              v-model="formData.confirmPassword"
-              label="Confirm Password"
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              asterisk="*"
-              icon="lock"
-              special="eye"
-              special_icon="confirm_eye"
-            />
+            <div :class="$style.confirmPwd_label">
+              <BaseInput
+                v-model="formData.confirmPassword"
+                label="Confirm Password"
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                asterisk="*"
+                icon="lock"
+                special="eye"
+                special_icon="confirm_eye"
+              />
+            </div>
           </section>
         </section>
         <div :class="$style.btns_wrapper">
