@@ -293,14 +293,15 @@ const signup = () => {
   data.append("confirmPassword", formData.value.confirmPassword);
   data.append("avatar", formData.value.avatar);
   data.append("code", formData.value.code);
+  data.append("gender", formData.value.gender);
 
-  // for (let [key, value] of data.entries()) {
-  //   console.log(`${key}: ${value}`);
-  // }
+  for (let [key, value] of data.entries()) {
+    console.log(`${key}: ${value}`);
+  }
 
   try {
     loading.value = true;
-    axios.post(`${url}/user/register`, data, {
+    const response = axios.post(`${url}/user/register`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -335,6 +336,8 @@ const signup = () => {
   } catch (error) {
     const response = error.response.data;
     errorMessage.value = response.error.message;
+    //Reload the signup page
+    router.push({ name: "signup" });
   } finally {
     loading.value = false;
   }
@@ -355,7 +358,7 @@ const signup = () => {
       <fieldset>
         <legend>Sign Up</legend>
 
-        <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" />
+        <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
 
         <section :class="$style.form_content">
           <section :class="$style.left_column">
@@ -404,7 +407,6 @@ const signup = () => {
                 name="code"
                 asterisk="*"
                 icon="globe"
-                @input="handleInput"
               ></CountryCodeSelect>
 
               <BaseInput
@@ -488,6 +490,13 @@ legend {
 .right_column {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
+}
+
+.btns_wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding-bottom: 1rem;
 }
 
 .phone {
