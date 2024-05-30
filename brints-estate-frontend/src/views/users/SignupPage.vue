@@ -250,9 +250,8 @@ const handleSubmit = async () => {
 <script setup>
 import { ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, maxLength, sameAs, helpers } from "@vuelidate/validators";
-
-import { passwordValidator } from "../../services/validations";
+import { required, email, minLength, maxLength, sameAs, helpers, alpha } from "@vuelidate/validators";
+// import { passwordValidator } from "@/services/validations";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -290,6 +289,9 @@ const formData = ref({
 const rules = {
   fullname: {
     required: helpers.withMessage("Fullname is required", required),
+    minLength: helpers.withMessage("Fullname should be more than 3 characters", minLength(3)),
+    maxLength: helpers.withMessage("Fullname should not be more than 80 characters", maxLength(80)),
+    alpha: helpers.withMessage("Fullname should contain only letters.", alpha),
   },
   email: {
     required: helpers.withMessage("Email is required", required),
@@ -300,22 +302,25 @@ const rules = {
   },
   password: {
     required: helpers.withMessage("Password is required", required),
-    minLength: helpers.withMessage("Password must be at least 6 characters", minLength(6)),
+    minLength: helpers.withMessage("Password must be at least 8 characters", minLength(8)),
     maxLength: helpers.withMessage("Password must be at most 16 characters", maxLength(16)),
-    passwordValidator: helpers.withMessage(
-      "Password must contain at least one uppercase, one lowercase, one number and one special character",
-      passwordValidator
-    ),
+    // passwordValidator: helpers.withMessage(
+    //   "Password must contain at least one uppercase, one lowercase, one number and one special character",
+    //   passwordValidator
+    // ),
   },
   confirmPassword: {
     required: helpers.withMessage("Confirm Password is required", required),
-    sameAs: helpers.withMessage("Password does not match", sameAs(formData.value.password)),
+    sameAs: helpers.withMessage("Confirm Password must be same as Password.", sameAs(formData.value.password)),
   },
   avatar: {
-    required: helpers.withMessage("Avatar is required", required),
+    // required: helpers.withMessage("Avatar is required", required),
   },
   code: {
-    required: helpers.withMessage("Country code is required", required),
+    required: helpers.withMessage("Code required", required),
+  },
+  gender: {
+    required: helpers.withMessage("Gender is required", required),
   },
 };
 
@@ -400,13 +405,14 @@ const signup = async () => {
 
         <div :class="$style.img_label">
           <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
+          <ValidationError :model="v$.avatar"></ValidationError>
         </div>
 
         <section :class="$style.form_content">
           <section :class="$style.left_column">
-            <div :class="$style.fullname_label">
+            <div :class="$style.input_group">
               <BaseInput
-                v-model="formData.fullname"
+                v-model="v$.fullname.$model"
                 label="Full Name"
                 id="fullname"
                 name="fullname"
@@ -415,11 +421,12 @@ const signup = async () => {
                 asterisk="*"
                 icon="user"
               />
+              <ValidationError :model="v$.fullname"></ValidationError>
             </div>
 
-            <div :class="$style.email_label">
+            <div :class="$style.input_group">
               <BaseInput
-                v-model="formData.email"
+                v-model="v$.email.$model"
                 label="Email"
                 id="email"
                 name="email"
@@ -428,9 +435,10 @@ const signup = async () => {
                 asterisk="*"
                 icon="envelope"
               />
+              <ValidationError :model="v$.email"></ValidationError>
             </div>
 
-            <div :class="$style.password_label">
+            <div :class="$style.input_group">
               <BaseInput
                 v-model="v$.password.$model"
                 label="Password"
@@ -449,20 +457,21 @@ const signup = async () => {
 
           <section :class="$style.right_column">
             <div :class="$style.phone">
-              <div :class="$style.code_label">
+              <div :class="$style.input_group">
                 <CountryCodeSelect
-                  v-model="formData.code"
+                  v-model="v$.code.$model"
                   label="Code"
                   id="code"
                   name="code"
                   asterisk="*"
                   icon="globe"
                 ></CountryCodeSelect>
+                <ValidationError :model="v$.code"></ValidationError>
               </div>
 
-              <div :class="$style.phone_label">
+              <div :class="$style.input_group">
                 <BaseInput
-                  v-model="formData.phone"
+                  v-model="v$.phone.$model"
                   label="Phone"
                   id="phone"
                   name="phone"
@@ -471,27 +480,29 @@ const signup = async () => {
                   asterisk="*"
                   icon="phone"
                 />
+                <ValidationError :model="v$.phone"></ValidationError>
               </div>
             </div>
 
-            <div :class="$style.gender_label">
+            <div :class="$style.input_group">
               <LabelSelect
                 label="Gender"
                 id="gender"
                 name="gender"
                 asterisk="*"
                 icon="venus-mars"
-                v-model="formData.gender"
+                v-model="v$.gender.$model"
               >
                 <option value="">Choose your Gender</option>
                 <option value="female">Female</option>
                 <option value="male">Male</option>
               </LabelSelect>
+              <ValidationError :model="v$.gender"></ValidationError>
             </div>
 
-            <div :class="$style.confirmPwd_label">
+            <div :class="$style.input_group">
               <BaseInput
-                v-model="formData.confirmPassword"
+                v-model="v$.confirmPassword.$model"
                 label="Confirm Password"
                 id="confirmPassword"
                 name="confirmPassword"
@@ -502,12 +513,13 @@ const signup = async () => {
                 special="eye"
                 special_icon="confirm_eye"
               />
+              <ValidationError :model="v$.confirmPassword"></ValidationError>
             </div>
           </section>
         </section>
         <div :class="$style.btns_wrapper">
-          <BaseButton type="submit" mode="signup">Signup</BaseButton>
-          <BaseButton type="reset" mode="reset_btn">Reset</BaseButton>
+          <BaseButton type="submit" mode="signup" label="Signup"></BaseButton>
+          <BaseButton type="reset" mode="reset_btn" label="Reset"></BaseButton>
         </div>
       </fieldset>
     </BaseForm>
@@ -560,5 +572,9 @@ legend {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 10px;
+}
+
+.input_group {
+  margin-bottom: 1rem;
 }
 </style>
