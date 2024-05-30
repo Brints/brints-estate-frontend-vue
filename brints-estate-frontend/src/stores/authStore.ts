@@ -1,43 +1,53 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import axios from "axios";
 
 export const useAuthStore = defineStore("auth", () => {
-  const user = ref(null);
-  const error = ref(null);
+  const token = ref<string | null>(null);
+  const user = ref<any>(null);
+  const errorMessage = ref<string | null>(null);
 
-  const isAuthenticated = computed(() => !!user.value);
+  const isLoggedIn = computed(() => !!token.value);
 
-  const login = async (email, password) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const login = async (email: string, password: string) => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      const response = await axios.post(`${backendUrl}/user/login`, {
+        email,
+        password,
       });
+      const { payload } = response.data;
+      token.value = payload.token;
+      user.value = payload;
 
-      if (response.ok) {
-        user.value = await response.json();
-      } else {
-        error.value = await response.json();
-      }
-    } catch (e) {
-      error.value = e.response ? e.response.data.message : "An error occurred";
-      user.value = null;
+      // Save token to local storage
+      localStorage.setItem("token", token.value);
+    } catch (error) {
+      errorMessage.value = error.response.data.error.message;
+      console.error(errorMessage.value);
     }
   };
 
   const logout = () => {
-    user.value = null;
-    error.value = null;
+    token.value = null;
+    localStorage.removeItem("token");
+  };
+
+  const loadTokenFromLocalStorage = () => {
+    const storageToken = localStorage.getItem("token");
+    if (storageToken) {
+      token.value = storageToken;
+    }
   };
 
   return {
+    errorMessage,
     user,
-    error,
-    isAuthenticated,
+    token,
+    isLoggedIn,
     login,
     logout,
+    loadTokenFromLocalStorage,
   };
 });
