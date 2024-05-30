@@ -1,16 +1,18 @@
 <script setup>
 import { ref } from "vue";
-// import { useAuthStore } from "@/stores/authStore";
+import { useAuthStore } from "@/stores/authStore";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
+// import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, maxLength } from "@vuelidate/validators";
-// import { emailValidator } from "@/services/validations";
+import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
+
+const authStore = useAuthStore();
 
 const credentials = ref({
   email: "",
@@ -18,24 +20,29 @@ const credentials = ref({
 });
 
 const rules = {
-  email: { required, email },
-  password: { required, minLength: minLength(8), maxLength: maxLength(16) },
+  email: {
+    required: helpers.withMessage("Email is required.", required),
+    email: helpers.withMessage("Email must be valid.", email),
+  },
+  password: {
+    required: helpers.withMessage("Password is required.", required),
+    minLength: helpers.withMessage("Password must be at least 6 characters.", minLength(6)),
+    maxLength: helpers.withMessage("Password must be at most 16 characters.", maxLength(16)),
+  },
 };
 
 const v$ = useVuelidate(rules, credentials);
 
-// const authStore = useAuthStore();
-
-const login = async () => {
+const handleLogin = async () => {
   if (!(await v$.value.$validate())) return;
-  // v$.$touch();
-  // if (v$.$invalid) {
-  //   return;
-  // }
-  // authStore.login({ email: email.value, password: password.value });
-};
 
-//const errorMessage = computed(() => authStore.error);
+  try {
+    await authStore.login(credentials.value.email, credentials.value.password);
+    console.log(authStore.user);
+  } catch (error) {
+    console.error(authStore.errorMessage);
+  }
+};
 </script>
 
 <template>
@@ -45,7 +52,10 @@ const login = async () => {
 
   <div class="wrapper">
     <div class="left">
-      <BaseForm class="form" @submit="login">
+      <!-- <div v-if="authStore.error">
+        <ErrorMessage :message="authStore.error"></ErrorMessage>
+      </div> -->
+      <BaseForm class="form" @submit="handleLogin">
         <fieldset>
           <legend>Login</legend>
 
@@ -60,8 +70,6 @@ const login = async () => {
               asterisk="*"
               icon="envelope"
             />
-            <!-- :isError="v$.$invalid"
-              :rules="v$.email.$errors" -->
             <ValidationError :model="v$.email"></ValidationError>
           </div>
 
@@ -82,7 +90,14 @@ const login = async () => {
           </div>
 
           <div class="btn">
-            <BaseButton type="submit" class="bg-lime-500 hover:bg-lime-700 text-white"> Login </BaseButton>
+            <BaseButton
+              type="submit"
+              label="Login"
+              class="bg-lime-500 hover:bg-lime-700 text-white"
+              :disabled="v$.$invalid"
+            >
+              Login
+            </BaseButton>
 
             <div>
               <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
