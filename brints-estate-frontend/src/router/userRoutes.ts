@@ -24,6 +24,11 @@ const userRoutes = [
     },
   },
   {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: () => import("@/views/users/ForgotPassword.vue"),
+  },
+  {
     path: "/verify-phone",
     name: "verify-phone",
     component: () => import("@/views/users/OTPVerification.vue"),
