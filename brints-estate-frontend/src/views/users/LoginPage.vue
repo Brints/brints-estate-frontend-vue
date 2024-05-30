@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "vue-router";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseForm from "@/components/form/BaseForm.vue";
@@ -13,6 +14,7 @@ import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
 
 const authStore = useAuthStore();
+const router = useRouter();
 
 const credentials = ref({
   email: "",
@@ -38,9 +40,14 @@ const handleLogin = async () => {
 
   try {
     await authStore.login(credentials.value.email, credentials.value.password);
-    console.log(authStore.user);
+
+    if (authStore.isLoggedIn) {
+      router.push({ name: "listings" });
+    } else {
+      router.push({ name: "login" });
+    }
   } catch (error) {
-    console.error(authStore.errorMessage);
+    console.error(error);
   }
 };
 </script>
