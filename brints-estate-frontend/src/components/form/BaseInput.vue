@@ -190,6 +190,10 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  isInvalid: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // emit the input event
@@ -220,12 +224,12 @@ const togglePassword = () => {
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
+        :class="{ 'is-invalid': isInvalid }"
       />
+      <span v-if="special" :class="special_icon">
+        <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
+      </span>
     </div>
-
-    <span v-if="special" :class="special_icon">
-      <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
-    </span>
   </div>
 </template>
 
@@ -240,6 +244,7 @@ const togglePassword = () => {
 }
 
 .input-group {
+  position: relative;
   display: grid;
   grid-template-rows: 1fr minmax(1rem);
 }
@@ -259,25 +264,19 @@ input:focus {
   border-color: #2563eb;
 }
 
-.password_eye {
-  cursor: pointer;
-  position: absolute;
-  bottom: 6.85rem;
-  left: 23rem;
-}
-
+.password_eye,
 .confirm_eye {
   cursor: pointer;
   position: absolute;
-  bottom: 6.85rem;
-  right: 2.32rem;
+  bottom: 0.7rem;
+  left: 21rem;
 }
 
 .login_eye_icon {
   cursor: pointer;
   position: absolute;
-  bottom: 32%;
-  right: 3.75rem;
+  bottom: 0.7rem;
+  left: 29rem;
 }
 
 .invalid-feedback {
@@ -287,7 +286,7 @@ input:focus {
   margin-top: 0.25rem;
 }
 
-/* .is-invalid {
+.is-invalid {
   border-color: #dc3545;
-} */
+}
 </style>
