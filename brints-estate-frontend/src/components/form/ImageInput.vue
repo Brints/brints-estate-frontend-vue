@@ -5,6 +5,7 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faUpload);
 export default {
+  emits: ["update:modelValue"],
   components: {
     FontAwesomeIcon,
   },
@@ -43,7 +44,14 @@ export default {
       >
     </div>
     <slot name="input">
-      <input :class="$style.form_control" type="file" :id="id" :name="name" :multiple="multiple" />
+      <input
+        :class="$style.form_control"
+        type="file"
+        :id="id"
+        :name="name"
+        :multiple="multiple"
+        @input="$emit('update:modelValue', $event.target.files[0])"
+      />
     </slot>
   </div>
 </template>
