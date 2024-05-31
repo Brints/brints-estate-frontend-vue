@@ -6,6 +6,7 @@ import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
 library.add(faVenusMars);
 
 export default {
+  emits: ["update:modelValue"],
   components: {
     FontAwesomeIcon,
   },
@@ -22,7 +23,7 @@ export default {
       type: String,
       required: true,
     },
-    value: {
+    modelValue: {
       type: String,
       default: "",
     },
@@ -58,17 +59,13 @@ export default {
       >
     </div>
 
-    <select :id="id" :name="name" v-model.trim="selectedValue">
+    <select :id="id" :name="name" @change="$emit('update:modelValue', $event.target.value)">
       <slot></slot>
     </select>
   </div>
 </template>
 
 <style module>
-.form_group {
-  margin-bottom: 1rem;
-}
-
 select {
   width: 100%;
   height: 3rem;
