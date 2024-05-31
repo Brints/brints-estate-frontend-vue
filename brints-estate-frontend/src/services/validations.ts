@@ -38,8 +38,14 @@ export const fullNameValidator = {
 
 export const emailValidator = {
   $validator: (value: string) => {
-    if (!value) return 0;
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 1 : 2;
+    if (!value) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : false;
   },
-  $message: ["Email is required", "Must be a valid email address"],
+  // $message: ["Email is required", "This field must be a valid email address"],
+  $message: "Invalid email address",
+};
+
+export const passwordValidator = (password: string) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  return regex.test(password);
 };
