@@ -8,7 +8,7 @@ import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
-// import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
@@ -20,6 +20,9 @@ const credentials = ref({
   email: "",
   password: "",
 });
+const error = ref("");
+
+error.value = authStore.errorMessage;
 
 const rules = {
   email: {
@@ -38,16 +41,12 @@ const v$ = useVuelidate(rules, credentials);
 const handleLogin = async () => {
   if (!(await v$.value.$validate())) return;
 
-  try {
-    await authStore.login(credentials.value.email, credentials.value.password);
+  await authStore.login(credentials.value.email, credentials.value.password);
 
-    if (authStore.isLoggedIn) {
-      router.push({ name: "listings" });
-    } else {
-      router.push({ name: "login" });
-    }
-  } catch (error) {
-    console.error(error);
+  if (authStore.isLoggedIn) {
+    router.push({ name: "listings" });
+  } else {
+    router.push({ name: "login" });
   }
 };
 </script>
@@ -59,9 +58,9 @@ const handleLogin = async () => {
 
   <div class="wrapper">
     <div class="left">
-      <!-- <div v-if="authStore.error">
-        <ErrorMessage :message="authStore.error"></ErrorMessage>
-      </div> -->
+      <div v-if="error">
+        <ErrorMessage :message="error"></ErrorMessage>
+      </div>
       <BaseForm class="form" @submit="handleLogin">
         <fieldset>
           <legend>Login</legend>
