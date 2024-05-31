@@ -7,7 +7,7 @@ import SmallButton from "@/components/buttons/SmallButton.vue";
     <p>Your phone number has been verified successfully.</p>
     <p>Check your email to verify your email address.</p>
     <router-link :to="{ name: 'login' }">
-      <SmallButton type="submit"><span className="text-green-400">Get Started</span></SmallButton>
+      <SmallButton type="submit"><span className="text-green-400">Continue</span></SmallButton>
     </router-link>
   </div>
 </template>
