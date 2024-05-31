@@ -11,11 +11,11 @@ const loading = ref(true);
 const errorMessage = ref("");
 
 // Parse the email and token from the URL query string
-// const email = router.currentRoute.value.query.email;
-// const token = router.currentRoute.value.query.token;
 const queryParams = new URLSearchParams(window.location.search);
 const email = queryParams.get("email");
 const token = queryParams.get("token");
+// const email = router.currentRoute.value.query.email;
+// const token = router.currentRoute.value.query.token;
 
 // Send a GET request function to the backend to verify the email using fetch
 const verifyEmail = async () => {
