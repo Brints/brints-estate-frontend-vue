@@ -9,6 +9,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 library.add(faGlobe);
 
 export default {
+  emits: ["update:modelValue"],
   components: {
     FontAwesomeIcon,
   },
@@ -25,7 +26,7 @@ export default {
       type: String,
       required: true,
     },
-    value: {
+    modelValue: {
       type: String,
       default: "",
     },
@@ -40,21 +41,8 @@ export default {
 
   data() {
     return {
-      selectedValue: this.value,
       countries: CountriesData.countries,
     };
-  },
-
-  watch: {
-    value(newValue) {
-      this.selectedValue = newValue;
-    },
-  },
-
-  methods: {
-    handleInput() {
-      this.$emit("input", this.selectedValue);
-    },
   },
 
   computed: {
@@ -74,10 +62,9 @@ export default {
       >
     </div>
 
-    <select :id="id" :name="name" v-model.trim="selectedValue">
+    <select :id="id" :name="name" @change="$emit('update:modelValue', $event.target.value)">
       <option value="">(Pick One)</option>
       <option v-for="(country, index) in countries" :key="index" :value="country.zipcode">
-        <!-- ({{ country.zipcode }}) - {{ country.name }} -->
         {{ formatCountryCode(country) }}
       </option>
     </select>
@@ -85,10 +72,6 @@ export default {
 </template>
 
 <style module>
-.form_group {
-  margin-bottom: 1rem;
-}
-
 .form_group select {
   padding: 0.5rem;
   font-size: 1rem;
