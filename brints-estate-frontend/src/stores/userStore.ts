@@ -43,6 +43,18 @@ export const useUserStore = defineStore("user", () => {
       const userData = response.data;
       const payload = userData.payload;
       phoneNumber.value = payload.phone;
+
+      // Reset the form data
+      if (userData.statusCode === 201) {
+        data.value.fullname = "";
+        data.value.email = "";
+        data.value.password = "";
+        data.value.phone = "";
+        data.value.gender = "";
+        data.value.avatar = null;
+        data.value.confirmPassword = "";
+        data.value.code = "";
+      }
     } catch (error) {
       console.error(error);
       const response = error.response.data;
