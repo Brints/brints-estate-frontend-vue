@@ -23,17 +23,6 @@ export const useUserStore = defineStore("user", () => {
     try {
       loading.value = true;
 
-      // Call your API here
-      // const response = await fetch(`${url}/user/register`, {
-      //   method: "POST",
-      //   body: formData,
-      //   headers: {
-      //     Accept: "multipart/form-data"
-      //   }
-      // })
-
-      // const responseData = await response.json();
-
       const response = await axios.post(`${url}/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
