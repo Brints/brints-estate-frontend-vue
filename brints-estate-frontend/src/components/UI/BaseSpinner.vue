@@ -13,4 +13,11 @@
   </div>
 </template>
 
-<style module></style>
+<style module>
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+</style>
