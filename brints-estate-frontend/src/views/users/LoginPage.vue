@@ -9,6 +9,8 @@ import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import BaseDialog from "@/components/UI/BaseDialog.vue";
+import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
@@ -20,9 +22,6 @@ const credentials = ref({
   email: "",
   password: "",
 });
-const error = ref("");
-
-error.value = authStore.errorMessage;
 
 const rules = {
   email: {
@@ -52,72 +51,78 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="header">
-    <HeaderBar></HeaderBar>
-  </div>
-
-  <div class="wrapper">
-    <div class="left">
-      <div v-if="error">
-        <ErrorMessage :message="error"></ErrorMessage>
-      </div>
-      <BaseForm class="form" @submit="handleLogin">
-        <fieldset>
-          <legend>Login</legend>
-
-          <div class="email-input">
-            <BaseInput
-              v-model="v$.email.$model"
-              label="Email"
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Enter your email address"
-              asterisk="*"
-              icon="envelope"
-            />
-            <ValidationError :model="v$.email"></ValidationError>
-          </div>
-
-          <div class="password-input">
-            <BaseInput
-              v-model="v$.password.$model"
-              label="Password"
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              asterisk="*"
-              icon="lock"
-              special="eye"
-              special_icon="login_eye_icon"
-            />
-            <ValidationError :model="v$.password"></ValidationError>
-          </div>
-
-          <div class="btn">
-            <BaseButton
-              type="submit"
-              label="Login"
-              class="bg-lime-500 hover:bg-lime-700 text-white"
-              :disabled="v$.$invalid"
-            >
-              Login
-            </BaseButton>
-
-            <div>
-              <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
-              <p>
-                Forgot Password?
-                <router-link :to="{ name: 'forgot-password' }" class="text-lime-500">Reset</router-link>
-              </p>
-            </div>
-          </div>
-        </fieldset>
-      </BaseForm>
+  <div>
+    <div class="header">
+      <HeaderBar></HeaderBar>
     </div>
 
-    <div class="right"></div>
+    <BaseDialog :show="authStore.isLoading" fixed>
+      <BaseSpinner></BaseSpinner>
+    </BaseDialog>
+
+    <div class="wrapper">
+      <div class="left">
+        <div v-if="authStore.errorMessage">
+          <ErrorMessage :message="authStore.errorMessage"></ErrorMessage>
+        </div>
+        <BaseForm class="form" @submit="handleLogin">
+          <fieldset>
+            <legend>Login</legend>
+
+            <div class="email-input">
+              <BaseInput
+                v-model="v$.email.$model"
+                label="Email"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email address"
+                asterisk="*"
+                icon="envelope"
+              />
+              <ValidationError :model="v$.email"></ValidationError>
+            </div>
+
+            <div class="password-input">
+              <BaseInput
+                v-model="v$.password.$model"
+                label="Password"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                asterisk="*"
+                icon="lock"
+                special="eye"
+                special_icon="login_eye_icon"
+              />
+              <ValidationError :model="v$.password"></ValidationError>
+            </div>
+
+            <div class="btn">
+              <BaseButton
+                type="submit"
+                label="Login"
+                class="bg-lime-500 hover:bg-lime-700 text-white"
+                :disabled="v$.$invalid"
+              >
+                Login
+              </BaseButton>
+
+              <div>
+                <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
+                <p>
+                  Forgot Password?
+                  <router-link :to="{ name: 'forgot-password' }" class="text-lime-500">Reset</router-link>
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </BaseForm>
+      </div>
+
+      <div class="right"></div>
+    </div>
   </div>
 </template>
 
