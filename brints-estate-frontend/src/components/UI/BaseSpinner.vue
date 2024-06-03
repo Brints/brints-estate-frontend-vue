@@ -20,4 +20,11 @@
   align-items: center;
   width: 100%;
 }
+
+.lds_roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
 </style>
