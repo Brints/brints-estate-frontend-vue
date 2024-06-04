@@ -8,7 +8,7 @@ import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
-import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+// import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
@@ -56,15 +56,19 @@ const handleLogin = async () => {
       <HeaderBar></HeaderBar>
     </div>
 
-    <BaseDialog :show="authStore.isLoading" fixed>
+    <BaseDialog :show="!!authStore.errorMessage" @close="authStore.handleError">
+      <p>{{ authStore.errorMessage }}</p>
+    </BaseDialog>
+
+    <BaseDialog :show="authStore.loading" fixed>
       <BaseSpinner></BaseSpinner>
     </BaseDialog>
 
     <div class="wrapper">
       <div class="left">
-        <div v-if="authStore.errorMessage">
+        <!-- <div v-if="authStore.errorMessage">
           <ErrorMessage :message="authStore.errorMessage"></ErrorMessage>
-        </div>
+        </div> -->
         <BaseForm class="form" @submit="handleLogin">
           <fieldset>
             <legend>Login</legend>
@@ -110,7 +114,6 @@ const handleLogin = async () => {
               </BaseButton>
 
               <div>
-                <p>Don't have an account? <router-link to="/signup" class="text-lime-500">Sign Up</router-link></p>
                 <p>
                   Forgot Password?
                   <router-link :to="{ name: 'forgot-password' }" class="text-lime-500">Reset</router-link>
