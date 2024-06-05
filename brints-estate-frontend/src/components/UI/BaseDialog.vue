@@ -1,5 +1,5 @@
 <script setup>
-import BaseButton from "@/buttons/BaseButton.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
 
 defineProps({
   show: {
@@ -22,7 +22,7 @@ const tryClose = () => {
 
 <template>
   <teleport to="body">
-    <div v-if="show" @click="tryClose" :class="$style.backdrop"></div>
+    <div v-if="show" @click="tryClose" class="backdrop"></div>
     <transition name="dialog">
       <dialog open v-if="show">
         <section>
@@ -30,7 +30,7 @@ const tryClose = () => {
         </section>
         <menu v-if="!fixed">
           <slot name="actions">
-            <BaseButton @click="tryClose">Close</BaseButton>
+            <BaseButton type="submit" label="Close" @click="tryClose"></BaseButton>
           </slot>
         </menu>
       </dialog>
@@ -38,7 +38,7 @@ const tryClose = () => {
   </teleport>
 </template>
 
-<style module>
+<style scoped>
 .backdrop {
   position: fixed;
   top: 0;
