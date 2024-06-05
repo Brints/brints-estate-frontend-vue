@@ -1,26 +1,3 @@
-<!-- <script setup>
-defineProps({
-  legend: {
-    type: String,
-    default: "",
-  },
-  mode: {
-    type: String,
-  },
-});
-</script> -->
-
-<!-- <template>
-  <form novalidate class="main_form">
-    <fieldset>
-      <legend v-if="legend" :legend="legend" :class="mode">
-        <h1>{{ legend }}</h1>
-      </legend>
-      <slot name="content"></slot>
-    </fieldset>
-  </form>
-</template> -->
-
 <script setup>
 const emit = defineEmits(["submit"]);
 
