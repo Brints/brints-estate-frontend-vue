@@ -16,7 +16,7 @@ defineProps({
 
 <template>
   <button :type="type" :label="label" :class="[button, 'small_button']">
-    <slot>{{ label }}</slot>
+    {{ label }}
   </button>
 </template>
 
