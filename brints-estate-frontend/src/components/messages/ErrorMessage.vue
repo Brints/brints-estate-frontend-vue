@@ -16,10 +16,10 @@ const message = ref(props.message);
 
 <style scoped>
 div {
-  padding: 20px;
+  padding: 10px 20px;
   background-color: #f44336;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .closebtn {
