@@ -18,6 +18,11 @@ const userRoutes = [
   {
     path: "/verify-email",
     name: "verify-email",
+    // redirect: (to) => {
+    //   //perform logic
+
+    //   return { name: "verify-email", query: { token: "asc", email: "asde" } };
+    // },
     component: () => import("@/views/users/EmailVerification.vue"),
     meta: {
       requiresAuth: false,
