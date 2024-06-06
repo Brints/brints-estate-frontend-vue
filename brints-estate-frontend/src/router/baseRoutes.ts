@@ -10,6 +10,10 @@ const baseRoutes = [
     },
   },
   {
+    path: "/landing",
+    redirect: { name: "landing-page" },
+  },
+  {
     path: "/about",
     name: "about",
     component: () => import("@/views/base/AboutUs.vue"),
