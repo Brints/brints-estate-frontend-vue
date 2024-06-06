@@ -68,7 +68,11 @@ function scale(num, in_min, in_max, out_min, out_max) {
             Ready to hop in and explore?
             <div className="flex justify-center">
               <router-link :to="{ name: 'login' }">
-                <SmallButton type="submit"><span className="text-green-400">Get Started</span></SmallButton>
+                <SmallButton
+                  type="submit"
+                  label="Get Started"
+                  className="text-green-400 bg-slate-500 p-2 rounded"
+                ></SmallButton>
               </router-link>
             </div>
           </SignInSignUpInfo>
