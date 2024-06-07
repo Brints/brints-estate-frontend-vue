@@ -1,10 +1,17 @@
+<script setup>
+defineProps({
+  mode: {
+    type: String,
+  },
+});
+</script>
 <template>
-  <div :class="$style.card">
+  <div :class="['card', mode]">
     <slot></slot>
   </div>
 </template>
 
-<style module>
+<style scoped>
 .card {
   background-color: white;
   border-radius: 12px;
