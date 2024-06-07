@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email as emailValidator, helpers } from "@vuelidate/validators";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -7,8 +9,18 @@ import BaseInput from "@/components/form/BaseInput.vue";
 import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
+import ValidationError from "@/components/messages/ValidationError.vue";
 
 const email = ref("");
+
+const rules = {
+  email: {
+    required: helpers.withMessage("Email is required.", required),
+    emailValidator: helpers.withMessage("Email must be a valid email address", emailValidator),
+  },
+};
+
+const v$ = useVuelidate(rules, email);
 
 const submitForm = () => {
   console.log("Form submitted");
@@ -28,15 +40,16 @@ const submitForm = () => {
             <legend className="text-center text-2xl">Forgot Password</legend>
             <div class="input">
               <BaseInput
-                v-model="email"
+                v-model="v$.email.$model"
                 type="email"
                 name="email"
                 id="email"
-                label="Reset Password"
+                label="Email"
                 placeholder="Enter your registered email address"
                 asterisk="*"
                 icon="envelope"
               />
+              <ValidationError :model="v$.email"></ValidationError>
             </div>
             <BaseButton type="submit" label="Reset"></BaseButton>
           </fieldset>
