@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email as emailValidator, helpers } from "@vuelidate/validators";
+import { required, email, helpers } from "@vuelidate/validators";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -11,16 +11,18 @@ import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 
-const email = ref("");
+const credentials = ref({
+  email: "",
+});
 
 const rules = {
   email: {
     required: helpers.withMessage("Email is required.", required),
-    emailValidator: helpers.withMessage("Email must be a valid email address", emailValidator),
+    email: helpers.withMessage("Email must be a valid email address", email),
   },
 };
 
-const v$ = useVuelidate(rules, email);
+const v$ = useVuelidate(rules, credentials);
 
 const submitForm = async () => {
   if (!(await v$.value.$validate())) return;
