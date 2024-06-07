@@ -22,7 +22,8 @@ const rules = {
 
 const v$ = useVuelidate(rules, email);
 
-const submitForm = () => {
+const submitForm = async () => {
+  if (!(await v$.value.$validate())) return;
   console.log("Form submitted");
 };
 </script>
