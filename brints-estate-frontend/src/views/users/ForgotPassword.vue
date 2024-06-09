@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, helpers } from "@vuelidate/validators";
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -10,6 +12,9 @@ import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
+
+const userStore = useUserStore();
+const router = useRouter();
 
 const credentials = ref({
   email: "",
@@ -26,7 +31,13 @@ const v$ = useVuelidate(rules, credentials);
 
 const submitForm = async () => {
   if (!(await v$.value.$validate())) return;
-  console.log("Form submitted");
+
+  await userStore.forgotPassword(credentials.value.email);
+
+  if (userStore.statusCode === 200) {
+    router.push({ name: "forgot-password" });
+    console.log("Password reset link sent to your email");
+  }
 };
 </script>
 
@@ -34,7 +45,15 @@ const submitForm = async () => {
   <div class="container">
     <main>
       <BaseCard mode="forgot-password">
-        <BaseDialog>
+        <BaseDialog :show="!!userStore.error" @close="userStore.error = null">
+          <p>{{ userStore.error }}</p>
+        </BaseDialog>
+
+        <BaseDialog :show="userStore.statusCode === 200">
+          <p>Success</p>
+        </BaseDialog>
+
+        <BaseDialog :show="userStore.loading" fixed>
           <BaseSpinner></BaseSpinner>
         </BaseDialog>
 
