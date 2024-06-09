@@ -1,13 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
+import { stat } from "fs";
 
 export const useUserStore = defineStore("user", () => {
   const phoneNumber = ref("");
   const loading = ref(false);
   const error = ref(null);
+  const successMessage = ref("");
+  const statusCode = ref(0);
 
-  const url = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const signup = async (data: any) => {
     const formData = new FormData();
@@ -23,7 +26,7 @@ export const useUserStore = defineStore("user", () => {
     try {
       loading.value = true;
 
-      const response = await axios.post(`${url}/user/register`, formData, {
+      const response = await axios.post(`${backendUrl}/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -53,10 +56,35 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const forgotPassword = async (email: string) => {
+    loading.value = true;
+
+    try {
+      const response = await axios.post(`${backendUrl}/user/forgot-password`, {
+        email,
+      });
+
+      const { status } = response;
+      const { message } = response.data;
+      successMessage.value = message;
+      statusCode.value = status;
+    } catch (e) {
+      // const response = e.response;
+      // const { message } = response.data.error;
+      // error.value = message;
+      console.error(e);
+    } finally {
+      loading.value = false;
+    }
+  };
+
   return {
+    statusCode,
+    successMessage,
     phoneNumber,
     loading,
     error,
     signup,
+    forgotPassword,
   };
 });
