@@ -995,6 +995,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-api@npm:^6.0.0-beta.11":
+  version: 6.6.3
+  resolution: "@vue/devtools-api@npm:6.6.3"
+  checksum: 10c0/e9e712f687e901b1ecfcfb958a305db9729d37408677ea8d63189176406196c7c6d4e9580216de590ccbe68037f323c163293e917cfad3834d7f3299cd5a22bb
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-api@npm:^6.5.0, @vue/devtools-api@npm:^6.5.1":
   version: 6.6.1
   resolution: "@vue/devtools-api@npm:6.6.1"
@@ -1509,6 +1516,8 @@ __metadata:
     vue: "npm:^3.4.21"
     vue-router: "npm:^4.3.0"
     vue-tsc: "npm:^2.0.6"
+    vue3-google-login: "npm:^2.0.26"
+    vuex: "npm:^4.1.0"
   languageName: unknown
   linkType: soft
 
@@ -5711,6 +5720,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue3-google-login@npm:^2.0.26":
+  version: 2.0.26
+  resolution: "vue3-google-login@npm:2.0.26"
+  peerDependencies:
+    vue: ^3.0.3
+  checksum: 10c0/a281912433c4e4202b17c7732052bac69b035fd3837a011ed0efe19a42967395f3c75a22cb075aa9ae402fc84dbc7bd54c0699da984dade8e5e019a2b9bc66ea
+  languageName: node
+  linkType: hard
+
 "vue@npm:^3.4.21":
   version: 3.4.27
   resolution: "vue@npm:3.4.27"
@@ -5726,6 +5744,17 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/73349e05cf554891d5e0076be10083150c92831c1cffdeee1e25c2222a8a4d8291630825a897049add753c4925e1c916c3614fe8d9c0392d9ff0186e553fe24b
+  languageName: node
+  linkType: hard
+
+"vuex@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "vuex@npm:4.1.0"
+  dependencies:
+    "@vue/devtools-api": "npm:^6.0.0-beta.11"
+  peerDependencies:
+    vue: ^3.2.0
+  checksum: 10c0/33605e6d8731cfa064933727a199039db474cb36e1a9178a2c31f21c3d9c04e7800d70f4b5115986cb5995761c7320faaab512e9ba35d019ae4f657c25bb7fdb
   languageName: node
   linkType: hard
 
