@@ -4,6 +4,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
+import BaseFooter from "@/components/layout/BaseFooter.vue";
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -125,6 +126,10 @@ const handleLogin = async () => {
       </div>
 
       <div class="right"></div>
+    </div>
+
+    <div class="footer">
+      <BaseFooter></BaseFooter>
     </div>
   </div>
 </template>
