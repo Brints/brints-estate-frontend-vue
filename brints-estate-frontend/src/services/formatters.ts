@@ -9,7 +9,7 @@ export function formatDate(value: string): string {
   return new Intl.DateTimeFormat("en-NG").format(new Date(value));
 }
 
-export function formatCountryCode(value): string {
-  const { zipcode, name } = value;
-  return `(${zipcode}) - ${name}`;
+export function formatCountryCode(value: any): string {
+  const { zipcode, name, flag, code } = value;
+  return `${flag} (${zipcode}) ${name} - ${code}`;
 }
