@@ -11,6 +11,7 @@ import LabelSelect from "@/components/form/LabelSelect.vue";
 import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
+import BaseFooter from "@/components/layout/BaseFooter.vue";
 // import SmallButton from "@/components/buttons/SmallButton.vue";
 import ErrorMessages from "@/components/messages/ErrorMessage.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
@@ -273,6 +274,10 @@ const handleSignup = async () => {
       </fieldset>
     </BaseForm>
   </main>
+
+  <div class="footer">
+    <BaseFooter></BaseFooter>
+  </div>
 </template>
 
 <style module>
