@@ -4,6 +4,7 @@ const userRoutes = [
     name: "login",
     component: () => import("@/views/users/LoginPage.vue"),
     meta: {
+      title: "Login",
       requiresAuth: false,
     },
   },
@@ -12,6 +13,7 @@ const userRoutes = [
     name: "signup",
     component: () => import("@/views/users/SignupPage.vue"),
     meta: {
+      title: "Signup",
       requiresAuth: false,
     },
   },
@@ -25,6 +27,7 @@ const userRoutes = [
     // },
     component: () => import("@/views/users/EmailVerification.vue"),
     meta: {
+      title: "Verify Email",
       requiresAuth: false,
     },
   },
@@ -32,12 +35,17 @@ const userRoutes = [
     path: "/forgot-password",
     name: "forgot-password",
     component: () => import("@/views/users/ForgotPassword.vue"),
+    meta: {
+      title: "Forgot Password",
+      requiresAuth: false,
+    },
   },
   {
     path: "/verify-phone",
     name: "verify-phone",
     component: () => import("@/views/users/OTPVerification.vue"),
     meta: {
+      title: "Verify Phone",
       requiresAuth: false,
     },
   },
@@ -45,6 +53,10 @@ const userRoutes = [
     path: "/success",
     name: "success",
     component: () => import("@/views/users/SuccessPage.vue"),
+    meta: {
+      title: "Success",
+      requiresAuth: false,
+    },
   },
 ];
 
