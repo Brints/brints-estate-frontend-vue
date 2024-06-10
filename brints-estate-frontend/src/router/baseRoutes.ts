@@ -1,5 +1,4 @@
 import LandingPage from "@/views/base/LandingPage.vue";
-import { title } from "process";
 
 const baseRoutes = [
   {
