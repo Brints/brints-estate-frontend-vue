@@ -1,4 +1,5 @@
 import LandingPage from "@/views/base/LandingPage.vue";
+import { title } from "process";
 
 const baseRoutes = [
   {
@@ -6,18 +7,23 @@ const baseRoutes = [
     name: "landing-page",
     component: LandingPage,
     meta: {
+      title: "Home",
       requiresAuth: false,
     },
   },
-  {
-    path: "/landing",
-    redirect: { name: "landing-page" },
-  },
+  // {
+  //   path: "/landing",
+  //   redirect: { name: "landing-page" },
+  //   meta: {
+  //     requiresAuth: false,
+  //   },
+  // },
   {
     path: "/about",
     name: "about",
     component: () => import("@/views/base/AboutUs.vue"),
     meta: {
+      title: "About Us",
       requiresAuth: false,
     },
   },
@@ -26,6 +32,7 @@ const baseRoutes = [
     name: "contact",
     component: () => import("@/views/base/ContactUs.vue"),
     meta: {
+      title: "Contact Us",
       requiresAuth: false,
     },
   },
@@ -34,6 +41,7 @@ const baseRoutes = [
     name: "company",
     component: () => import("@/views/base/CompanyProfile.vue"),
     meta: {
+      title: "Company Profile",
       requiresAuth: false,
     },
   },
@@ -42,6 +50,7 @@ const baseRoutes = [
     name: "not-found",
     component: () => import("@/views/base/NotFound.vue"),
     meta: {
+      title: "Not Found",
       requiresAuth: false,
     },
   },
