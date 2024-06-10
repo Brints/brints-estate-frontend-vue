@@ -18,9 +18,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !authStore.isLoggedIn) {
     next({ name: "login" });
   } else {
-    // Continue to the next route and load token from storage
-    // authStore.loadTokenFromLocalStorage;
-    next(authStore.loadTokenFromLocalStorage);
+    next();
   }
 });
 
