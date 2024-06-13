@@ -5,6 +5,7 @@ const listingRoutes = [
     component: () => import("@/views/listings/AllListings.vue"),
     meta: {
       requiresAuth: true,
+      title: "Listings",
     },
   },
 ];
