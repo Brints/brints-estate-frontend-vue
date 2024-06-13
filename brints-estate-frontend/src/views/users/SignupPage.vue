@@ -13,10 +13,15 @@ import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
 // import SmallButton from "@/components/buttons/SmallButton.vue";
+
+import BaseDialog from "@/components/UI/BaseDialog.vue";
+import BaseSpinner from "@/components/UI/BaseSpinner.vue";
+import BaseCard from "@/components/UI/BaseCard.vue";
+
 import ErrorMessages from "@/components/messages/ErrorMessage.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 
-import axios from "axios";
+// import axios from "axios";
 
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
@@ -25,7 +30,7 @@ const userStore = useUserStore();
 
 const router = useRouter();
 
-const errorMessage = ref("");
+// const errorMessage = ref("");
 const loading = ref(false);
 const formData = ref({
   fullname: "",
@@ -78,58 +83,15 @@ const rules = {
 
 const v$ = useVuelidate(rules, formData);
 
-const url = import.meta.env.VITE_BACKEND_URL;
-
 const handleSignup = async () => {
   if (!(await v$.value.$validate())) return;
-  loading.value = true;
 
-  const data = new FormData();
-  data.append("fullname", formData.value.fullname);
-  data.append("email", formData.value.email);
-  data.append("phone", formData.value.phone);
-  data.append("password", formData.value.password);
-  data.append("confirmPassword", formData.value.confirmPassword);
-  data.append("avatar", formData.value.avatar);
-  data.append("code", formData.value.code);
-  data.append("gender", formData.value.gender);
+  await userStore.signup(formData);
 
-  try {
-    loading.value = true;
-    const response = await axios.post(`${url}/user/register`, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    const userData = response.data;
-    const payload = userData.payload;
-
-    // store phone number
-    userStore.phoneNumber = payload.phone;
-
-    if (userData.statusCode === 201) {
-      formData.value = {
-        fullname: "",
-        email: "",
-        phone: "",
-        gender: "",
-        password: "",
-        confirmPassword: "",
-        avatar: null,
-        code: "",
-      };
-      // Redirect to otp verification page
-      // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
-      router.push({ name: "verify-phone" });
-    }
-  } catch (error) {
-    //Reload the signup page
-    // router.push({ name: "signup" });
-    const response = error.response.data;
-    errorMessage.value = response.error.message;
-  } finally {
-    loading.value = false;
+  // Redirect to otp verification page
+  // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
+  if (userStore.statusCode === 201) {
+    router.push({ name: "verify-phone" });
   }
 };
 </script>
@@ -140,139 +102,149 @@ const handleSignup = async () => {
   </div>
 
   <main :class="$style.wrapper">
-    <div v-if="errorMessage" class="error_message">
-      <ErrorMessages :message="errorMessage" />
-    </div>
+    <!-- <div v-if="userStore.error" class="error_message">
+      <ErrorMessages :message="userStore.error" />
+    </div> -->
 
-    <BaseForm @submit="handleSignup">
-      <fieldset>
-        <legend>Sign Up</legend>
+    <BaseDialog :show="!!userStore.loading" fixed>
+      <BaseSpinner />
+    </BaseDialog>
 
-        <div :class="$style.img_label">
-          <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
-          <ValidationError :model="v$.avatar"></ValidationError>
-        </div>
+    <BaseDialog :show="!!userStore.error" @close="userStore.error === null">
+      <ErrorMessages :message="userStore.error" class="error_message" />
+    </BaseDialog>
 
-        <section :class="$style.form_content">
-          <section :class="$style.left_column">
-            <div :class="$style.input_group">
-              <BaseInput
-                v-model="v$.fullname.$model"
-                label="Full Name"
-                id="fullname"
-                name="fullname"
-                type="text"
-                placeholder="Enter your full name"
-                asterisk="*"
-                icon="user"
-              />
-              <ValidationError :model="v$.fullname"></ValidationError>
-            </div>
+    <BaseCard>
+      <BaseForm @submit="handleSignup">
+        <fieldset>
+          <legend>Sign Up</legend>
 
-            <div :class="$style.input_group">
-              <BaseInput
-                v-model="v$.email.$model"
-                label="Email"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email address"
-                asterisk="*"
-                icon="envelope"
-              />
-              <ValidationError :model="v$.email"></ValidationError>
-            </div>
+          <div :class="$style.img_label">
+            <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
+            <ValidationError :model="v$.avatar"></ValidationError>
+          </div>
 
-            <div :class="$style.input_group">
-              <BaseInput
-                v-model="v$.password.$model"
-                label="Password"
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                asterisk="*"
-                icon="lock"
-                special="eye"
-                special_icon="password_eye"
-              />
-              <ValidationError :model="v$.password"></ValidationError>
-            </div>
-          </section>
-
-          <section :class="$style.right_column">
-            <div :class="$style.phone">
+          <section :class="$style.form_content">
+            <section :class="$style.left_column">
               <div :class="$style.input_group">
-                <CountryCodeSelect
-                  v-model="v$.code.$model"
-                  label="Code"
-                  id="code"
-                  name="code"
+                <BaseInput
+                  v-model="v$.fullname.$model"
+                  label="Full Name"
+                  id="fullname"
+                  name="fullname"
+                  type="text"
+                  placeholder="Enter your full name"
                   asterisk="*"
-                  icon="globe"
-                ></CountryCodeSelect>
-                <ValidationError :model="v$.code"></ValidationError>
+                  icon="user"
+                />
+                <ValidationError :model="v$.fullname"></ValidationError>
               </div>
 
               <div :class="$style.input_group">
                 <BaseInput
-                  v-model="v$.phone.$model"
-                  label="Phone"
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Enter your phone number"
+                  v-model="v$.email.$model"
+                  label="Email"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
                   asterisk="*"
-                  icon="phone"
+                  icon="envelope"
                 />
-                <ValidationError :model="v$.phone"></ValidationError>
+                <ValidationError :model="v$.email"></ValidationError>
               </div>
-            </div>
 
-            <div :class="$style.input_group">
-              <LabelSelect
-                label="Gender"
-                id="gender"
-                name="gender"
-                asterisk="*"
-                icon="venus-mars"
-                v-model="v$.gender.$model"
-              >
-                <option value="">Choose your Gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-              </LabelSelect>
-              <ValidationError :model="v$.gender"></ValidationError>
-            </div>
+              <div :class="$style.input_group">
+                <BaseInput
+                  v-model="v$.password.$model"
+                  label="Password"
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  asterisk="*"
+                  icon="lock"
+                  special="eye"
+                  special_icon="password_eye"
+                />
+                <ValidationError :model="v$.password"></ValidationError>
+              </div>
+            </section>
 
-            <div :class="$style.input_group">
-              <BaseInput
-                v-model="v$.confirmPassword.$model"
-                label="Confirm Password"
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm your password"
-                asterisk="*"
-                icon="lock"
-                special="eye"
-                special_icon="confirm_eye"
-              />
-              <ValidationError :model="v$.confirmPassword"></ValidationError>
-            </div>
+            <section :class="$style.right_column">
+              <div :class="$style.phone">
+                <div :class="$style.input_group">
+                  <CountryCodeSelect
+                    v-model="v$.code.$model"
+                    label="Code"
+                    id="code"
+                    name="code"
+                    asterisk="*"
+                    icon="globe"
+                  ></CountryCodeSelect>
+                  <ValidationError :model="v$.code"></ValidationError>
+                </div>
+
+                <div :class="$style.input_group">
+                  <BaseInput
+                    v-model="v$.phone.$model"
+                    label="Phone"
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    asterisk="*"
+                    icon="phone"
+                  />
+                  <ValidationError :model="v$.phone"></ValidationError>
+                </div>
+              </div>
+
+              <div :class="$style.input_group">
+                <LabelSelect
+                  label="Gender"
+                  id="gender"
+                  name="gender"
+                  asterisk="*"
+                  icon="venus-mars"
+                  v-model="v$.gender.$model"
+                >
+                  <option value="">Choose your Gender</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                </LabelSelect>
+                <ValidationError :model="v$.gender"></ValidationError>
+              </div>
+
+              <div :class="$style.input_group">
+                <BaseInput
+                  v-model="v$.confirmPassword.$model"
+                  label="Confirm Password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm your password"
+                  asterisk="*"
+                  icon="lock"
+                  special="eye"
+                  special_icon="confirm_eye"
+                />
+                <ValidationError :model="v$.confirmPassword"></ValidationError>
+              </div>
+            </section>
           </section>
-        </section>
-        <div :class="$style.btns_wrapper">
-          <BaseButton
-            type="submit"
-            mode="signup"
-            :label="loading ? 'Submitting...' : 'Signup'"
-            :disabled="loading"
-          ></BaseButton>
-          <BaseButton type="reset" mode="reset_btn" label="Reset"></BaseButton>
-        </div>
-      </fieldset>
-    </BaseForm>
+          <div :class="$style.btns_wrapper">
+            <BaseButton
+              type="submit"
+              mode="signup"
+              :label="loading ? 'Submitting...' : 'Signup'"
+              :disabled="loading"
+            ></BaseButton>
+            <BaseButton type="reset" mode="reset_btn" label="Reset"></BaseButton>
+          </div>
+        </fieldset>
+      </BaseForm>
+    </BaseCard>
   </main>
 
   <div class="footer">
@@ -330,5 +302,9 @@ legend {
 
 .input_group {
   margin-bottom: 1rem;
+}
+
+.signup {
+  background-color: #000;
 }
 </style>
