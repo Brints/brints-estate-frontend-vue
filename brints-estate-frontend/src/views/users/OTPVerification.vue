@@ -7,6 +7,7 @@ import { required, minLength, maxLength, helpers, numeric } from "@vuelidate/val
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
+import SmallButton from "@/components/buttons/SmallButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 
@@ -20,7 +21,9 @@ const formData = ref({
   otp: "",
   phone: "",
 });
+const email = ref("");
 const errorMessage = ref("");
+const successMessage = ref("");
 
 const rules = {
   otp: {
@@ -39,7 +42,8 @@ const v$ = useVuelidate(rules, formData);
 const loading = ref(false);
 
 // Fetch the phone number from the store
-formData.value.phone = userStore.phoneNumber;
+formData.value.phone = userStore.user.phone;
+email.value = userStore.user.email;
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -63,26 +67,13 @@ const verifyOTP = async () => {
   }
 };
 
-// const handleSubmit = async () => {
-// loading.value = true;
+const resend = async () => {
+  await userStore.resendOTP(email.value);
 
-// try {
-//   const response = await axios.post(`${backendUrl}/user/verify-phone`, formData.value);
-//   const { data } = response;
-
-//   if (data.statusCode === 200) {
-//     router.push({ name: "success" });
-//   }
-// } catch (error) {
-//   console.error(error);
-// } finally {
-//   loading.value = false;
-// }
-// };
-
-// const handleInput = (e) => {
-//   formData.value[e.target.name] = e.target.value;
-// };
+  if (userStore.statusCode === 200) {
+    successMessage.value = userStore.successMessage;
+  }
+};
 </script>
 
 <template>
@@ -90,22 +81,21 @@ const verifyOTP = async () => {
     <div v-if="errorMessage" :class="$style.error_message">
       <ErrorMessage :message="errorMessage" />
     </div>
+    <div v-if="successMessage">
+      <p>{{ successMessage }}</p>
+    </div>
     <BaseForm @submit="verifyOTP">
       <fieldset>
-        <legend>OTP Verficication</legend>
+        <legend>OTP Verification</legend>
         <div :class="$style.otp_input">
-          <BaseInput
-            v-model="v$.otp.$model"
-            id="otp"
-            label="OTP"
-            type="text"
-            name="otp"
-            placeholder="Enter OTP"
-            :isInvalid="v$.$invalid"
-          />
+          <BaseInput v-model="v$.otp.$model" id="otp" label="OTP" type="text" name="otp" placeholder="Enter OTP" />
+          <!-- :isInvalid="v$.$invalid" -->
           <ValidationError :model="v$.otp"></ValidationError>
         </div>
-        <BaseButton type="submit" :disabled="v$.$invalid">Verify OTP</BaseButton>
+        <div :class="$style.btns">
+          <BaseButton type="submit" label="Verify OTP" :disabled="v$.$invalid"></BaseButton>
+          <p>Didn't receive OTP? <SmallButton type="button" label="Resend" @click="resend"></SmallButton></p>
+        </div>
       </fieldset>
     </BaseForm>
   </div>
@@ -114,6 +104,7 @@ const verifyOTP = async () => {
 <style module>
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -140,5 +131,12 @@ legend {
 
 .error_message {
   color: #ca0b0b;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
 }
 </style>
