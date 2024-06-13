@@ -57,11 +57,12 @@ const handleLogin = async () => {
       <HeaderBar></HeaderBar>
     </div>
 
-    <BaseDialog :show="!!authStore.errorMessage" @close="authStore.handleError">
+    <BaseDialog :show="!!authStore.errorMessage" title="An error occurred" @close="authStore.handleError()">
       <p>{{ authStore.errorMessage }}</p>
+      <!-- <ErrorMessage :message="authStore.errorMessage"></ErrorMessage> -->
     </BaseDialog>
 
-    <BaseDialog :show="authStore.loading" fixed>
+    <BaseDialog :show="authStore.loading" title="Authenticating...Please wait..." fixed>
       <BaseSpinner></BaseSpinner>
     </BaseDialog>
 
