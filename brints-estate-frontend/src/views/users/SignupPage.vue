@@ -30,8 +30,6 @@ const userStore = useUserStore();
 
 const router = useRouter();
 
-// const errorMessage = ref("");
-const loading = ref(false);
 const formData = ref({
   fullname: "",
   email: "",
@@ -91,7 +89,9 @@ const handleSignup = async () => {
   // Redirect to otp verification page
   // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
   if (userStore.statusCode === 201) {
-    router.push({ name: "verify-phone" });
+    setTimeout(() => {
+      router.push({ name: "verify-phone" });
+    }, 2000);
   }
 };
 </script>
@@ -106,11 +106,17 @@ const handleSignup = async () => {
       <ErrorMessages :message="userStore.error" />
     </div> -->
 
-    <BaseDialog :show="!!userStore.loading" fixed>
+    <BaseDialog :show="!!userStore.loading" title="Please wait..." fixed>
       <BaseSpinner />
     </BaseDialog>
 
-    <BaseDialog :show="!!userStore.error" @close="userStore.error === null">
+    <BaseDialog :show="userStore.successMessage !== ''" title="Signup Successful" fixed>
+      <p>Signup was successful. Please check your email for OTP and verification.</p>
+      <p>{{ userStore.successMessage }}</p>
+      <p>Redirecting to OTP verification page...</p>
+    </BaseDialog>
+
+    <BaseDialog :show="!!userStore.error" title="An error occurred. Please try again." @close="userStore.handleError()">
       <ErrorMessages :message="userStore.error" class="error_message" />
     </BaseDialog>
 
