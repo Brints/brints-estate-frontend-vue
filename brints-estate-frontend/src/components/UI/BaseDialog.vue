@@ -1,21 +1,26 @@
 <script setup>
 import BaseButton from "@/components/buttons/BaseButton.vue";
 
-defineProps({
+const props = defineProps({
   show: {
     type: Boolean,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   fixed: {
     type: Boolean,
+    required: false,
     default: false,
   },
 });
 
-defineEmits(["close"]);
+const emit = defineEmits(["close"]);
 
 const tryClose = () => {
-  if (fixed) return;
+  if (props.fixed) return;
   emit("close");
 };
 </script>
@@ -25,12 +30,17 @@ const tryClose = () => {
     <div v-if="show" @click="tryClose" class="backdrop"></div>
     <transition name="dialog">
       <dialog open v-if="show">
+        <header>
+          <slot name="header">
+            <h2>{{ title }}</h2>
+          </slot>
+        </header>
         <section>
           <slot></slot>
         </section>
         <menu v-if="!fixed">
           <slot name="actions">
-            <BaseButton type="submit" label="Close" @click="tryClose"></BaseButton>
+            <BaseButton type="button" label="Close" @click="tryClose"></BaseButton>
           </slot>
         </menu>
       </dialog>
@@ -54,7 +64,6 @@ dialog {
   top: 20vh;
   left: 10%;
   width: 80%;
-  transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 12px;
   border: none;
@@ -68,6 +77,17 @@ dialog {
 
 section {
   padding: 1rem;
+}
+
+header {
+  background-color: #3a0061;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+}
+
+header h2 {
+  margin: 0;
 }
 
 menu {
