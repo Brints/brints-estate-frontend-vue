@@ -25,6 +25,7 @@ export const useAuthStore = defineStore("auth", () => {
 
       // Save token to local storage
       localStorage.setItem("token", token.value);
+      localStorage.setItem("user", JSON.stringify(payload));
     } catch (error) {
       const response = error.response;
       const { message } = response.data.error;
@@ -38,12 +39,17 @@ export const useAuthStore = defineStore("auth", () => {
     token.value = null;
     user.value = null;
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   const loadTokenFromLocalStorage = () => {
     const storageToken = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
     if (storageToken) {
       token.value = storageToken;
+    }
+    if (storedUser) {
+      user.value = JSON.parse(storedUser);
     }
   };
 
