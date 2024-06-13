@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import axios from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength, helpers, numeric } from "@vuelidate/validators";
@@ -10,6 +10,8 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import SmallButton from "@/components/buttons/SmallButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import BaseDialog from "@/components/UI/BaseDialog.vue";
+import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
 import { useUserStore } from "@/stores/userStore";
 import { useRouter } from "vue-router";
@@ -74,16 +76,22 @@ const resend = async () => {
     successMessage.value = userStore.successMessage;
   }
 };
+
+// change the title based on the action - if it's a resend or verification
+const title = computed(() => {
+  return userStore.resendOTP ? "Please wait... Generating New OTP..." : "Please wait... Verifying OTP...";
+});
 </script>
 
 <template>
   <div :class="$style.wrapper">
-    <div v-if="errorMessage" :class="$style.error_message">
+    <BaseDialog :show="!!errorMessage" title="An error occurred" @close="errorMessage = ''">
       <ErrorMessage :message="errorMessage" />
-    </div>
-    <div v-if="successMessage">
-      <p>{{ successMessage }}</p>
-    </div>
+    </BaseDialog>
+
+    <BaseDialog :show="!!loading || userStore.loading" :title="title" fixed>
+      <BaseSpinner />
+    </BaseDialog>
     <BaseForm @submit="verifyOTP">
       <fieldset>
         <legend>OTP Verification</legend>
