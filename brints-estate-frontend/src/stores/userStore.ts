@@ -1,18 +1,21 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
-import { stat } from "fs";
 
 export const useUserStore = defineStore("user", () => {
-  const phoneNumber = ref("");
+  // const phoneNumber = ref("");
   const loading = ref(false);
-  const error = ref(null);
+  const error = ref<string | null>(null);
   const successMessage = ref("");
   const statusCode = ref(0);
+  // const userEmail = ref("");
+  const user = ref<any>({});
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const signup = async (data: any) => {
+    loading.value = true;
+
     const formData = new FormData();
     formData.append("fullname", data.value.fullname);
     formData.append("email", data.value.email);
@@ -22,10 +25,8 @@ export const useUserStore = defineStore("user", () => {
     formData.append("avatar", data.value.avatar);
     formData.append("confirmPassword", data.value.confirmPassword);
     formData.append("code", data.value.code);
-    loading.value = true;
-    try {
-      loading.value = true;
 
+    try {
       const response = await axios.post(`${backendUrl}/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -34,7 +35,8 @@ export const useUserStore = defineStore("user", () => {
 
       const userData = response.data;
       const payload = userData.payload;
-      phoneNumber.value = payload.phone;
+      user.value = payload;
+      statusCode.value = response.status;
 
       // Reset the form data
       if (userData.statusCode === 201) {
@@ -47,10 +49,10 @@ export const useUserStore = defineStore("user", () => {
         data.value.confirmPassword = "";
         data.value.code = "";
       }
-    } catch (error) {
-      console.error(error);
-      const response = error.response.data;
+    } catch (e) {
+      const response = e.response.data;
       error.value = response.error.message;
+      statusCode.value = response.error.statusCode;
     } finally {
       loading.value = false;
     }
@@ -78,13 +80,42 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const resendOTP = async (email: string) => {
+    loading.value = true;
+
+    try {
+      const response = await axios.post(`${backendUrl}/user/resend-otp`, {
+        email,
+      });
+
+      const { status } = response;
+      const userData = response.data;
+      const payload = userData.payload;
+      user.value = payload;
+      successMessage.value = userData.message;
+      statusCode.value = status;
+    } catch (e) {
+      const response = e.response;
+      const { message } = response.data.error;
+      error.value = message;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const handleError = () => {
+    error.value = null;
+  };
+
   return {
+    user,
     statusCode,
     successMessage,
-    phoneNumber,
     loading,
     error,
     signup,
     forgotPassword,
+    resendOTP,
+    handleError,
   };
 });
