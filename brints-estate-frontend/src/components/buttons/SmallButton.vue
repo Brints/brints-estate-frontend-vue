@@ -11,19 +11,23 @@ defineProps({
   button: {
     type: String,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
 <template>
-  <button :type="type" :label="label" :class="[button, 'small_button']">
+  <button :type="type" :label="label" :class="[button, 'small_button']" :disabled="disabled">
     {{ label }}
   </button>
 </template>
 
 <style scoped>
 .small_button {
-  background-color: #363333;
-  padding: 3px 20px;
+  background-color: #138ee0;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -44,5 +48,10 @@ defineProps({
   left: 12rem;
   background-color: #050555;
   border: 2px solid #0c0b0b;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 </style>
