@@ -9,7 +9,7 @@ import BaseForm from "@/components/form/BaseForm.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
-// import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
@@ -58,8 +58,7 @@ const handleLogin = async () => {
     </div>
 
     <BaseDialog :show="!!authStore.errorMessage" title="An error occurred" @close="authStore.handleError()">
-      <p>{{ authStore.errorMessage }}</p>
-      <!-- <ErrorMessage :message="authStore.errorMessage"></ErrorMessage> -->
+      <ErrorMessage :message="authStore.errorMessage"></ErrorMessage>
     </BaseDialog>
 
     <BaseDialog :show="authStore.loading" title="Authenticating...Please wait..." fixed>
