@@ -17,8 +17,7 @@ const message = ref(props.message);
 <style scoped>
 div {
   padding: 10px 20px;
-  background-color: #f44336;
-  color: white;
+  color: #f44336;
   margin-bottom: 5px;
 }
 
