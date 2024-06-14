@@ -26,6 +26,8 @@ const formData = ref({
 const email = ref("");
 const errorMessage = ref("");
 const successMessage = ref("");
+const isResendCountDownActive = ref(false);
+const resendCountDown = ref(56);
 
 const rules = {
   otp: {
@@ -75,12 +77,29 @@ const resend = async () => {
   if (userStore.statusCode === 200) {
     successMessage.value = userStore.successMessage;
   }
+
+  startResendCountDownTimer();
+};
+
+const startResendCountDownTimer = () => {
+  isResendCountDownActive.value = true;
+  const interval = setInterval(() => {
+    resendCountDown.value -= 1;
+    if (resendCountDown.value === 0) {
+      clearInterval(interval);
+      isResendCountDownActive.value = false;
+      resendCountDown.value = 56;
+    }
+  }, 1000);
 };
 
 // change the title based on the action - if it's a resend or verification
 const title = computed(() => {
   return userStore.resendOTP ? "Please wait... Generating New OTP..." : "Please wait... Verifying OTP...";
 });
+
+// Initialize the resend count down timer on component mount
+startResendCountDownTimer();
 </script>
 
 <template>
@@ -97,12 +116,24 @@ const title = computed(() => {
         <legend>OTP Verification</legend>
         <div :class="$style.otp_input">
           <BaseInput v-model="v$.otp.$model" id="otp" label="OTP" type="text" name="otp" placeholder="Enter OTP" />
-          <!-- :isInvalid="v$.$invalid" -->
           <ValidationError :model="v$.otp"></ValidationError>
         </div>
         <div :class="$style.btns">
-          <BaseButton type="submit" label="Verify OTP" :disabled="v$.$invalid"></BaseButton>
-          <p>Didn't receive OTP? <SmallButton type="button" label="Resend" @click="resend"></SmallButton></p>
+          <div><BaseButton type="submit" label="Verify OTP" :disabled="v$.$invalid"></BaseButton></div>
+          <div>
+            <p>
+              Didn't receive OTP?
+              <span v-if="isResendCountDownActive"
+                ><p>Resend OTP in {{ resendCountDown }} seconds</p></span
+              >
+              <SmallButton
+                type="button"
+                label="Resend OTP"
+                @click="resend"
+                :disabled="isResendCountDownActive"
+              ></SmallButton>
+            </p>
+          </div>
         </div>
       </fieldset>
     </BaseForm>
@@ -142,9 +173,9 @@ legend {
 }
 
 .btns {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   align-items: center;
-  margin-top: 1rem;
 }
 </style>
