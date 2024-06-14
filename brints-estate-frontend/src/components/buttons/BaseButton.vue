@@ -149,6 +149,10 @@ button:hover {
 button:focus {
   outline: none;
 }
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 .reset_btn {
   background-color: rgb(88, 9, 9);
