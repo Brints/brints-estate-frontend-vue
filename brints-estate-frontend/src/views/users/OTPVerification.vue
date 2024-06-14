@@ -98,6 +98,12 @@ const title = computed(() => {
   return userStore.resendOTP ? "Please wait... Generating New OTP..." : "Please wait... Verifying OTP...";
 });
 
+const timerText = computed(() => {
+  return resendCountDown.value < 2
+    ? `Resend OTP in ${resendCountDown.value} second`
+    : `Resend OTP in ${resendCountDown.value} seconds`;
+});
+
 // Initialize the resend count down timer on component mount
 startResendCountDownTimer();
 </script>
@@ -119,12 +125,12 @@ startResendCountDownTimer();
           <ValidationError :model="v$.otp"></ValidationError>
         </div>
         <div :class="$style.btns">
-          <div><BaseButton type="submit" label="Verify OTP" :disabled="v$.$invalid"></BaseButton></div>
+          <div><BaseButton type="submit" label="Verify OTP" :disabled="v$.otp.$invalid"></BaseButton></div>
           <div>
             <p>
               Didn't receive OTP?
               <span v-if="isResendCountDownActive"
-                ><p>Resend OTP in {{ resendCountDown }} seconds</p></span
+                ><p>{{ timerText }}</p></span
               >
               <SmallButton
                 type="button"
