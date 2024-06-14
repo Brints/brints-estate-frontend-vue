@@ -73,7 +73,7 @@ const submitForm = async () => {
               />
               <ValidationError :model="v$.email"></ValidationError>
             </div>
-            <BaseButton type="submit" label="Reset"></BaseButton>
+            <BaseButton type="submit" label="Reset" :disabled="v$.$invalid"></BaseButton>
           </fieldset>
         </BaseForm>
       </BaseCard>
