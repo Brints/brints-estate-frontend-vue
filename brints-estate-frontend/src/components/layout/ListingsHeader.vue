@@ -43,7 +43,7 @@ authStore.loadTokenFromLocalStorage();
 </script>
 
 <template>
-  <header :class="[$style.main_heading, 'flex p-5 items-center']">
+  <header class="main-heading">
     <div :class="['container', 'items-center']">
       <BaseLogo></BaseLogo>
     </div>
@@ -56,7 +56,7 @@ authStore.loadTokenFromLocalStorage();
         </div>
 
         <div class="flex gap-4 items-center overflow-hidden">
-          <div :class="[$style.profile_picture, 'bg-sky-900 flex gap-4 items-center justify-center overflow-hidden']">
+          <div :class="['profile-picture', 'bg-sky-900 flex gap-4 items-center justify-center overflow-hidden']">
             <img
               v-if="displayProfilePic"
               :src="displayProfilePic"
@@ -79,19 +79,24 @@ authStore.loadTokenFromLocalStorage();
   </header>
 </template>
 
-<style module>
-.main_heading {
+<style scoped>
+.main-heading {
   background-color: #333;
   color: #fff;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  padding: 1.25rem;
+  width: 100vw;
 }
 
-.profile_picture {
+.profile-picture {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.profile_picture img {
+.profile-picture img {
   width: 100%;
   height: 100%;
 }
