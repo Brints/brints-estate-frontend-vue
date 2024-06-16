@@ -17,9 +17,9 @@ const handleLogout = () => {
 const displayName = computed(() => {
   return authStore.user.fullname;
 });
-// const isLoggedIn = computed(() => {
-//   return authStore.isLoggedIn;
-// });
+const isLoggedIn = computed(() => {
+  return authStore.isLoggedIn;
+});
 const displayProfilePic = computed(() => {
   if (authStore.user.avatar.length > 0) {
     return authStore.user.avatar[0].url;
@@ -72,8 +72,7 @@ authStore.loadTokenFromLocalStorage();
           <div>
             <p>{{ displayName }}</p>
           </div>
-          <!-- <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-          <button @click="handleLogout" v-if="isLoggedIn">Logout</button> -->
+          <button @click="handleLogout" v-if="isLoggedIn">Logout</button>
         </div>
       </nav>
     </div>
@@ -95,5 +94,13 @@ authStore.loadTokenFromLocalStorage();
 .profile_picture img {
   width: 100%;
   height: 100%;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
