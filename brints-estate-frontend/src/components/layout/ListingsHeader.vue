@@ -103,4 +103,10 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 1rem;
+}
 </style>
