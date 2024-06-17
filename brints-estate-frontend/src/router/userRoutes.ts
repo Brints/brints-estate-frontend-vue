@@ -1,3 +1,5 @@
+import path = require("node:path");
+
 const userRoutes = [
   {
     path: "/login",
@@ -20,11 +22,6 @@ const userRoutes = [
   {
     path: "/verify-email",
     name: "verify-email",
-    // redirect: (to) => {
-    //   //perform logic
-
-    //   return { name: "verify-email", query: { token: "asc", email: "asde" } };
-    // },
     component: () => import("@/views/users/EmailVerification.vue"),
     meta: {
       title: "Verify Email",
@@ -55,6 +52,15 @@ const userRoutes = [
     component: () => import("@/views/users/SuccessPage.vue"),
     meta: {
       title: "Success",
+      requiresAuth: false,
+    },
+  },
+  {
+    path: "/resend-token",
+    name: "resend-token",
+    component: () => import("@/views/users/ResendEmailVerificationToken.vue"),
+    mata: {
+      title: "Resend Token",
       requiresAuth: false,
     },
   },
