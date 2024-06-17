@@ -1,5 +1,3 @@
-import path = require("node:path");
-
 const userRoutes = [
   {
     path: "/login",
