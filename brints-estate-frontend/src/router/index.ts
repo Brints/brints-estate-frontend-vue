@@ -14,12 +14,22 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
-  if (to.meta.requiresAuth && (!authStore.isLoggedIn || !authStore.user)) {
-    next({ name: "login" });
-  } else {
-    next();
+  try {
+    const authStore = useAuthStore();
+    authStore.loadTokenFromLocalStorage();
+    if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+      next({ name: "login" });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error("Error in router.beforeEach: ", error);
+    next(false);
   }
+});
+
+router.onError((error) => {
+  console.error("Error in router.onError: ", error);
 });
 
 router.afterEach((to) => {
