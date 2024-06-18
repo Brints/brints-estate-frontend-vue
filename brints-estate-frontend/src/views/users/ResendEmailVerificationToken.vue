@@ -1,6 +1,6 @@
 <script setup>
 // non-relative imports
-import { ref } from "vue";
+import { ref, computed } from "vue";
 // import { useRouter } from "vue-router";
 
 // relative imports
@@ -12,6 +12,7 @@ import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import SuccessMessage from "@/components/messages/SuccessMessage.vue";
 
 import { useUserStore } from "@/stores/userStore";
 
@@ -20,31 +21,37 @@ const userStore = useUserStore();
 
 const email = ref("");
 const errorMessage = ref("");
-const successMessage = ref("");
 
 const resendToken = async () => {
   await userStore.resendEmailToken(email.value);
 
-  console.log(userStore.error);
-
   if (userStore.error) {
     errorMessage.value = userStore.error;
-  } else {
-    successMessage.value = "Token sent successfully.";
   }
 };
+
+// const success = computed(() => {
+//   return userStore.successMessage !== "" ? userStore.successMessage : "";
+// });
+const title = computed(() => {
+  return userStore.statusCode === 404 ? "Not Found" : "An error occurred. Try again.";
+});
 </script>
 
 <template>
   <div :class="$style.container">
     <main>
       <BaseCard :mode="$style.resend_card">
-        <BaseDialog :show="!!errorMessage" title="An error occurred. Try again." @close="errorMessage = ''">
+        <BaseDialog :show="!!errorMessage" :title="title" @close="errorMessage = ''">
           <ErrorMessage :message="errorMessage"></ErrorMessage>
         </BaseDialog>
 
         <BaseDialog :show="userStore.loading" title="Generating New Verification Token." fixed>
           <BaseSpinner></BaseSpinner>
+        </BaseDialog>
+
+        <BaseDialog :show="!!userStore.successMessage" title="Success" @close="userStore.successMessage = ''">
+          <SuccessMessage>{{ userStore.successMessage }}</SuccessMessage>
         </BaseDialog>
 
         <BaseForm @submit="resendToken">
