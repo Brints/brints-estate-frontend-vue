@@ -3,18 +3,19 @@ import { ref } from "vue";
 import axios from "axios";
 
 export const useUserStore = defineStore("user", () => {
-  // const phoneNumber = ref("");
   const loading = ref(false);
   const error = ref<string | null>(null);
   const successMessage = ref("");
   const statusCode = ref(0);
-  // const userEmail = ref("");
   const user = ref<any>({});
+  const phoneNumber = ref("");
+  const userEmail = ref("");
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const signup = async (data: any) => {
     loading.value = true;
+    error.value = null;
 
     const formData = new FormData();
     formData.append("fullname", data.value.fullname);
@@ -35,8 +36,17 @@ export const useUserStore = defineStore("user", () => {
 
       const userData = response.data;
       const payload = userData.payload;
+      phoneNumber.value = `${data.value.code}${data.value.phone}`;
+      userEmail.value = data.value.email;
       user.value = payload;
       statusCode.value = response.status;
+
+      if (payload) {
+        // Save phone number to local storage
+        localStorage.setItem("phone", `${data.value.code}${data.value.phone}`);
+        // localStorage.setItem("user", JSON.stringify(payload));
+        localStorage.setItem("email", data.value.email);
+      }
 
       // Reset the form data
       if (userData.statusCode === 201) {
@@ -49,6 +59,8 @@ export const useUserStore = defineStore("user", () => {
         data.value.confirmPassword = "";
         data.value.code = "";
       }
+
+      successMessage.value = userData.message;
     } catch (e) {
       const response = e.response.data;
       error.value = response.error.message;
@@ -60,6 +72,7 @@ export const useUserStore = defineStore("user", () => {
 
   const forgotPassword = async (email: string) => {
     loading.value = true;
+    error.value = null;
 
     try {
       const response = await axios.post(`${backendUrl}/user/forgot-password`, {
@@ -82,6 +95,7 @@ export const useUserStore = defineStore("user", () => {
 
   const resendOTP = async (email: string) => {
     loading.value = true;
+    error.value = null;
 
     try {
       const response = await axios.post(`${backendUrl}/user/resend-otp`, {
@@ -103,11 +117,61 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const resendEmailToken = async (email: string) => {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const response = await fetch(`${backendUrl}/user/resend-verification-token`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(JSON.stringify(errorData));
+      }
+
+      const data = await response.json();
+      successMessage.value = data.message;
+    } catch (err) {
+      const errorData = JSON.parse(err.message);
+      const { message } = errorData.error;
+      statusCode.value = errorData.error.statusCode;
+      error.value = message;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const loadPhoneNumberFromLocalStorage = () => {
+    const storedPhone = localStorage.getItem("phone");
+    const storedEmail = localStorage.getItem("email");
+    if (storedPhone) {
+      phoneNumber.value = storedPhone;
+    }
+    if (storedEmail) {
+      userEmail.value = storedEmail;
+    }
+  };
+
+  const clearPhoneNumberFromLocalStorage = () => {
+    phoneNumber.value = "";
+    userEmail.value = "";
+    localStorage.removeItem("phone");
+    localStorage.removeItem("email");
+  };
+
   const handleError = () => {
     error.value = null;
   };
 
   return {
+    phoneNumber,
+    userEmail,
     user,
     statusCode,
     successMessage,
@@ -117,5 +181,8 @@ export const useUserStore = defineStore("user", () => {
     forgotPassword,
     resendOTP,
     handleError,
+    resendEmailToken,
+    loadPhoneNumberFromLocalStorage,
+    clearPhoneNumberFromLocalStorage,
   };
 });
