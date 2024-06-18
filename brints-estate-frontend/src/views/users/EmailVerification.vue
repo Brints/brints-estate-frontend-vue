@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 
 import SuccessMessage from "@/components/messages/SuccessMessage.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import SmallButton from "@/components/buttons/SmallButton.vue";
 
 const router = useRouter();
 
@@ -14,8 +15,6 @@ const errorMessage = ref("");
 const queryParams = new URLSearchParams(window.location.search);
 const email = queryParams.get("email");
 const token = queryParams.get("token");
-// const email = router.currentRoute.value.query.email;
-// const token = router.currentRoute.value.query.token;
 
 // Send a GET request function to the backend to verify the email using fetch
 const verifyEmail = async () => {
@@ -27,7 +26,8 @@ const verifyEmail = async () => {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to verify email: ${response.statusText}`);
+      const errorData = await response.json();
+      throw new Error(JSON.stringify(errorData));
     }
 
     loading.value = false;
@@ -37,8 +37,9 @@ const verifyEmail = async () => {
       router.push({ name: "login" });
     }, 2000);
   } catch (error) {
-    console.error(error.message);
-    errorMessage.value = error.message;
+    const errorData = JSON.parse(error.message);
+    const { message } = errorData.error;
+    errorMessage.value = message;
   } finally {
     loading.value = false;
   }
@@ -56,6 +57,11 @@ onMounted(() => {
       >Email verified successfully. Redirecting to the login page...</SuccessMessage
     >
     <ErrorMessage v-else :message="errorMessage" />
+    <div v-if="!loading && errorMessage" className="block">
+      <router-link :to="{ name: 'resend-token' }">
+        <SmallButton type="button" label="Resend Email Verification Token" />
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -63,8 +69,17 @@ onMounted(() => {
 .wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   font-size: 1.5rem;
+}
+
+.wrapper p {
+  font-size: 1.5rem;
+}
+
+.wrapper a:focus {
+  outline: none;
 }
 </style>
