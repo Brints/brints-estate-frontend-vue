@@ -1,4 +1,4 @@
-import { acceptHMRUpdate, defineStore } from "pinia";
+import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import axios from "axios";
 
@@ -20,12 +20,15 @@ export const useAuthStore = defineStore("auth", () => {
         password,
       });
       const { payload } = response.data;
-      token.value = payload.token;
-      user.value = payload;
 
-      // Save token to local storage
-      localStorage.setItem("token", token.value);
-      localStorage.setItem("user", JSON.stringify(payload));
+      if (payload) {
+        token.value = payload.token;
+        user.value = payload;
+
+        // Save token to local storage
+        localStorage.setItem("token", token.value);
+        localStorage.setItem("user", JSON.stringify(payload));
+      }
     } catch (error) {
       const response = error.response;
       const { message } = response.data.error;
@@ -45,10 +48,8 @@ export const useAuthStore = defineStore("auth", () => {
   const loadTokenFromLocalStorage = () => {
     const storageToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
-    if (storageToken) {
+    if (storageToken && storedUser) {
       token.value = storageToken;
-    }
-    if (storedUser) {
       user.value = JSON.parse(storedUser);
     }
   };
@@ -58,10 +59,10 @@ export const useAuthStore = defineStore("auth", () => {
   };
 
   return {
+    token,
+    user,
     loading,
     errorMessage,
-    user,
-    token,
     isLoggedIn,
     login,
     logout,
@@ -69,7 +70,3 @@ export const useAuthStore = defineStore("auth", () => {
     handleError,
   };
 });
-
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot));
-}
