@@ -1,5 +1,3 @@
-<script></script>
-
 <template>
   <header class="header_links">
     <nav className="flex gap-4 items-center">
