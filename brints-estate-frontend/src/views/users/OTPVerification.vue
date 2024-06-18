@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength, helpers, numeric } from "@vuelidate/validators";
@@ -21,9 +21,8 @@ const router = useRouter();
 
 const formData = ref({
   otp: "",
-  phone: "",
+  phone: userStore.phoneNumber,
 });
-const email = ref("");
 const errorMessage = ref("");
 const successMessage = ref("");
 const isResendCountDownActive = ref(false);
@@ -45,10 +44,6 @@ const v$ = useVuelidate(rules, formData);
 
 const loading = ref(false);
 
-// Fetch the phone number from the store
-formData.value.phone = userStore.user.phone;
-email.value = userStore.user.email;
-
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const verifyOTP = async () => {
@@ -61,6 +56,9 @@ const verifyOTP = async () => {
 
     if (data.statusCode === 200) {
       router.push({ name: "success" });
+
+      // clear phone number from local storage
+      userStore.clearPhoneNumberFromLocalStorage();
     }
   } catch (error) {
     console.error(error);
@@ -72,7 +70,8 @@ const verifyOTP = async () => {
 };
 
 const resend = async () => {
-  await userStore.resendOTP(email.value);
+  console.log("Email value: ", userStore.userEmail);
+  await userStore.resendOTP(userStore.userEmail);
 
   if (userStore.statusCode === 200) {
     successMessage.value = userStore.successMessage;
@@ -91,6 +90,10 @@ const startResendCountDownTimer = () => {
       resendCountDown.value = 56;
     }
   }, 1000);
+
+  onMounted(() => {
+    userStore.loadPhoneNumberFromLocalStorage();
+  });
 };
 
 // change the title based on the action - if it's a resend or verification
