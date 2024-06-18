@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  width: 66%;
+  width: 300px;
 }
 
 .logo img {
