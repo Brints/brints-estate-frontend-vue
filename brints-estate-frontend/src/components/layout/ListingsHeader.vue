@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import BaseLogo from "@/components/layout/BaseLogo.vue";
 
 import { useRouter } from "vue-router";
@@ -39,44 +39,48 @@ const displayAvatarAlt = computed(() => {
   }
 });
 
-authStore.loadTokenFromLocalStorage();
+onMounted(() => {
+  authStore.loadTokenFromLocalStorage();
+});
 </script>
 
 <template>
-  <header class="main-heading">
-    <div :class="['container', 'items-center']">
-      <BaseLogo></BaseLogo>
-    </div>
+  <div>
+    <header class="main-heading">
+      <div>
+        <BaseLogo></BaseLogo>
+      </div>
 
-    <div class="container">
-      <nav class="flex justify-between items-center py-4">
-        <div>
-          <router-link to="/">Home</router-link>
-          <router-link to="/listings">Listings</router-link>
-        </div>
+      <div class="container justify-center">
+        <nav className="flex justify-between items-center">
+          <div className="flex justify-center">
+            <router-link to="/">Home</router-link>
+            <router-link to="/listings">Listings</router-link>
+          </div>
 
-        <div class="flex gap-4 items-center overflow-hidden">
-          <div :class="['profile-picture', 'bg-sky-900 flex gap-4 items-center justify-center overflow-hidden']">
-            <img
-              v-if="displayProfilePic"
-              :src="displayProfilePic"
-              :alt="displayAvatarAlt"
-              class="rounded-full object-cover h-full w-full"
-            />
+          <div class="flex gap-4 items-center overflow-hidden">
+            <div :class="['profile-picture', 'bg-sky-900 flex gap-4 items-center justify-center overflow-hidden']">
+              <img
+                v-if="displayProfilePic"
+                :src="displayProfilePic"
+                :alt="displayAvatarAlt"
+                class="rounded-full object-cover h-full w-full"
+              />
 
-            <div v-else class="rounded-full flex justify-center items-center">
-              {{ displayInitials }}
+              <div v-else class="rounded-full flex justify-center items-center">
+                {{ displayInitials }}
+              </div>
             </div>
-          </div>
 
-          <div>
-            <p>{{ displayName }}</p>
+            <div>
+              <p>{{ displayName }}</p>
+            </div>
+            <button @click="handleLogout" v-if="isLoggedIn">Logout</button>
           </div>
-          <button @click="handleLogout" v-if="isLoggedIn">Logout</button>
-        </div>
-      </nav>
-    </div>
-  </header>
+        </nav>
+      </div>
+    </header>
+  </div>
 </template>
 
 <style scoped>
@@ -84,10 +88,10 @@ authStore.loadTokenFromLocalStorage();
   background-color: #333;
   color: #fff;
   display: flex;
-  justify-items: center;
   align-items: center;
-  padding: 1.25rem;
-  width: 100vw;
+  justify-content: center;
+  padding: 2rem 5rem;
+  margin-bottom: 1rem;
 }
 
 .profile-picture {
