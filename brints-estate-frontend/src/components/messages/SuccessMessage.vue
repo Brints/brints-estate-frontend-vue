@@ -1,13 +1,3 @@
-<script setup>
-// import { ref } from "vue";
-
-// const message = ref("");
-
-// const setMessage = (msg) => {
-//   message.value = msg;
-// };
-</script>
-
 <template>
   <div class="alert alert-success">
     <p><slot></slot></p>
@@ -18,7 +8,7 @@
 .alert {
   padding: 20px;
   background-color: #4caf50;
-  color: white;
+  color: #fff;
   margin-bottom: 15px;
 }
 
