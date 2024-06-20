@@ -36,7 +36,6 @@ const submitForm = async () => {
 
   if (userStore.statusCode === 200) {
     router.push({ name: "forgot-password" });
-    console.log("Password reset link sent to your email");
   }
 };
 </script>
@@ -45,15 +44,15 @@ const submitForm = async () => {
   <div class="container">
     <main>
       <BaseCard mode="forgot-password">
-        <BaseDialog :show="!!userStore.error" @close="userStore.error = null">
+        <BaseDialog :show="!!userStore.error" title="Error: An error occurred." @close="userStore.error = null">
           <p>{{ userStore.error }}</p>
         </BaseDialog>
 
-        <BaseDialog :show="userStore.statusCode === 200">
+        <BaseDialog :show="userStore.statusCode === 200" title="Success!" @close="userStore.statusCode = 0">
           <p>Success</p>
         </BaseDialog>
 
-        <BaseDialog :show="userStore.loading" fixed>
+        <BaseDialog :show="userStore.loading" title="Submitting..." fixed>
           <BaseSpinner></BaseSpinner>
         </BaseDialog>
 
