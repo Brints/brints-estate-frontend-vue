@@ -62,6 +62,15 @@ const userRoutes = [
       requiresAuth: false,
     },
   },
+  {
+    path: "/reset-password/:token/:email",
+    name: "reset-password",
+    component: () => import("@/views/users/ResetPassword.vue"),
+    meta: {
+      title: "Reset Password",
+      requiresAuth: false,
+    },
+  },
 ];
 
 export default userRoutes;
