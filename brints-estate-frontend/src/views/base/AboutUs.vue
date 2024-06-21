@@ -1,10 +1,16 @@
 <script>
 import axios from "axios";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
+import BaseFooter from "@/components/layout/BaseFooter.vue";
+import BaseDialog from "@/components/UI/BaseDialog.vue";
+import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
 export default {
   components: {
     HeaderBar,
+    BaseFooter,
+    BaseDialog,
+    BaseSpinner,
   },
   data() {
     return {
@@ -48,6 +54,10 @@ export default {
       <HeaderBar></HeaderBar>
     </div>
 
+    <BaseDialog :show="!!loading" title="Please wait... Fetching Data..." fixed>
+      <BaseSpinner></BaseSpinner>
+    </BaseDialog>
+
     <main className="flex flex-col h-full">
       <section v-if="loading" :class="$style.loading">
         <p>Loading...</p>
@@ -75,6 +85,10 @@ export default {
         <p>No Content yet.</p>
       </section>
     </main>
+
+    <div :class="$style.footer">
+      <BaseFooter></BaseFooter>
+    </div>
   </div>
 </template>
 
