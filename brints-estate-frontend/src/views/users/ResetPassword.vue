@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import { useUserStore } from "../../stores/userStore";
-import { useRoute /*useRouter*/ } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import BaseInput from "@/components/form/BaseInput.vue";
@@ -11,24 +11,29 @@ import BaseCard from "@/components/UI/BaseCard.vue";
 import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
+import ErrorMessage from "../../components/messages/ErrorMessage.vue";
+import SuccessMessage from "../../components/messages/SuccessMessage.vue";
 
 const userStore = useUserStore();
 const route = useRoute();
-// const router = useRouter();
+const router = useRouter();
 
 const credentials = ref({
-  password: "",
+  newPassword: "",
   confirmPassword: "",
 });
 
 const resetPassword = async () => {
   const { token, email } = route.params;
 
-  await userStore.resetPassword(token, email, credentials.value.password, credentials.value.confirmPassword);
+  await userStore.resetPassword(token, email, credentials.value.newPassword, credentials.value.confirmPassword);
 
-  // if (userStore.successMessage !== "") {
-  //   router.push({ name: "login" });
-  // }
+  //  navigate to login page after 2 seconds
+  if (userStore.statusCode === 200) {
+    setTimeout(() => {
+      router.push({ name: "login" });
+    }, 2000);
+  }
 };
 </script>
 
@@ -36,12 +41,12 @@ const resetPassword = async () => {
   <div class="wrapper">
     <main>
       <BaseCard mode="reset-password">
-        <BaseDialog :show="!!userStore.errorMessage" title="An error occurred" @close="userStore.handleError()">
-          <p>{{ userStore.errorMessage }}</p>
+        <BaseDialog :show="!!userStore.error" title="An error occurred" @close="userStore.handleError()">
+          <ErrorMessage :message="userStore.error"></ErrorMessage>
         </BaseDialog>
 
-        <BaseDialog :show="!!userStore.successMessage" title="Success" @close="userStore.successMessage = ''">
-          <p>{{ userStore.successMessage }}</p>
+        <BaseDialog :show="!!userStore.successMessage" title="Success!" fixed>
+          <SuccessMessage :message="userStore.successMessage"></SuccessMessage>
         </BaseDialog>
 
         <BaseDialog :show="!!userStore.loading" title="Loading..." fixed>
@@ -54,9 +59,10 @@ const resetPassword = async () => {
 
             <div className="mb-4">
               <BaseInput
-                v-model="credentials.password"
+                v-model="credentials.newPassword"
                 type="password"
-                name="password"
+                id="password"
+                name="newPassword"
                 label="New Password"
                 placeholder="Enter your new password"
                 asterisk="*"
@@ -68,6 +74,7 @@ const resetPassword = async () => {
               <BaseInput
                 v-model="credentials.confirmPassword"
                 type="password"
+                id="confirmPassword"
                 name="confirmPassword"
                 label="Confirm New Password"
                 placeholder="Confirm your new password"
