@@ -1,6 +1,10 @@
+<script setup>
+defineProps(["message"]);
+</script>
+
 <template>
-  <div class="alert alert-success">
-    <p><slot></slot></p>
+  <div class="alert alert-success" v-if="message">
+    {{ message }}
   </div>
 </template>
 
