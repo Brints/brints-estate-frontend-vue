@@ -33,7 +33,6 @@ setInterval(() => {
 <template>
   <div class="text-center text-sm text-gray-500 dark:text-gray-400">
     <span>&copy; {{ month }} {{ year }} Brints Estate</span>
-    <!-- <span>&copy; 2021 Brints Estate</span> -->
   </div>
 </template>
 
