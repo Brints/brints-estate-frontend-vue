@@ -94,6 +94,10 @@ const handleSignup = async () => {
     }, 2000);
   }
 };
+
+const label = computed(() => {
+  userStore.loading ? "Submitting..." : "Signup";
+});
 </script>
 
 <template>
@@ -243,8 +247,8 @@ const handleSignup = async () => {
             <BaseButton
               type="submit"
               mode="signup"
-              :label="loading ? 'Submitting...' : 'Signup'"
-              :disabled="loading"
+              :label="label"
+              :disabled="v$.$invalid || userStore.loading"
             ></BaseButton>
             <BaseButton type="reset" mode="reset_btn" label="Reset"></BaseButton>
           </div>
