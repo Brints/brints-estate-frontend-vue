@@ -12,6 +12,8 @@ import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+import SuccessMessage from "@/components/messages/SuccessMessage.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -45,11 +47,11 @@ const submitForm = async () => {
     <main>
       <BaseCard mode="forgot-password">
         <BaseDialog :show="!!userStore.error" title="Error: An error occurred." @close="userStore.error = null">
-          <p>{{ userStore.error }}</p>
+          <ErrorMessage :message="userStore.error"></ErrorMessage>
         </BaseDialog>
 
         <BaseDialog :show="userStore.statusCode === 200" title="Success!" @close="userStore.statusCode = 0">
-          <p>Success</p>
+          <SuccessMessage :message="userStore.successMessage" />
         </BaseDialog>
 
         <BaseDialog :show="userStore.loading" title="Submitting..." fixed>
