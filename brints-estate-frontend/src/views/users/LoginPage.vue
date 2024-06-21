@@ -67,9 +67,6 @@ const handleLogin = async () => {
 
     <div class="wrapper">
       <div class="left">
-        <!-- <div v-if="authStore.errorMessage">
-          <ErrorMessage :message="authStore.errorMessage"></ErrorMessage>
-        </div> -->
         <BaseForm class="form" @submit="handleLogin">
           <fieldset>
             <legend>Login</legend>
