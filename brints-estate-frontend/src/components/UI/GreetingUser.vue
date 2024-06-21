@@ -1,9 +1,12 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
 
 // const emojis = ["👋", "🌞", "🌜", "🌅", "🌇", "🌄", "🌆", "🌃", "🌌", "🌠", "🌈"];
 
-const greeting = computed(() => {
+function greeting() {
   const date = new Date();
   const hours = date.getHours();
   let greeting = "";
@@ -17,12 +20,26 @@ const greeting = computed(() => {
   }
 
   return greeting;
+}
+
+const displayGreeting = computed(() => {
+  const lastLogin = new Date(authStore.user.last_login);
+  const now = new Date();
+  const diff = now - lastLogin;
+  const TenDays = 1000 * 60 * 60 * 24 * 10;
+  const loginDays = Math.floor(diff / TenDays);
+
+  return loginDays > 10 ? `Welcome back!` : `${greeting()}`;
+});
+
+onMounted(() => {
+  authStore.loadTokenFromLocalStorage();
 });
 </script>
 
 <template>
   <div>
-    {{ greeting }}
+    {{ displayGreeting }}
   </div>
 </template>
 
