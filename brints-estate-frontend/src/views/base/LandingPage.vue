@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import SignInSignUpInfo from "@/components/SignInSignUpInfo.vue";
+import SignInSignUpInfo from "@/views/base/SignInSignUpInfo.vue";
 import SmallButton from "@/components/buttons/SmallButton.vue";
 
 const bg = ref(null);
