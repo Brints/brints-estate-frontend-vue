@@ -9,5 +9,6 @@ hr {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 10px 0;
 }
 </style>
