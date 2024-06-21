@@ -83,11 +83,11 @@ export const useUserStore = defineStore("user", () => {
       const { message } = response.data;
       successMessage.value = message;
       statusCode.value = status;
-    } catch (e) {
-      // const response = e.response;
-      // const { message } = response.data.error;
-      // error.value = message;
-      console.error(e);
+    } catch (err) {
+      const { response } = err;
+
+      const { message } = response.data.error;
+      error.value = message;
     } finally {
       loading.value = false;
     }
@@ -147,6 +147,41 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const resetPassword = async (token: string, email: string, newPassword: string, confirmPassword: string) => {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const response = await fetch(`${backendUrl}/user/reset-password/${token}/${email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newPassword, confirmPassword }),
+      });
+
+      if (newPassword !== confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(JSON.stringify(errorData));
+      }
+
+      const data = await response.json();
+      statusCode.value = data.statusCode;
+      successMessage.value = "Password reset successful. Redirecting to login page...";
+    } catch (err) {
+      const errorData = JSON.parse(err.message);
+      const { message } = errorData.error;
+      statusCode.value = errorData.error.statusCode;
+      error.value = message;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   const loadPhoneNumberFromLocalStorage = () => {
     const storedPhone = localStorage.getItem("phone");
     const storedEmail = localStorage.getItem("email");
@@ -184,5 +219,6 @@ export const useUserStore = defineStore("user", () => {
     resendEmailToken,
     loadPhoneNumberFromLocalStorage,
     clearPhoneNumberFromLocalStorage,
+    resetPassword,
   };
 });
