@@ -1,25 +1,36 @@
 <script setup>
-import { computed, onMounted } from "vue";
-import BaseLogo from "@/components/layout/BaseLogo.vue";
+import { computed, onMounted, ref } from "vue";
 
-import { useRouter } from "vue-router";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+import BaseLogo from "@/components/layout/BaseLogo.vue";
+import UserDropDownMenu from "@/components/UI/UserDropDownMenu.vue";
+
+const isVisible = ref(false);
+library.add(faBars, faTimes);
+
 import { useAuthStore } from "@/stores/authStore";
 
 const authStore = useAuthStore();
-const router = useRouter();
 
-const handleLogout = () => {
-  authStore.logout();
-
-  router.push({ name: "login" });
+const toggleDropDown = () => {
+  isVisible.value = !isVisible.value;
 };
+
+const dropDownMenu = computed(() => {
+  return isVisible.value ? "fas fa-times" : "fas fa-bars";
+});
 
 const displayName = computed(() => {
   return authStore.user.fullname;
 });
-const isLoggedIn = computed(() => {
-  return authStore.isLoggedIn;
+
+const showRole = computed(() => {
+  return authStore.user.role;
 });
+
 const displayProfilePic = computed(() => {
   if (authStore.user.avatar.length > 0) {
     return authStore.user.avatar[0].url;
@@ -72,10 +83,17 @@ onMounted(() => {
               </div>
             </div>
 
-            <div>
-              <p>{{ displayName }}</p>
+            <div class="display">
+              <div className="flex flex-col justify-center items-center m-0 p-0">
+                <p>{{ displayName }}</p>
+                <small className="text-green-400 font-bold">({{ showRole }})</small>
+              </div>
+
+              <div @click="toggleDropDown">
+                <font-awesome-icon class="menu-icon" :icon="dropDownMenu" />
+                <UserDropDownMenu :isVisible="isVisible" />
+              </div>
             </div>
-            <button @click="handleLogout" v-if="isLoggedIn">Logout</button>
           </div>
         </nav>
       </div>
@@ -85,6 +103,7 @@ onMounted(() => {
 
 <style scoped>
 .main-heading {
+  position: relative;
   background-color: #333;
   color: #fff;
   display: flex;
@@ -103,17 +122,25 @@ onMounted(() => {
   height: 100%;
 }
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 a {
   color: #fff;
   text-decoration: none;
   padding: 0 1rem;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: 1px solid #8762db;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.display {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 </style>
