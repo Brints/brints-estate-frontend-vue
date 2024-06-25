@@ -53,6 +53,11 @@ const resetPassword = async () => {
           <BaseSpinner></BaseSpinner>
         </BaseDialog>
 
+        <p>
+          Don’t worry, we’ve got your back! Just enter your email address and we’ll send you a link to reset your
+          password.
+        </p>
+
         <BaseForm @submit="resetPassword">
           <fieldset>
             <legend class="text-2xl text-orange-400 px-4 pr-4">Reset Password</legend>
