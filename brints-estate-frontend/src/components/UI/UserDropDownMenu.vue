@@ -13,12 +13,14 @@ import {
   faEnvelope,
   faTrashAlt,
   faSignOutAlt,
+  faTachometerAlt,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 const authStore = useAuthStore();
 const router = useRouter();
 
-library.add(faUser, faKey, faUserCog, faUserShield, faEnvelope, faTrashAlt, faSignOutAlt);
+library.add(faUser, faKey, faUserCog, faUserShield, faEnvelope, faTrashAlt, faSignOutAlt, faTachometerAlt, faPlus);
 
 defineProps({
   isVisible: {
@@ -42,8 +44,26 @@ const isLoggedIn = computed(() => {
 });
 
 const userRole = computed(() => {
-  return authStore.user.role === "user" ? true : false;
+  return authStore.user.role;
 });
+
+const loadDashboard = () => {
+  if (userRole.value === "admin") {
+    router.push({ name: "admin-dashboard" });
+  } else {
+    router.push({ name: "realtor-dashboard" });
+  }
+};
+
+const loadChangePassword = () => {
+  if (userRole.value === "admin") {
+    router.push({ name: "admin-change-password" });
+  } else if (userRole.value === "user") {
+    router.push({ name: "change-password" });
+  } else {
+    router.push({ name: "realtor-change-password" });
+  }
+};
 
 onMounted(() => {
   authStore.loadTokenFromLocalStorage();
@@ -53,25 +73,35 @@ onMounted(() => {
 <template>
   <div :class="$style.wrapper" v-if="isVisible">
     <ul :class="$style.menu">
+      <li v-if="userRole !== 'user'">
+        <font-awesome-icon :icon="['fas', 'tachometer-alt']" />
+        <!-- <router-link :to="{ name: 'profile' }">Dashboard</router-link> -->
+        <button type="button" @click="loadDashboard">Dashboard</button>
+      </li>
       <li>
         <font-awesome-icon :icon="['fas', 'user']" />
         <router-link :to="{ name: 'profile' }">Profile</router-link>
       </li>
+      <li v-if="userRole !== 'user'">
+        <font-awesome-icon :icon="['fas', 'plus']" />
+        <router-link :to="{ name: 'add-listing' }">New Listing</router-link>
+      </li>
       <li>
         <font-awesome-icon :icon="['fas', 'key']" />
-        <RouterLink :to="{ name: 'change-password' }">Change Password</RouterLink>
+        <!-- <RouterLink :to="{ name: 'change-password' }">Change Password</RouterLink> -->
+        <button type="button" @click="loadChangePassword">Change Password</button>
       </li>
       <li>
         <font-awesome-icon :icon="['fas', 'user-cog']" />
         <router-link :to="{ name: 'edit-profile' }">Edit Profile</router-link>
       </li>
-      <li v-if="userRole">
+      <li v-if="userRole === 'user'">
         <div>
           <font-awesome-icon :icon="['fas', 'user-shield']" />
           <router-link :to="{ name: 'upgrade-to-realtor' }">Become a Realtor</router-link>
         </div>
       </li>
-      <li>
+      <li v-if="userRole !== 'admin'">
         <font-awesome-icon :icon="['fas', 'envelope']" />
         <router-link :to="{ name: 'contact-admin' }">Contact Admin</router-link>
       </li>
