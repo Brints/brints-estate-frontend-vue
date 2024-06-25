@@ -138,7 +138,7 @@ a {
 
 .display {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 40px;
   align-items: center;
   justify-content: center;
   gap: 2rem;
