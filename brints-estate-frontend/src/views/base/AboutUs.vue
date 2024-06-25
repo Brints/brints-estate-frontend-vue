@@ -2,21 +2,17 @@
 import axios from "axios";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
-import BaseDialog from "@/components/UI/BaseDialog.vue";
-import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
 export default {
   components: {
     HeaderBar,
     BaseFooter,
-    BaseDialog,
-    BaseSpinner,
   },
   data() {
     return {
       imageUrl: "",
       loading: false,
-      aboutUs: null,
+      aboutUs: [],
     };
   },
   async mounted() {
@@ -28,7 +24,7 @@ export default {
       try {
         this.loading = true;
         const response = await axios.get(`${url}/admin/about-us`);
-        this.aboutUs = response.data.payload;
+        this.aboutUs.push = response.data.payload;
         for (const item of this.aboutUs) {
           this.imageUrl = item.image[0].url;
         }
@@ -49,21 +45,21 @@ export default {
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div :class="$style.wrapper">
     <div class="nav-links">
       <HeaderBar></HeaderBar>
     </div>
 
-    <BaseDialog :show="!!loading" title="Please wait... Fetching Data..." fixed>
-      <BaseSpinner></BaseSpinner>
-    </BaseDialog>
-
-    <main className="flex flex-col h-full">
+    <main>
       <section v-if="loading" :class="$style.loading">
         <p>Loading...</p>
       </section>
 
-      <section v-else-if="aboutUs" class="about-contents">
+      <section v-else-if="!loading && aboutUs.length === 0" :class="$style.no_content">
+        <p>No Content yet.</p>
+      </section>
+
+      <section v-else class="about-contents">
         <div v-for="item in aboutUs" :key="item._id">
           <div :class="$style.imageContainer">
             <h1
@@ -80,10 +76,6 @@ export default {
           </div>
         </div>
       </section>
-
-      <section v-else :class="$style.no_content">
-        <p>No Content yet.</p>
-      </section>
     </main>
 
     <div :class="$style.footer">
@@ -93,6 +85,12 @@ export default {
 </template>
 
 <style module>
+.wrapper {
+  display: grid;
+  grid-template-rows: minmax(5rem, auto) 1fr auto;
+  height: 100vh;
+}
+
 .loading {
   height: calc(100vh - 5rem);
   display: flex;
