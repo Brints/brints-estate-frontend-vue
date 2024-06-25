@@ -71,6 +71,38 @@ const userRoutes = [
       requiresAuth: false,
     },
   },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("@/views/users/ProfilePage.vue"),
+    meta: {
+      title: "Profile",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/change-password",
+    name: "change-password",
+    component: () => import("@/views/users/ChangePassword.vue"),
+    meta: {
+      title: "Change Password",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-profile",
+    name: "edit-profile",
+    component: () => import("@/views/users/EditProfile.vue"),
+    meta: {
+      title: "Edit Profile",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/upgrade-to-realtor",
+    name: "upgrade-to-realtor",
+    component: () => import("@/views/users/BecomeARealtor.vue"),
+  },
 ];
 
 export default userRoutes;
