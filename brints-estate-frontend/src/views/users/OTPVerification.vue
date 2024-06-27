@@ -98,7 +98,7 @@ const startResendCountDownTimer = () => {
 
 // change the title based on the action - if it's a resend or verification
 const title = computed(() => {
-  return userStore.resendOTP ? "Please wait... Generating New OTP..." : "Please wait... Verifying OTP...";
+  return userStore.resendOTP() ? "Processing New OTP..." : "Verifying OTP...";
 });
 
 const timerText = computed(() => {
