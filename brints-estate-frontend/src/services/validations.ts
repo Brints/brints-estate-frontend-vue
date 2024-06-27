@@ -50,3 +50,7 @@ export const passwordValidator = (password: string) => {
 
   return regex.test(password);
 };
+
+export const maxSize = (size: number) => {
+  return (file) => !file || file.size <= size;
+};
