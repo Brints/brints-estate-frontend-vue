@@ -16,8 +16,7 @@ interface FormData {
 export const useUserStore = defineStore("user", () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
-  // const successMessage = ref("");
-  const successMessage = ref("Success Message");
+  const successMessage = ref("");
   const statusCode = ref(0);
   const user = ref<any>({});
   const phoneNumber = ref("");
