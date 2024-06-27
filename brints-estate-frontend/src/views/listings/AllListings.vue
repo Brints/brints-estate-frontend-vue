@@ -21,6 +21,10 @@ const listings = computed(() => {
 onMounted(() => {
   listingsStore.fetchListings(authStore.token);
   authStore.loadTokenFromLocalStorage();
+
+  if (!authStore.isLoggedIn) {
+    router.push({ name: "login" });
+  }
 });
 </script>
 

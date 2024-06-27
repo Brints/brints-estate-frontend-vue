@@ -2,6 +2,17 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
 
+interface FormData {
+  fullname: string;
+  email: string;
+  password: string;
+  phone: string;
+  gender: string;
+  avatar?: File;
+  confirmPassword: string;
+  code: string;
+}
+
 export const useUserStore = defineStore("user", () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
@@ -11,24 +22,24 @@ export const useUserStore = defineStore("user", () => {
   const phoneNumber = ref("");
   const userEmail = ref("");
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-  const signup = async (data: any) => {
+  const signup = async (data: FormData) => {
     loading.value = true;
     error.value = null;
 
     const formData = new FormData();
-    formData.append("fullname", data.value.fullname);
-    formData.append("email", data.value.email);
-    formData.append("password", data.value.password);
-    formData.append("phone", data.value.phone);
-    formData.append("gender", data.value.gender);
-    formData.append("avatar", data.value.avatar);
-    formData.append("confirmPassword", data.value.confirmPassword);
-    formData.append("code", data.value.code);
+    formData.append("fullname", data.fullname);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("phone", data.phone);
+    formData.append("gender", data.gender);
+    formData.append("avatar", data.avatar);
+    formData.append("confirmPassword", data.confirmPassword);
+    formData.append("code", data.code);
 
     try {
-      const response = await axios.post(`${backendUrl}/user/register`, formData, {
+      const response = await axios.post(`${BASE_URL}/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -36,28 +47,28 @@ export const useUserStore = defineStore("user", () => {
 
       const userData = response.data;
       const payload = userData.payload;
-      phoneNumber.value = `${data.value.code}${data.value.phone}`;
-      userEmail.value = data.value.email;
+      phoneNumber.value = `${data.code}${data.phone}`;
+      userEmail.value = data.email;
       user.value = payload;
       statusCode.value = response.status;
 
       if (payload) {
         // Save phone number to local storage
-        localStorage.setItem("phone", `${data.value.code}${data.value.phone}`);
+        localStorage.setItem("phone", `${data.code}${data.phone}`);
         // localStorage.setItem("user", JSON.stringify(payload));
-        localStorage.setItem("email", data.value.email);
+        localStorage.setItem("email", data.email);
       }
 
       // Reset the form data
       if (userData.statusCode === 201) {
-        data.value.fullname = "";
-        data.value.email = "";
-        data.value.password = "";
-        data.value.phone = "";
-        data.value.gender = "";
-        data.value.avatar = null;
-        data.value.confirmPassword = "";
-        data.value.code = "";
+        data.fullname = "";
+        data.email = "";
+        data.password = "";
+        data.phone = "";
+        data.gender = "";
+        data.avatar = null;
+        data.confirmPassword = "";
+        data.code = "";
       }
 
       successMessage.value = userData.message;
@@ -75,7 +86,7 @@ export const useUserStore = defineStore("user", () => {
     error.value = null;
 
     try {
-      const response = await axios.post(`${backendUrl}/user/forgot-password`, {
+      const response = await axios.post(`${BASE_URL}/user/forgot-password`, {
         email,
       });
 
@@ -98,7 +109,7 @@ export const useUserStore = defineStore("user", () => {
     error.value = null;
 
     try {
-      const response = await axios.post(`${backendUrl}/user/resend-otp`, {
+      const response = await axios.post(`${BASE_URL}/user/resend-otp`, {
         email,
       });
 
@@ -122,7 +133,7 @@ export const useUserStore = defineStore("user", () => {
     error.value = null;
 
     try {
-      const response = await fetch(`${backendUrl}/user/resend-verification-token`, {
+      const response = await fetch(`${BASE_URL}/user/resend-verification-token`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,18 +162,18 @@ export const useUserStore = defineStore("user", () => {
     loading.value = true;
     error.value = null;
 
+    if (newPassword !== confirmPassword) {
+      throw new Error("Passwords do not match");
+    }
+
     try {
-      const response = await fetch(`${backendUrl}/user/reset-password/${token}/${email}`, {
+      const response = await fetch(`${BASE_URL}/user/reset-password/${token}/${email}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ newPassword, confirmPassword }),
       });
-
-      if (newPassword !== confirmPassword) {
-        throw new Error("Passwords do not match");
-      }
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -200,6 +211,40 @@ export const useUserStore = defineStore("user", () => {
     localStorage.removeItem("email");
   };
 
+  const changePassword = async (oldPassword: string, newPassword: string, confirmPassword: string) => {
+    loading.value = true;
+    error.value = null;
+
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/user/change-password`,
+        {
+          oldPassword,
+          newPassword,
+          confirmPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const { status, data } = response;
+      statusCode.value = status;
+      successMessage.value = data.message;
+    } catch (e) {
+      const { message } = e.response.data.error;
+      console.error(message);
+      error.value = message;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   const handleError = () => {
     error.value = null;
   };
@@ -220,5 +265,6 @@ export const useUserStore = defineStore("user", () => {
     loadPhoneNumberFromLocalStorage,
     clearPhoneNumberFromLocalStorage,
     resetPassword,
+    changePassword,
   };
 });
