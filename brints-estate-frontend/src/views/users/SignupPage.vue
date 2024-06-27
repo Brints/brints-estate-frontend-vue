@@ -1,8 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
-// import { passwordValidator } from "@/services/validations";
 
 import BaseForm from "@/components/form/BaseForm.vue";
 import BaseButton from "@/components/buttons/BaseButton.vue";
@@ -12,7 +11,6 @@ import ImageInput from "@/components/form/ImageInput.vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import CountryCodeSelect from "@/components/form/CountryCodeSelect.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
-// import SmallButton from "@/components/buttons/SmallButton.vue";
 
 import BaseDialog from "@/components/UI/BaseDialog.vue";
 import BaseSpinner from "@/components/UI/BaseSpinner.vue";
@@ -21,10 +19,9 @@ import BaseCard from "@/components/UI/BaseCard.vue";
 import ErrorMessages from "@/components/messages/ErrorMessage.vue";
 import ValidationError from "@/components/messages/ValidationError.vue";
 
-// import axios from "axios";
-
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
+import { maxSize } from "@/services/validations";
 
 const userStore = useUserStore();
 
@@ -69,7 +66,7 @@ const rules = {
     // sameAs: helpers.withMessage("Confirm Password must be same as Password.", sameAs(formData.value.password)),
   },
   avatar: {
-    // required: helpers.withMessage("Avatar is required", required),
+    maxSize: helpers.withMessage("Avatar size should not be more than 4MB", maxSize(4 * 1024 * 1024)),
   },
   code: {
     required: helpers.withMessage("Code required", required),
@@ -84,7 +81,7 @@ const v$ = useVuelidate(rules, formData);
 const handleSignup = async () => {
   if (!(await v$.value.$validate())) return;
 
-  await userStore.signup(formData);
+  await userStore.signup(formData.value);
 
   // Redirect to otp verification page
   // router.push({ name: "verify-phone", params: { phone: phone } }); // if you're using params
@@ -96,7 +93,7 @@ const handleSignup = async () => {
 };
 
 const label = computed(() => {
-  userStore.loading ? "Submitting..." : "Signup";
+  return userStore.loading ? "Submitting..." : "Signup";
 });
 </script>
 
@@ -106,17 +103,11 @@ const label = computed(() => {
   </div>
 
   <main :class="$style.wrapper">
-    <!-- <div v-if="userStore.error" class="error_message">
-      <ErrorMessages :message="userStore.error" />
-    </div> -->
-
-    <BaseDialog :show="!!userStore.loading" title="Please wait..." fixed>
+    <BaseDialog :show="!!userStore.loading" title="Processing..." fixed>
       <BaseSpinner />
     </BaseDialog>
 
-    <BaseDialog :show="userStore.successMessage !== ''" title="Signup Successful" fixed>
-      <p>Signup was successful. Please check your email for OTP and verification.</p>
-      <p>{{ userStore.successMessage }}</p>
+    <BaseDialog :show="userStore.statusCode === 201" title="Signup Success" fixed>
       <p>Redirecting to OTP verification page...</p>
     </BaseDialog>
 
@@ -130,7 +121,16 @@ const label = computed(() => {
           <legend>Sign Up</legend>
 
           <div :class="$style.img_label">
-            <ImageInput label="Upload your Avatar" id="avatar" name="avatar" icon="image" v-model="formData.avatar" />
+            <ImageInput
+              v-model="v$.avatar.$model"
+              label="Upload your Avatar"
+              id="avatar"
+              name="avatar"
+              icon="image"
+              :multiple="false"
+            />
+            <!-- :imageSize="2"
+              @update:modelValue="handleAvatarUpload" -->
             <ValidationError :model="v$.avatar"></ValidationError>
           </div>
 
