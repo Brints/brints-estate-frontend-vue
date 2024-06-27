@@ -16,7 +16,8 @@ interface FormData {
 export const useUserStore = defineStore("user", () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
-  const successMessage = ref("");
+  // const successMessage = ref("");
+  const successMessage = ref("Success Message");
   const statusCode = ref(0);
   const user = ref<any>({});
   const phoneNumber = ref("");
@@ -215,34 +216,30 @@ export const useUserStore = defineStore("user", () => {
     loading.value = true;
     error.value = null;
 
-    if (newPassword !== confirmPassword) {
-      throw new Error("Passwords do not match");
-    }
-
-    if (newPassword.length < 10) {
-      throw new Error("Password must be at least 10 characters");
-    }
-
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
-    if (!regex.test(newPassword)) {
-      throw new Error(
-        "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
-      );
-    }
+    const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.post(`${BASE_URL}/user/change-password`, {
-        oldPassword,
-        newPassword,
-        confirmPassword,
-      });
+      const response = await axios.post(
+        `${BASE_URL}/user/change-password`,
+        {
+          oldPassword,
+          newPassword,
+          confirmPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      const { status } = response;
+      const { status, data } = response;
       statusCode.value = status;
-      successMessage.value = response.data;
+      successMessage.value = data.message;
     } catch (e) {
-      const response = e.response;
-      const { message } = response.data.error;
+      const { message } = e.response.data.error;
+      console.error(message);
       error.value = message;
     } finally {
       loading.value = false;
