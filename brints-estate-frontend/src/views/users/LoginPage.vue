@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
+import { useListingsStore } from "@/stores/listingsStore";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
@@ -18,6 +19,7 @@ import { required, email, minLength, maxLength, helpers } from "@vuelidate/valid
 
 const authStore = useAuthStore();
 const router = useRouter();
+const listingsStore = useListingsStore();
 
 const credentials = ref({
   email: "",
@@ -49,6 +51,10 @@ const handleLogin = async () => {
     router.push({ name: "login" });
   }
 };
+
+const checkTokenExpirationError = computed(() => {
+  return listingsStore.errorObject.name === "TokenExpiredError";
+});
 </script>
 
 <template>
@@ -66,6 +72,9 @@ const handleLogin = async () => {
     </BaseDialog>
 
     <div class="wrapper">
+      <div class="error_display" v-if="checkTokenExpirationError">
+        <ErrorMessage message="Session Expired. Please login again."></ErrorMessage>
+      </div>
       <div class="left">
         <BaseForm class="form" @submit="handleLogin">
           <fieldset>
