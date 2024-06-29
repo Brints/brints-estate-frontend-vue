@@ -3,6 +3,7 @@ import { onMounted, computed } from "vue";
 
 import { useListingsStore } from "@/stores/listingsStore";
 import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "vue-router";
 
 import ListingsHeader from "@/components/layout/ListingsHeader.vue";
 import DisplayUserName from "@/components/UI/DisplayUserName.vue";
@@ -13,17 +14,29 @@ import BaseFooter from "@/components/layout/BaseFooter.vue";
 
 const listingsStore = useListingsStore();
 const authStore = useAuthStore();
+const router = useRouter();
 
 const listings = computed(() => {
   return listingsStore.listings;
 });
 
+const tokenExpired = computed(() => {
+  return listingsStore.errorObject.expiredAt < Date.now();
+});
+
 onMounted(() => {
-  listingsStore.fetchListings(authStore.token);
   authStore.loadTokenFromLocalStorage();
 
   if (!authStore.isLoggedIn) {
     router.push({ name: "login" });
+  }
+
+  if (listingsStore.errorObject && tokenExpired.value) {
+    router.push({ name: "login" });
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  } else {
+    listingsStore.fetchListings(authStore.token);
   }
 });
 </script>

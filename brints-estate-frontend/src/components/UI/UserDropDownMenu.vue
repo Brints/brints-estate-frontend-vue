@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 
@@ -68,6 +68,13 @@ const loadChangePassword = () => {
 onMounted(() => {
   authStore.loadTokenFromLocalStorage();
 });
+
+onUnmounted(() => {
+  authStore.error = null;
+  authStore.successMessage = null;
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+});
 </script>
 
 <template>
@@ -88,7 +95,6 @@ onMounted(() => {
       </li>
       <li>
         <font-awesome-icon :icon="['fas', 'key']" />
-        <!-- <RouterLink :to="{ name: 'change-password' }">Change Password</RouterLink> -->
         <button type="button" @click="loadChangePassword">Change Password</button>
       </li>
       <li>
@@ -96,10 +102,8 @@ onMounted(() => {
         <router-link :to="{ name: 'edit-profile' }">Edit Profile</router-link>
       </li>
       <li v-if="userRole === 'user'">
-        <div>
-          <font-awesome-icon :icon="['fas', 'user-shield']" />
-          <router-link :to="{ name: 'upgrade-to-realtor' }">Become a Realtor</router-link>
-        </div>
+        <font-awesome-icon :icon="['fas', 'user-shield']" />
+        <router-link :to="{ name: 'upgrade-to-realtor' }">Become a Realtor</router-link>
       </li>
       <li v-if="userRole !== 'admin'">
         <font-awesome-icon :icon="['fas', 'envelope']" />
