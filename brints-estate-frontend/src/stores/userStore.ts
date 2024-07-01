@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import {defineStore} from "pinia";
+import {ref} from "vue";
 import axios from "axios";
 
 interface FormData {
@@ -15,7 +15,7 @@ interface FormData {
 
 export const useUserStore = defineStore("user", () => {
   const loading = ref(false);
-  const error = ref<string | null>(null);
+  const errorObject = ref<any | null>(null);
   const successMessage = ref("");
   const statusCode = ref(0);
   const user = ref<any>({});
@@ -26,7 +26,7 @@ export const useUserStore = defineStore("user", () => {
 
   const signup = async (data: FormData) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     const formData = new FormData();
     formData.append("fullname", data.fullname);
@@ -45,18 +45,15 @@ export const useUserStore = defineStore("user", () => {
         },
       });
 
-      const userData = response.data;
-      const payload = userData.payload;
-      phoneNumber.value = `${data.code}${data.phone}`;
-      userEmail.value = data.email;
-      user.value = payload;
-      statusCode.value = response.status;
+        const userData = response.data;
+        const payload = userData.payload;
+        statusCode.value = userData.statusCode;
+        user.value = payload;
 
       if (payload) {
         // Save phone number to local storage
-        localStorage.setItem("phone", `${data.code}${data.phone}`);
-        // localStorage.setItem("user", JSON.stringify(payload));
-        localStorage.setItem("email", data.email);
+        localStorage.setItem("phone", payload.phone);
+        localStorage.setItem("email", payload.email);
       }
 
       // Reset the form data
@@ -72,18 +69,38 @@ export const useUserStore = defineStore("user", () => {
       }
 
       successMessage.value = userData.message;
-    } catch (e) {
-      const response = e.response.data;
-      error.value = response.error.message;
-      statusCode.value = response.error.statusCode;
+    } catch (error) {
+      const response = error.response.data;
+      errorObject.value = response.error;
     } finally {
       loading.value = false;
     }
   };
 
+  const verifyPhone = async (otp: string, phone: string) => {
+    loading.value = true;
+
+    try {
+      const response = await axios.post(`${BASE_URL}/user/verify-phone`, {
+        otp,
+        phone
+      });
+
+      const { data } = response;
+      statusCode.value = data.statusCode;
+      successMessage.value = data.message
+    } catch (error) {
+      const response = error.response;
+      const { data } = response;
+      errorObject.value = data.error;
+    } finally {
+      loading.value = false;
+    }
+  }
+
   const forgotPassword = async (email: string) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     try {
       const response = await axios.post(`${BASE_URL}/user/forgot-password`, {
@@ -94,11 +111,9 @@ export const useUserStore = defineStore("user", () => {
       const { message } = response.data;
       successMessage.value = message;
       statusCode.value = status;
-    } catch (err) {
-      const { response } = err;
-
-      const { message } = response.data.error;
-      error.value = message;
+    } catch (error) {
+      const response = error.response.data;
+      errorObject.value = response.error;
     } finally {
       loading.value = false;
     }
@@ -106,23 +121,19 @@ export const useUserStore = defineStore("user", () => {
 
   const resendOTP = async (email: string) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     try {
       const response = await axios.post(`${BASE_URL}/user/resend-otp`, {
         email,
       });
 
-      const { status } = response;
-      const userData = response.data;
-      const payload = userData.payload;
-      user.value = payload;
-      successMessage.value = userData.message;
-      statusCode.value = status;
-    } catch (e) {
-      const response = e.response;
-      const { message } = response.data.error;
-      error.value = message;
+      const { data } = response;
+      successMessage.value = data.message;
+      statusCode.value = data.statusCode;
+    } catch (error) {
+      const response = error.response.data;
+      errorObject.value = response.error;
     } finally {
       loading.value = false;
     }
@@ -130,29 +141,19 @@ export const useUserStore = defineStore("user", () => {
 
   const resendEmailToken = async (email: string) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     try {
-      const response = await fetch(`${BASE_URL}/user/resend-verification-token`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      const response = await axios.post(`${BASE_URL}/user/resend-verification-token`, {
+        email
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(JSON.stringify(errorData));
-      }
-
-      const data = await response.json();
+      const { data } = response
+      statusCode.value = data.statusCode;
       successMessage.value = data.message;
-    } catch (err) {
-      const errorData = JSON.parse(err.message);
-      const { message } = errorData.error;
-      statusCode.value = errorData.error.statusCode;
-      error.value = message;
+    } catch (error) {
+      const response = error.response.data;
+      errorObject.value = response.error;
     } finally {
       loading.value = false;
     }
@@ -160,7 +161,7 @@ export const useUserStore = defineStore("user", () => {
 
   const resetPassword = async (token: string, email: string, newPassword: string, confirmPassword: string) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     if (newPassword !== confirmPassword) {
       throw new Error("Passwords do not match");
@@ -183,11 +184,10 @@ export const useUserStore = defineStore("user", () => {
       const data = await response.json();
       statusCode.value = data.statusCode;
       successMessage.value = "Password reset successful. Redirecting to login page...";
-    } catch (err) {
-      const errorData = JSON.parse(err.message);
-      const { message } = errorData.error;
-      statusCode.value = errorData.error.statusCode;
-      error.value = message;
+    } catch (error) {
+      const response = error.response;
+      const { data } = response;
+      errorObject.value = data.error;
     } finally {
       loading.value = false;
     }
@@ -211,9 +211,11 @@ export const useUserStore = defineStore("user", () => {
     localStorage.removeItem("email");
   };
 
+
+
   const changePassword = async (oldPassword: string, newPassword: string, confirmPassword: string) => {
     loading.value = true;
-    error.value = null;
+    errorObject.value = null;
 
     const token = localStorage.getItem("token");
 
@@ -236,27 +238,46 @@ export const useUserStore = defineStore("user", () => {
       const { status, data } = response;
       statusCode.value = status;
       successMessage.value = data.message;
-    } catch (e) {
-      const { message } = e.response.data.error;
-      console.error(message);
-      error.value = message;
+    } catch (error) {
+      const response = error.response;
+      const { data } = response;
+      errorObject.value = data.error;
     } finally {
       loading.value = false;
     }
   };
 
+  const VerifyEmail = async (token: string, email: string) =>{
+    const url = `${BASE_URL}/user/verify-email?token=${token}&email=${email}`;
+
+    try {
+      const response = await axios.get(url, { email });
+
+      const { data } = response;
+      statusCode.value = data.statusCode;
+      successMessage.value = data.message;
+
+    } catch (error) {
+      const response = error.response;
+      const { data } = response;
+      errorObject.value = data.error;
+    } finally {
+      loading.value = false;
+    }
+  }
+
   const handleError = () => {
-    error.value = null;
+    errorObject.value = null;
   };
 
   return {
     phoneNumber,
     userEmail,
     user,
-    statusCode,
-    successMessage,
     loading,
-    error,
+    errorObject,
+      statusCode,
+      successMessage,
     signup,
     forgotPassword,
     resendOTP,
@@ -266,5 +287,7 @@ export const useUserStore = defineStore("user", () => {
     clearPhoneNumberFromLocalStorage,
     resetPassword,
     changePassword,
+    verifyPhone,
+    VerifyEmail
   };
 });
