@@ -1,15 +1,15 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 import SuccessMessage from "@/components/messages/SuccessMessage.vue";
 import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 import SmallButton from "@/components/buttons/SmallButton.vue";
 
-const router = useRouter();
+import { useUserStore } from "@/stores/userStore";
 
-const loading = ref(true);
-const errorMessage = ref("");
+const router = useRouter();
+const userStore = useUserStore();
 
 // Parse the email and token from the URL query string
 const queryParams = new URLSearchParams(window.location.search);
@@ -18,30 +18,13 @@ const token = queryParams.get("token");
 
 // Send a GET request function to the backend to verify the email using fetch
 const verifyEmail = async () => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/user/verify-email?token=${token}&email=${email}`;
+  await userStore.VerifyEmail(token, email);
 
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(JSON.stringify(errorData));
-    }
-
-    loading.value = false;
-
-    // Redirect to the login page
+  // Redirect to the login page
+  if (userStore.statusCode === 200) {
     setTimeout(() => {
       router.push({ name: "login" });
     }, 2000);
-  } catch (error) {
-    const errorData = JSON.parse(error.message);
-    const { message } = errorData.error;
-    errorMessage.value = message;
-  } finally {
-    loading.value = false;
   }
 };
 
@@ -52,12 +35,12 @@ onMounted(() => {
 
 <template>
   <div :class="$style.wrapper">
-    <p v-if="loading">Verifying email...</p>
-    <SuccessMessage v-else-if="!loading && !errorMessage"
+    <p v-if="userStore.loading">Verifying email...</p>
+    <SuccessMessage v-else-if="!userStore.loading && !userStore.errorObject"
       >Email verified successfully. Redirecting to the login page...</SuccessMessage
     >
-    <ErrorMessage v-else :message="errorMessage" />
-    <div v-if="!loading && errorMessage" className="block">
+    <ErrorMessage v-else :message="userStore.errorObject.message" />
+    <div className="block" v-if="!userStore.loading && userStore.errorObject">
       <router-link :to="{ name: 'resend-token' }">
         <SmallButton type="button" label="Resend Email Verification Token" />
       </router-link>
