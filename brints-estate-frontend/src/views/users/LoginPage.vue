@@ -2,7 +2,6 @@
 import { ref, computed } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
-import { useListingsStore } from "@/stores/listingsStore";
 
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import BaseFooter from "@/components/layout/BaseFooter.vue";
@@ -19,7 +18,6 @@ import { required, email, minLength, maxLength, helpers } from "@vuelidate/valid
 
 const authStore = useAuthStore();
 const router = useRouter();
-const listingsStore = useListingsStore();
 
 const credentials = ref({
   email: "",
@@ -52,9 +50,14 @@ const handleLogin = async () => {
   }
 };
 
-const checkTokenExpirationError = computed(() => {
-  return listingsStore.errorObject.name === "TokenExpiredError";
-});
+const errorMessage = computed(() => {
+  return authStore.errorObject ? authStore.errorObject.message : null;
+})
+
+
+// const checkTokenExpirationError = computed(() => {
+//   return authStore.errorObject.name === "TokenExpiredError";
+// });
 </script>
 
 <template>
@@ -63,8 +66,9 @@ const checkTokenExpirationError = computed(() => {
       <HeaderBar></HeaderBar>
     </div>
 
-    <BaseDialog :show="!!authStore.errorMessage" title="An error occurred" @close="authStore.handleError()">
-      <ErrorMessage :message="authStore.errorMessage"></ErrorMessage>
+    <BaseDialog :show="!!errorMessage" title="An error occurred"
+                @close="authStore.handleError()">
+      <ErrorMessage :message="errorMessage"></ErrorMessage>
     </BaseDialog>
 
     <BaseDialog :show="authStore.loading" title="Authenticating...Please wait..." fixed>
@@ -72,9 +76,9 @@ const checkTokenExpirationError = computed(() => {
     </BaseDialog>
 
     <div class="wrapper">
-      <div class="error_display" v-if="checkTokenExpirationError">
-        <ErrorMessage message="Session Expired. Please login again."></ErrorMessage>
-      </div>
+<!--      <div class="error_display" v-if="checkTokenExpirationError">-->
+<!--        <ErrorMessage message="Session Expired. Please login again."></ErrorMessage>-->
+<!--      </div>-->
       <div class="left">
         <BaseForm class="form" @submit="handleLogin">
           <fieldset>
