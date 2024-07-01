@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import axios from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength, helpers, numeric } from "@vuelidate/validators";
 
@@ -15,18 +14,18 @@ import BaseSpinner from "@/components/UI/BaseSpinner.vue";
 
 import { useUserStore } from "@/stores/userStore";
 import { useRouter } from "vue-router";
+import {handleError} from "@vue/runtime-dom";
 
 const userStore = useUserStore();
 const router = useRouter();
 
 const formData = ref({
   otp: "",
-  phone: userStore.phoneNumber,
+  phone: localStorage.getItem("phone"),
 });
-const errorMessage = ref("");
-const successMessage = ref("");
+
 const isResendCountDownActive = ref(false);
-const resendCountDown = ref(56);
+const resendCountDown = ref(30);
 
 const rules = {
   otp: {
@@ -42,40 +41,20 @@ const rules = {
 
 const v$ = useVuelidate(rules, formData);
 
-const loading = ref(false);
-
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
 const verifyOTP = async () => {
   if (!(await v$.value.$validate())) return;
-  loading.value = true;
 
-  try {
-    const response = await axios.post(`${backendUrl}/user/verify-phone`, formData.value);
-    const { data } = response;
+  await userStore.verifyPhone(formData.value.otp, formData.value.phone);
 
-    if (data.statusCode === 200) {
-      router.push({ name: "success" });
-
-      // clear phone number from local storage
-      userStore.clearPhoneNumberFromLocalStorage();
-    }
-  } catch (error) {
-    console.error(error);
-    const response = error.response.data;
-    errorMessage.value = response.error.message;
-  } finally {
-    loading.value = false;
+  if (userStore.statusCode === 200) {
+    userStore.clearPhoneNumberFromLocalStorage();
+    await router.push({name: "success"});
   }
+
 };
 
 const resend = async () => {
-  console.log("Email value: ", userStore.userEmail);
   await userStore.resendOTP(userStore.userEmail);
-
-  if (userStore.statusCode === 200) {
-    successMessage.value = userStore.successMessage;
-  }
 
   startResendCountDownTimer();
 };
@@ -87,19 +66,14 @@ const startResendCountDownTimer = () => {
     if (resendCountDown.value === 0) {
       clearInterval(interval);
       isResendCountDownActive.value = false;
-      resendCountDown.value = 56;
+      resendCountDown.value = 30;
     }
   }, 1000);
-
-  onMounted(() => {
-    userStore.loadPhoneNumberFromLocalStorage();
-  });
 };
 
-// change the title based on the action - if it's a resend or verification
-const title = computed(() => {
-  return userStore.resendOTP() ? "Processing New OTP..." : "Verifying OTP...";
-});
+const error = computed(() => {
+  return userStore.errorObject;
+})
 
 const timerText = computed(() => {
   return resendCountDown.value < 2
@@ -109,17 +83,31 @@ const timerText = computed(() => {
 
 // Initialize the resend count down timer on component mount
 startResendCountDownTimer();
+
+onMounted(() => {
+  userStore.loadPhoneNumberFromLocalStorage();
+});
 </script>
 
 <template>
   <div :class="$style.wrapper">
-    <BaseDialog :show="!!errorMessage" title="An error occurred" @close="errorMessage = ''">
-      <ErrorMessage :message="errorMessage" />
+    <BaseDialog :show="!!error" title="An error occurred"
+                @close="userStore.handleError()">
+      <ErrorMessage :message="error.message" />
     </BaseDialog>
 
-    <BaseDialog :show="!!loading || userStore.loading" :title="title" fixed>
-      <BaseSpinner />
+<BaseDialog :show="userStore.loading"
+            title="Processing"
+fixed>
+ <BaseSpinner></BaseSpinner>
+</BaseDialog>
+
+    <BaseDialog :show="userStore.statusCode === 200"
+                title="Success" @close="userStore.statusCode = 0">
+      {{ userStore.successMessage }}
     </BaseDialog>
+
+
     <BaseForm @submit="verifyOTP">
       <fieldset>
         <legend>OTP Verification</legend>
