@@ -1,3 +1,3 @@
 # Brints Estate Frontend
 
-A Real Estate Web Application 
+Need a home or an office space? Brints Estate has you covered 
