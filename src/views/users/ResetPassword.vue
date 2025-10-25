@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
-import { useUserStore } from "../../stores/userStore";
+import { useUserStore } from "../../stores/userStore.ts";
 import { useRoute, useRouter } from "vue-router";
 
 import BaseButton from "@/components/buttons/BaseButton.vue";

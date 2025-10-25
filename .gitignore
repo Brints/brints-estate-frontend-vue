@@ -32,3 +32,6 @@ coverage
 .env
 
 .yarn/*
+
+.idea/
+yarn.lock

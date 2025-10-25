@@ -1,9 +1,9 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "../stores/authStore";
+import { useAuthStore } from "../stores/authStore.ts";
 
-import baseRoutes from "./baseRoutes";
-import userRoutes from "./userRoutes";
-import listingRoutes from "./listingsRoutes";
+import baseRoutes from "./baseRoutes.ts";
+import userRoutes from "./userRoutes.ts";
+import listingRoutes from "./listingsRoutes.ts";
 
 const routes: Array<RouteRecordRaw> = [...baseRoutes, ...userRoutes, ...listingRoutes];
 

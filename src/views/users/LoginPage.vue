@@ -1,17 +1,17 @@
 <script setup>
 import { ref, computed } from "vue";
-import { useAuthStore } from "@/stores/authStore";
+import { useAuthStore } from "../../stores/authStore";
 import { useRouter } from "vue-router";
 
-import HeaderBar from "@/components/layout/HeaderBar.vue";
-import BaseFooter from "@/components/layout/BaseFooter.vue";
-import BaseForm from "@/components/form/BaseForm.vue";
-import BaseInput from "@/components/form/BaseInput.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
-import ValidationError from "@/components/messages/ValidationError.vue";
-import ErrorMessage from "@/components/messages/ErrorMessage.vue";
-import BaseDialog from "@/components/UI/BaseDialog.vue";
-import BaseSpinner from "@/components/UI/BaseSpinner.vue";
+import HeaderBar from "../../components/layout/HeaderBar.vue";
+import BaseFooter from "../../components/layout/BaseFooter.vue";
+import BaseForm from "../../components/form/BaseForm.vue";
+import BaseInput from "../../components/form/BaseInput.vue";
+import BaseButton from "../../components/buttons/BaseButton.vue";
+import ValidationError from "../../components/messages/ValidationError.vue";
+import ErrorMessage from "../../components/messages/ErrorMessage.vue";
+import BaseDialog from "../../components/UI/BaseDialog.vue";
+import BaseSpinner from "../../components/UI/BaseSpinner.vue";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength, helpers } from "@vuelidate/validators";
@@ -44,20 +44,15 @@ const handleLogin = async () => {
   await authStore.login(credentials.value.email, credentials.value.password);
 
   if (authStore.isLoggedIn) {
-    router.push({ name: "listings" });
+    await router.push({name: "listings"});
   } else {
-    router.push({ name: "login" });
+    await router.push({name: "login"});
   }
 };
 
 const errorMessage = computed(() => {
   return authStore.errorObject ? authStore.errorObject.message : null;
 })
-
-
-// const checkTokenExpirationError = computed(() => {
-//   return authStore.errorObject.name === "TokenExpiredError";
-// });
 </script>
 
 <template>
@@ -76,9 +71,6 @@ const errorMessage = computed(() => {
     </BaseDialog>
 
     <div class="wrapper">
-<!--      <div class="error_display" v-if="checkTokenExpirationError">-->
-<!--        <ErrorMessage message="Session Expired. Please login again."></ErrorMessage>-->
-<!--      </div>-->
       <div class="left">
         <BaseForm class="form" @submit="handleLogin">
           <fieldset>
@@ -192,7 +184,7 @@ legend {
 }
 
 .right {
-  background-image: url("@/assets/images/house-3.jpg");
+  background-image: url("../../assets/images/house-3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -202,7 +194,7 @@ legend {
 .email-input,
 .password-input {
   display: grid;
-  grid-template-rows: 1fr minmax(1rem);
+  grid-template-rows: 1fr minmax(1rem, auto);
   margin-bottom: 1rem;
 }
 </style>
