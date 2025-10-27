@@ -40,7 +40,7 @@ onMounted(() => {
       >Email verified successfully. Redirecting to the login page...</SuccessMessage
     >
     <ErrorMessage v-else :message="userStore.errorObject.message" />
-    <div className="block" v-if="!userStore.loading && userStore.errorObject">
+    <div class="block" v-if="!userStore.loading && userStore.errorObject">
       <router-link :to="{ name: 'resend-token' }">
         <SmallButton type="button" label="Resend Email Verification Token" />
       </router-link>
