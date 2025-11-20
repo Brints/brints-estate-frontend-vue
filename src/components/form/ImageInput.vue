@@ -1,9 +1,10 @@
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faImage } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faUpload);
+library.add(faUpload, faImage);
+
 export default {
   emits: ["update:modelValue"],
   components: {
@@ -35,17 +36,16 @@ export default {
 </script>
 
 <template>
-  <div :class="$style.form_group">
-    <div className="flex">
-      <span className="mr-2"><font-awesome-icon :icon="icon" /></span>
-
-      <label :for="id"
-        ><slot name="label">{{ label }}</slot></label
-      >
+  <div class="w-full">
+    <div class="flex gap-2 mb-2 text-slate-700 font-medium">
+      <span v-if="icon" class="text-indigo-500"><font-awesome-icon :icon="icon" /></span>
+      <label :for="id" class="cursor-pointer">
+        <slot name="label">{{ label }}</slot>
+      </label>
     </div>
     <slot name="input">
       <input
-        :class="$style.form_control"
+        class="w-full h-12 px-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 text-slate-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
         type="file"
         :id="id"
         :name="name"
@@ -55,18 +55,3 @@ export default {
     </slot>
   </div>
 </template>
-
-<style module>
-.form_group {
-  margin-bottom: 1rem;
-}
-
-.form_control {
-  width: 100%;
-  height: 3rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-</style>

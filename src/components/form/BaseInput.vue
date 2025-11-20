@@ -94,16 +94,16 @@ const togglePassword = () => {
 </script>
 
 <template>
-  <div class="base-input">
-    <div class="label_group">
-      <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id">
+  <div class="w-full">
+    <div class="flex gap-2 mb-2 text-slate-700 font-medium">
+      <span v-if="icon" class="text-indigo-500"><font-awesome-icon :icon="icon" /></span>
+      <label :for="id" class="cursor-pointer">
         {{ label }}
         <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span>
       </label>
     </div>
 
-    <div class="input-group">
+    <div class="relative">
       <input
         :type="type === 'password' && isPasswordVisible ? 'text' : type"
         :id="id"
@@ -111,69 +111,16 @@ const togglePassword = () => {
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :class="{ 'is-invalid': isInvalid }"
+        class="w-full h-12 px-4 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 text-slate-800 placeholder-slate-400"
+        :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-200': isInvalid }"
       />
-      <span v-if="special" :class="special_icon">
-        <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" @click="togglePassword" />
+      <span 
+        v-if="special" 
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-slate-400 hover:text-indigo-600 transition-colors"
+        @click="togglePassword"
+      >
+        <font-awesome-icon :icon="isPasswordVisible ? 'eye' : 'eye-slash'" />
       </span>
     </div>
   </div>
 </template>
-
-<style scoped>
-.label_group label {
-  margin-bottom: 0.5rem;
-}
-
-.label_group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.input-group {
-  position: relative;
-  display: grid;
-  grid-template-rows: 1fr minmax(1rem);
-}
-
-input {
-  width: 100%;
-  height: 3rem;
-  background-color: transparent;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-input:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-.password_eye,
-.confirm_eye {
-  cursor: pointer;
-  position: absolute;
-  bottom: 0.7rem;
-  left: 21rem;
-}
-
-.login_eye_icon {
-  cursor: pointer;
-  position: absolute;
-  bottom: 0.7rem;
-  left: 29rem;
-}
-
-.invalid-feedback {
-  color: #dc3545;
-  font-size: 0.875rem;
-  display: block;
-  margin-top: 0.25rem;
-}
-
-.is-invalid {
-  border-color: #dc3545;
-}
-</style>

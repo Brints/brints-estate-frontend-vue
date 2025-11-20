@@ -51,81 +51,22 @@ export default {
 </script>
 
 <template>
-  <div :class="$style.form_group">
-    <div :class="$style.label_group">
-      <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id"
-        >{{ label }}<span v-if="asterisk" class="text-red-500">{{ asterisk }}</span></label
-      >
+  <div class="w-full">
+    <div class="flex gap-2 mb-2 text-slate-700 font-medium">
+      <span v-if="icon" class="text-indigo-500"><font-awesome-icon :icon="icon" /></span>
+      <label :for="id" class="cursor-pointer">
+        {{ label }}
+        <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span>
+      </label>
     </div>
 
-    <select :id="id" :name="name" @change="$emit('update:modelValue', $event.target.value)">
+    <select 
+      :id="id" 
+      :name="name" 
+      @change="$emit('update:modelValue', $event.target.value)"
+      class="w-full h-12 px-4 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 text-slate-800 cursor-pointer appearance-none"
+    >
       <slot></slot>
     </select>
   </div>
 </template>
-
-<style module>
-select {
-  width: 100%;
-  height: 3rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: transparent;
-}
-
-.form_control:focus {
-  outline: none;
-  border-color: rgb(79 70 229);
-}
-
-.form_group label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.form_group select {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form_group select:focus {
-  outline: none;
-  border-color: rgb(79 70 229);
-}
-
-.form_group select option {
-  padding: 0.5rem;
-  background-color: #3d3a3a;
-  border-radius: 5px;
-  padding: 0.5rem;
-}
-
-.form_group select option:hover {
-  background-color: #f5f5f5;
-}
-
-.form_group select option:checked {
-  background-color: rgb(79 70 229);
-  color: #f5f5f5;
-}
-
-.form_group select option:checked:hover {
-  background-color: rgb(79 70 229);
-  color: #f5f5f5;
-}
-
-.form_group select option:focus {
-  outline: none;
-}
-
-.label_group {
-  display: flex;
-  gap: 0.5rem;
-}
-</style>

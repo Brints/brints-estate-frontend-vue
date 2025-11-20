@@ -1,6 +1,5 @@
 <script>
 import CountriesData from "@/lookup/country-codes.json";
-import { formatCountryCode } from "@/services/formatters";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -45,58 +44,34 @@ export default {
     };
   },
 
-  computed: {
-    formatCountryCode() {
-      return formatCountryCode;
-    },
-  },
+  methods: {
+    formatCountry(country) {
+      return `${country.flag} ${country.zipcode}`;
+    }
+  }
 };
 </script>
 
 <template>
-  <div :class="$style.form_group">
-    <div :class="$style.label_group">
-      <span><font-awesome-icon :icon="icon" /></span>
-      <label :for="id"
-        >{{ label }}<span v-if="asterisk" class="text-red-500">{{ asterisk }}</span></label
-      >
+  <div class="w-full">
+    <div class="flex gap-2 mb-2 text-slate-700 font-medium">
+      <span v-if="icon" class="text-indigo-500"><font-awesome-icon :icon="icon" /></span>
+      <label :for="id" class="cursor-pointer">
+        {{ label }}
+        <span v-if="asterisk" class="text-red-500">{{ asterisk }}</span>
+      </label>
     </div>
 
-    <select :id="id" :name="name" @change="$emit('update:modelValue', $event.target.value)">
+    <select 
+      :id="id" 
+      :name="name" 
+      @change="$emit('update:modelValue', $event.target.value)"
+      class="w-full h-12 px-4 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 text-slate-800 cursor-pointer appearance-none"
+    >
       <option value="">(Pick One)</option>
       <option v-for="(country, index) in countries" :key="index" :value="country.zipcode">
-        {{ formatCountryCode(country) }}
+        {{ formatCountry(country) }}
       </option>
     </select>
   </div>
 </template>
-
-<style module>
-.form_group select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form_group label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.label_group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-option {
-  background-color: #696972;
-  padding: 1rem 0;
-  font-size: 1rem;
-}
-
-option:hover {
-  background-color: #f4f4f4;
-  padding: 1rem 0;
-}
-</style>
